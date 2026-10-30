@@ -121,7 +121,8 @@ def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame
         models.loc[idx, 'role'] = 'comparison'
         # a catalog row is the base model if it has the same family, or is the same family without a version (e.g. 'YOLO' for YOLOv5)
         hit = [i for i in idx if models.at[i, 'family_new'] == fam
-               or ('未注明' in models.at[i, 'family_new'] and stem(models.at[i, 'family_new']) == stem(fam))]
+               or ('未注明' in models.at[i, 'family_new'] and stem(models.at[i, 'family_new']) == stem(fam))
+               or str(models.at[i, 'family_new']).lower().startswith('proposed')]  # the authors' own method = the base model
         if hit:
             models.loc[hit, 'role'] = 'main'
             models.loc[hit, 'family_new'] = fam
@@ -164,6 +165,11 @@ def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame
     models['model'] = models['family_new']
     models['kind'] = [k if k != QUALIFIED else kind_of(f, model_kind) for k, f in zip(models.kind.fillna(QUALIFIED), models.model)]
     models['variant'] = [std_variant(f'{v} {r}', f) for v, r, f in zip(models.variant.fillna(''), models.raw.fillna(''), models.model)]
+    # 'proposed: ...' rows that remain are the authors' own pipelines (no ready-made model): keep for the record, not in model counts
+    models.loc[models.model.astype(str).str.lower().str.startswith('proposed'), 'kind'] = '作者提出的流程（非现成模型）'
+    # depth estimation / image classification models are auxiliary, not detection or segmentation
+    aux_rx = r'depth|monodepth|classifier|places365|scene classif'
+    models.loc[models.model.astype(str).str.lower().str.contains(aux_rx) & models.role.isin(['main', 'comparison']), 'role'] = 'auxiliary'
     models = models.drop(columns=['family_new']).drop_duplicates(['id', 'model', 'variant', 'role'])
     for df in (pairs, records):
         if len(df):
