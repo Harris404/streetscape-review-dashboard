@@ -719,8 +719,12 @@ def training_page():
     if flat.empty:
         st.info('当前筛选下没有专项提取记录。'); return
     own = flat[flat.data_source.isin(['own-annotated', 'both'])].copy()
-    own['own_images'] = pd.to_numeric(own.own_images, errors='coerce')
+    for c_ in ('own_images', 'own_train', 'own_val', 'own_test'):
+        own[c_] = pd.to_numeric(own[c_], errors='coerce')
     counted = own.dropna(subset=['own_images']).copy()
+    # own labels used only for evaluation (zero-shot papers, or only a test split was annotated) are not training labels
+    eval_only = (counted.training_mode == 'zero-shot (no training)') | (counted.own_train.isna() & counted.own_val.isna() & counted.own_test.notna() & (counted.own_test == counted.own_images))
+    n_eval_only = int(eval_only.sum()); counted = counted[~eval_only].copy()
     g = gains.copy()
     g['标注图像'] = pd.to_numeric(g['适配用标注图像'], errors='coerce')
     g['提升'] = pd.to_numeric(g['提升(点)'], errors='coerce')
@@ -746,7 +750,7 @@ def training_page():
     if len(counted):
         q = counted.own_images.quantile([.25, .5, .75])
         med = counted.groupby('task_group').own_images.median()
-        card(c[2], '实际标注规模', f'自标图像中位 <b>{q[.5]:,.0f} 张</b>（一半在 {q[.25]:,.0f}–{q[.75]:,.0f}）；检测 {med.get("检测", float("nan")):,.0f}、分割 {med.get("分割", float("nan")):,.0f}。这是“实际标了多少”，不是“至少要多少”。')
+        card(c[2], '实际标注规模', f'自标图像中位 <b>{q[.5]:,.0f} 张</b>（一半在 {q[.25]:,.0f}–{q[.75]:,.0f}）；检测 {med.get("检测", float("nan")):,.0f}、分割 {med.get("分割", float("nan")):,.0f}。这是“实际标了多少”，不是“至少要多少”；另有 {n_eval_only} 篇自标图像只用于测试，未计入。')
     ns = (flat.init == 'not stated').mean() * 100
     card(c[3], '从什么权重起步', f'检测多从 <b>COCO</b> 起步，分割多从 <b>ImageNet 骨干 / Cityscapes</b> 起步；<b>{ns:.0f}%</b> 的论文没写初始化权重。')
     st.write('')
@@ -848,6 +852,7 @@ def training_page():
         stats = counted.groupby('task_group').own_images.describe()[['count', '25%', '50%', '75%']].round(0)
         stats.columns = ['篇数', 'P25', '中位数', 'P75']; stats.index.name = '任务'
         st.dataframe(stats, width='stretch')
+        st.caption(f'只统计用于训练的自标图像；另有 {n_eval_only} 篇论文的自标图像只用于测试（零样本评测或只标了测试集），未计入。')
     with right:
         st.subheader('基础模型从什么权重开始训练？')
         fi = flat[['id', 'family', 'init']]
