@@ -182,14 +182,40 @@ THEME_FIX = {
 }
 
 
+TECH_THEMES = {'街景目标检测与定位', '街景分割与场景解析', '检测与分割综合方法', '街景数据集与标注体系', '街景变化检测'}
+OWN_DATA = '作者自建／自标数据'
+
+
+def clean_dataset(d):
+    """Canonical dataset name; None for non-datasets ('unclear', 'not stated'); authors' own data grouped."""
+    d = str(d or '').strip()
+    low = d.lower()
+    if not d or low.startswith('unclear') or low in ('not stated', 'none', 'unknown', 'unspecified'):
+        return None
+    if d.startswith(('自建', '自采')) or '自标' in d or low.startswith('own ') or 'mapillary街景' in low:
+        return OWN_DATA
+    return DATASET_ALIAS.get(d, d)
+
+
+def method_theme(row):
+    """算法与方法类 uses technical themes only; papers coded with an application theme are re-derived from type and tasks."""
+    if row['theme'] in TECH_THEMES:
+        return row['theme']
+    if row.get('type_name') == '数据集研究':
+        return '街景数据集与标注体系'
+    t = set(row['tasks'])
+    det, seg = '目标检测' in t, bool(t & {'语义分割', '实例分割', '全景分割'})
+    return '检测与分割综合方法' if det and seg else '街景目标检测与定位' if det else '街景分割与场景解析'
+
+
 def fix_paper_fields(papers: pd.DataFrame) -> pd.DataFrame:
     papers = papers.copy()
-    papers['datasets'] = papers.datasets.apply(lambda ds: sorted({DATASET_ALIAS.get(d, d) for d in ds}))
-    papers['theme'] = [THEME_FIX.get(i, t) if g == '应用类' else t for i, t, g in zip(papers.id, papers.theme, papers.group)]
+    papers['datasets'] = papers.datasets.apply(lambda ds: sorted({c for c in map(clean_dataset, ds) if c}))
+    papers['theme'] = [THEME_FIX.get(r['id'], r['theme']) if r['group'] == '应用类' else method_theme(r) for _, r in papers.iterrows()]
     return papers
 
 
 def fix_dataset_names(df: pd.DataFrame, col: str) -> pd.DataFrame:
     if len(df) and col in df:
-        df = df.copy(); df[col] = df[col].map(lambda d: DATASET_ALIAS.get(d, d))
+        df = df.copy(); df[col] = df[col].map(clean_dataset); df = df[df[col].notna()]
     return df
