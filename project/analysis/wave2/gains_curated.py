@@ -1,0 +1,53 @@
+"""Hand-curated before/after-adaptation pairs (2026-10-26), built from the 49 records with baseline_without_adaptation in out/*.jsonl
+plus their results/label_efficiency_note fields. Automatic pairing was unreliable (mixed test sets, per-class lists, relative-only gains),
+so each pair below was checked against the extracted text: same model family, same street test set, before vs after.
+Values on the paper's own scale; gain = after - before in points (computed here). 'labels' = target-domain labelled images used for adaptation.
+Types: A = fine-tuned with target-domain labelled street images; B = no target labels (UDA / synthetic / weak); C = pretraining source, training strategy or data cleaning.
+Excluded from the 49: R0306, R0692, R1843 (not det/seg), R0422 (zero-shot pipeline change, no training), R1184 = same study as R0622 (kept once)."""
+G = [
+ # id, model, metric, test set, before setting, before, after setting, after, gain, labels, type, note
+ ("R0369", "DeepLabv3+ R101 (Cityscapes)", "mIoU", "自有 15 张清迈 GSV", "Cityscapes 预训练直接用", 75.9, "70 张自标微调（无增强/多重增强）", "89.7 / 90.8", 14.9, 70, "A", "作者建议其他城市至少标 100–200 张"),
+ ("R0143", "DeepLabv3+ (Cityscapes)", "mIoU", "自有测试集（200 张的 15%）", "Cityscapes 预训练", "73.6（由作者给的 +8.7 反推）", "200 张主动学习选出的低置信图像微调", 82.3, 8.7, 200, "A", "仅占站点 5% 的图像"),
+ ("R0029", "Panoptic FPN ResNeXt-101 (Cityscapes)", "mIoU", "100 张 MVD 东亚图像", "Cityscapes 训练", 73.65, "200 张 MVD 东亚图像少样本微调", 82.57, 8.92, 200, "A", "标签来自公开 MVD；车辆 +18.21、天空 +9.78"),
+ ("R1297", "HRNet-OCR (Cityscapes)", "IoU", "自有 768 张达卡 GSV", "Cityscapes 预训练", 65.99, "Cityscapes + 1,789 张达卡自标重训", 91.86, 25.87, 1789, "A", "F1 0.77→0.96"),
+ ("R1490", "HRNet-OCR (Cityscapes / Mapillary)", "IoU 人行道", "自有 768 张达卡 GSV", "Cityscapes 预训练 / Mapillary 预训练", "40.12 / 27.91", "+ 达卡自标重训", "85.92 / 77.62", 45.8, 1789, "A", "与 R1297 同一研究组同一数据；道路 91.85→97.80"),
+ ("R0601", "Segmenter (ViT)", "mIoU", "佛州路口 GSV（测试集未说明）", "预训练直接用", 27.1, "1,000 张自标微调", 82.1, 55.0, 1000, "A", "测试集未说明，增益偏大需谨慎"),
+ ("R1199", "FCN-8s (Cityscapes)", "mIoU", "自有 100 张 Ladybug3 全景", "Cityscapes 预训练直接用", "2.88 / 3.07", "100 张自标微调（+focal loss）", "34.64 / 37.51", 31.8, 100, "A", "目标类别（灯杆、标志）与 Cityscapes 不同，基线近零"),
+ ("R3340", "Facade R-CNN (DeepLabv3 R50)", "mIoU", "自有 100 张 Oxford 立面", "只用 ECP+RueMonge 训练（跨数据集）", 25.2, "400 张自标训练", 53.8, 28.6, 400, "A", "窗户/立面任务"),
+ ("R1905", "DDRNet-23-slim", "mIoU", "自有验证集（600 张的 1/5）", "预训练直接用", 59.4, "约 480 张自标微调", 66.6, 7.2, 600, "A", "600 为总数，训练约 480"),
+ ("R1032", "SegFormer (ADE20K→Jekyll)", "IoU 树", "Arbocensus 测试集", "ADE20K→Jekyll（公开树数据）", 79.1, "+ 自有 Arbocensus 微调", 88.9, 9.8, 986, "A", "作者结论：只用小规模本地数据≈先在大型外部树数据上预训练"),
+ ("R1131", "HRNet-OCR (温带训练)", "IoU 电杆/变压器/横担", "伊卡卢伊特 GSV（北极）", "南安大略模型直接迁移", "56 / 30.65 / 11.44", "+ 504 张北极自标微调", "61.05 / 41.42 / 31.09", "5.1 / 10.8 / 19.7", 504, "A", "只有像素占比 >0.05% 的类别学得会"),
+ ("R2172", "FCN-8s → 改进版", "F1", "自有 65 张街景", "原版 FCN-8s（VOC）", 0.61, "504 张自标训练（改进网络）", 0.91, 30.0, 504, "A", "同时改了网络结构"),
+ ("R1094", "YOLOv4", "F1", "50 张 CDOT 挡风玻璃图像", "LTPP 训练的模型直接用", 0.50, "20 张 CDOT 图像迁移学习", 0.78, 28.0, 20, "A", "只标 20 张；误检增加"),
+ ("R0123", "YOLOv8s (RDD2020)", "AP", "2,850 张 GSV 验证图像", "只用 RDD2020", 0.619, "+ 1,178 张自标难例 GSV", 0.746, 12.7, 1178, "A", "precision 43.0→64.4"),
+ ("R1506", "Faster R-CNN R50", "AP", "164 张麦德林 GSV", "只用公开 STORM", 58.3, "+ 373 张本地 GSV", 69.14, 10.8, 373, "A", "壁画类 37.4→59.13"),
+ ("R2651", "YOLOv5s / YOLOv8n", "mAP50", "MarPoth（摩洛哥）", "只用 PothD", 0.49, "PothD + 277 张本地图像联合训练", 0.74, 25.0, 277, "A", "先 PothD 再顺序微调只有 0.46，联合训练最好"),
+ ("R0622", "YOLOv8x (PSD)", "precision / recall（路缘坡道）", "波尔图 PTD 15% 测试", "只用 PSD", "74.6 / 30.1", "PSD + 本地 PTD", "85.0 / 91.0", "10.4 / 60.9", "2,044 个标注（图像数未写）", "A", "只用本地小数据 F1 41.4；与 R1184 为同一研究"),
+ ("R0716", "YOLOv11m-seg (Cityscapes)", "F1", "卡塔尔行车记录仪帧", "只用 Cityscapes（验证集）", 0.77, "+ 500 张本地帧", 0.8396, 7.0, 500, "A", "前值为验证集，后值为测试集"),
+ ("R2438", "YOLOv5", "mAP50", "自有 500 张电动车", "初始权重 / COCO+O365 子集", "78.97 / 88.43", "4,500 张自标微调", 94.58, 15.6, 4500, "A", ""),
+ ("R1761", "EAST", "recall", "ShopSign Test1", "英文 ICDAR 预训练", 12.9, "ShopSign 训练集（20,738 张）", "57.9–58.4", 45.0, 20738, "A", "中文招牌文字检测"),
+ ("R3298", "RF-DETR (DINOv2)", "F1", "洛杉矶 GSV 测试", "只用中国街树数据", 0.78, "+254 张 GSV → 主动学习 10 轮", "0.80 → 0.90", 12.0, 254, "A", "伪标签自训练反而 0.80→0.76"),
+ ("R0772", "SAM ViT-H 零样本 → UGSAM", "mIoU", "重庆百度街景", "SAM 文本提示零样本（恶劣天气 / 正常）", "63.22 / 85.56", "SAM 冻结 + 50 张修正图训练小模块", "84.90 / 86.81", "21.7 / 1.3", 50, "A", "零样本在恶劣天气下掉得厉害"),
+ ("R0185", "EfficientViT-SAM", "IoU（三种行道树）", "沙阿南 GSV", "未微调", "86.15 / 90.19 / 81.16", "在公开 Jekyll 树数据上微调", "89.33 / 90.57 / 89.88", "3.2 / 0.4 / 8.7", "0（公开数据）", "A", "微调数据非目标城市"),
+ ("R0093", "Grounding DINO Tiny / YOLO11", "检出 / mAP50", "雅典自有图像", "Grounding DINO 零样本", "108 个目标只检出 1 个", "全量微调 Grounding DINO / YOLO11", "0.67 / 0.97", "", 2344, "A", "LoRA 小子集微调失败（mAP50 0.05）"),
+ ("R1897", "关键点窗户检测 CNN (ResNet18)", "IoU（相对）", "3 类验证批", "只用公开立面数据", "—", "+ 537 张自标街景", "+9.5% / +1% / +8.5%（相对）", "", 537, "A", "R2351 为同一研究的另一记录"),
+ ("R0585", "SAM → BuildWin-SAM", "IoU（相对）", "SVBW 测试集", "原版 SAM（点提示）", "—", "适配器微调（PEFT）", "IoU 80.70，比原版高 43%", "", "1,172（8:2 划分）", "A", "1,172 张，8:2 划分"),
+ ("R2003", "ResNet-18 滑窗", "precision / recall", "西雅图 / 纽伯格 测试", "只用华盛顿特区数据", "55.6/56.3 · 46.0/48.6", "+ 目标城市数据", "76.2/82.8 · 80.6/90.2", "", "未写", "A", "裁剪块分类式验证"),
+ ("R2182", "Dilated-FCN (Cityscapes)", "mIoU", "自有 100 张/城 GSV：罗马/里约/东京/台北", "Cityscapes 直接用", "38.2 / 38.5 / 39.2 / 35.1", "无标签自适应 → 90 张有标签微调", "42.9/42.5/42.8/39.6 → 43.8/49.1/48.3/46.4", "UDA +4.5 均；90 张 +9.2 均", 90, "B", "同一篇里同时给出“无标签适应”和“标 90 张”的对照"),
+ ("R1478", "FCOS (VGG-16)", "mAP50", "Cityscapes 车辆", "SIM10K 仅源域", 39.8, "无监督域适应", 53.4, 13.6, 0, "B", ""),
+ ("R1752", "PSPNet R101", "mIoU", "Synscapes 测试", "只用 Cityscapes", 61.9, "跨域半监督多任务（目标无分割标签）", 65.4, 3.5, 0, "B", ""),
+ ("R1845", "像素对比分割网络", "mIoU", "Cityscapes val（7 类 / 19 类）", "GTA5000 源域直接测", "63.4 / 31.7", "无监督适应", "70.3 / 34.4", "6.9 / 2.7", 0, "B", "源域数据 2,500→5,000 也有提升"),
+ ("R2301", "ResNet-38 部件分割", "mIoU", "自有 200 张 ApolloScape 部件标注", "只用合成数据", 11.7, "类一致迁移（无真实部件标签）", 47.2, 35.5, 0, "B", ""),
+ ("R2507", "YOLOv3", "AP50 车 / 行人", "自有 200 张真实 360° 街景", "用 KITTI（透视）训练", "38.01 / 25.12", "用 3,664 张合成全景训练", "68.96 / 31.67", "31.0 / 6.6", "0（合成）", "B", "全景畸变：合成全景数据比真实透视数据更有用"),
+ ("R1540", "FCN-8s", "mIoU", "Cityscapes val", "只用 Cityscapes", 64.7, "+ GTA5 合成数据联合训练", 68.7, 4.0, 0, "B", ""),
+ ("R0440", "HRNet 文字检测", "F1", "ICDAR2017", "只用合成数据", 63.83, "+ 词级弱标签真实数据", "80.60 → 85.04", 16.8, "弱标签", "B", ""),
+ ("R2890", "DINOv2 ViT-S（冻结）变化检测", "F1", "PSCD", "只用 VL-CMU-CD", 0.337, "PSCD 微调", 0.442, 10.5, "公开 PSCD", "B", ""),
+ ("R1477", "IOG / GridIIS 交互分割", "IoU", "Cityscapes", "只用 PASCAL", 81.5, "+ 1/10 Cityscapes 微调", 83.8, 2.3, "Cityscapes 10%", "C", ""),
+ ("R1558", "Faster R-CNN R50-FPN", "mAP50", "TT100K / Mapillary 交通标志", "ImageNet 初始化", "91.27 / 72.90", "先在 MTSD 预训练再微调", "97.60 / 76.31", "6.3 / 3.4", 36589, "C", "预训练来源的影响"),
+ ("R2621", "Cascade R-CNN (HRNet)", "MR-2（越低越好）", "Caltech", "在 Caltech 本身训练", 6.2, "Wider Pedestrian→ECP 渐进预训练，不用目标集", 2.5, "−3.7（更好）", 0, "C", "大而多样的预训练数据 > 目标集训练"),
+ ("R1963", "Mask R-CNN R101 (COCO)", "mAP", "自有 431 张腾讯街景", "冻结骨干只训头", 0.54, "从第 3 层起微调", 0.80, 26.0, 3448, "C", "训练策略的影响"),
+ ("R1185", "YOLOv4", "mAP", "同一测试集", "原始开放数据", 61.2, "清洗后的开放数据（6000→3077 张）", 85.72, 24.5, "—", "C", "数据清洗；本地街景仅 164 张训练即达 85.36"),
+ ("R3334", "YOLOv5l / Faster R-CNN", "mAP", "pLitterStreet 测试", "用 TACO / PlastOPol 训练（跨数据集）", "7.6–12.5", "用 pLitterStreet 训练", "40.9 / 44.0", "", 13064, "C", "前值单类、后值 4 类，设置不完全一致"),
+ ("R0187", "DeepLabv3+ R101 管线", "precision / recall", "6,100 张 ODOT GSV", "去掉分割微调（消融）", "0.85 / 0.72", "Mapillary 加权训练", "0.989 / 0.967", "", "公开 Mapillary", "C", "目标级管线指标"),
+]
+COLS = ["id", "模型", "指标", "测试集", "适配前设置", "适配前", "适配后设置", "适配后", "提升(点)", "适配用标注图像", "类型", "备注"]

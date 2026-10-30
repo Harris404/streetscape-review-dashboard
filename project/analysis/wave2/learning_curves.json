@@ -1,0 +1,1158 @@
+[
+ {
+  "id": "R0029",
+  "type": "local_add",
+  "model": "Panoptic FPN semantic branch (ResNeXt-101 FPN)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "pre-fine-tuning (no MVD East Asia)",
+    "y": 73.65
+   },
+   {
+    "x": 200,
+    "label": "+200 MVD East Asian images",
+    "y": 82.57
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 5: 'Average 73.65 82.57 ± 0.38 8.92' (Pre- vs Post-Fine-Tuning)",
+  "test_set": "East Asian MVD held-out images (5 classes)"
+ },
+ {
+  "id": "R0123",
+  "type": "local_add",
+  "model": "YOLOv8",
+  "task": "detection",
+  "metric": "AP",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "RDD2020 only",
+    "y": 0.619
+   },
+   {
+    "x": 1178,
+    "label": "+1178 annotated local hard cases",
+    "y": 0.746
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 6: baseline 'Acc.: 89.5%, precision 43.0% ... AP: 0.619' vs augmented 'Acc.: 94.8% ... AP: 0.746'; point-wise AP",
+  "test_set": "Ward No.1 street-view validation, 2850 images/1425 points"
+ },
+ {
+  "id": "R0369",
+  "type": "local_add",
+  "model": "DeepLabV3+ (ResNet-101)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "baseline (no local data)",
+    "y": 0.759
+   },
+   {
+    "x": 70,
+    "label": "+70 local images, no aug (Case-01)",
+    "y": 0.897
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2: 'Baseline model 0 759' / 'Case-01 0.897'; text 'mIoU improvement from 0.759 to 0.908' (Case-06 multi-aug 0.908)",
+  "test_set": "15 local test images"
+ },
+ {
+  "id": "R0622",
+  "type": "local_add",
+  "model": "YOLOv8x",
+  "task": "detection",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "instances",
+  "points": [
+   {
+    "x": 0,
+    "label": "S1: PSD only",
+    "y": 30.1
+   },
+   {
+    "x": 2044,
+    "label": "S3: PSD + PTD (2044 local annotations)",
+    "y": 91.0
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 (per-object, applied to 15% of PTD), Curb Ramp recall: 'S1 ... 30.1' vs 'S3 ... 91.0'; metric = curb-ramp recall %. Note's F1 41.4 is S2 (PTD only) in Table 1 on its own test",
+  "test_set": "15% of Porto PTD"
+ },
+ {
+  "id": "R1184",
+  "type": "local_add",
+  "model": "YOLOv8x",
+  "task": "detection",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "instances",
+  "points": [
+   {
+    "x": 0,
+    "label": "S1: PSD only",
+    "y": 30.1
+   },
+   {
+    "x": 2044,
+    "label": "S3: PSD + PTD",
+    "y": 91.0
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table II (applied to 15% of PTD), Curb Ramp recall: S1 30.1 vs S3 91.0 (same study as R0622; conference version); metric = curb-ramp recall %",
+  "test_set": "15% of Porto PTD"
+ },
+ {
+  "id": "R0657",
+  "type": "local_add",
+  "model": "ConvNeXt V2-Base crop classifier",
+  "task": "other",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Project Sidewalk data only",
+    "y": 76.7
+   },
+   {
+    "x": 312,
+    "label": "+312 manually labelled panoramas",
+    "y": 89.0
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Sec 3.2: 'solely trained on Project Sidewalk data alone achieves a recall of 76.7%' -> 'final crop model achieves a recall of 89.0%' (precision 77.2%->87.0%); metric = recall %",
+  "test_set": "crop-level eval (not specified)"
+ },
+ {
+  "id": "R0716",
+  "type": "local_add",
+  "model": "YOLOv11m-seg",
+  "task": "segmentation",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "~2500 Cityscapes only",
+    "y": 0.77
+   },
+   {
+    "x": 500,
+    "label": "+500 local dashcam frames",
+    "y": 0.8396
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Intro: 'Before this addition, the model's F1 score on the validation data was 0.77 ... rose to 0.8396'",
+  "test_set": "validation data (Qatar dashcam)"
+ },
+ {
+  "id": "R1094",
+  "type": "local_add",
+  "model": "YOLOv4",
+  "task": "detection",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "LTPP-trained, before transfer",
+    "y": 0.5
+   },
+   {
+    "x": 20,
+    "label": "+20 CDOT images (transfer learning)",
+    "y": 0.78
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1: 'Before transfer learning ... 0.84 0.35 0.50' vs 'After ... 0.76 0.81 0.78'",
+  "test_set": "50 CDOT test images"
+ },
+ {
+  "id": "R1131",
+  "type": "local_add",
+  "model": "HRNet-OCR",
+  "task": "segmentation",
+  "metric": "IoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Southern-Ontario model (temperate only)",
+    "y": 56
+   },
+   {
+    "x": 504,
+    "label": "+504 Iqaluit arctic images fine-tune",
+    "y": 61.05
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table II, Poles IoU on Iqaluit test: 'Southern-Ontario-HRNet-OCR ... 56%' vs 'Iqaluit-HRNet-OCR ... 61.05%' (transformer 30.65->41.42, crossarm 11.44->31.09)",
+  "test_set": "Iqaluit (arctic) GSV test set, pole class"
+ },
+ {
+  "id": "R1139",
+  "type": "local_add",
+  "model": "YOLOv5m",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Ex-Mexico",
+    "y": 0.123
+   },
+   {
+    "x": 200,
+    "label": "Consolidated (+200 Mexico City GSV)",
+    "y": 0.22
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1, Mexico City test set, All classes mAP@0.5: Consolidated 0.220 vs Ex-Mexico 0.123 (Mission District 0.204->0.224)",
+  "test_set": "Mexico City neighbourhoods, 121 images"
+ },
+ {
+  "id": "R1477",
+  "type": "local_add",
+  "model": "GridIIS (Grid)",
+  "task": "other",
+  "metric": "IoU",
+  "metric_scale": "0-100",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 0,
+    "label": "PASCAL only",
+    "y": 81.5
+   },
+   {
+    "x": 10,
+    "label": "PASCAL + 1/10 Cityscapes",
+    "y": 83.8
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2: 'Grid PASCAL – 81.5' / 'Grid PASCAL+1/10 CityScapes – 83.8' (interactive segmentation)",
+  "test_set": "Cityscapes"
+ },
+ {
+  "id": "R1506",
+  "type": "local_add",
+  "model": "Faster R-CNN (ResNet-50)",
+  "task": "detection",
+  "metric": "AP",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "STORM only (1,022 images)",
+    "y": 58.3
+   },
+   {
+    "x": 373,
+    "label": "+373 local GSV images (Extended)",
+    "y": 69.14
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Sec 3.3: 'STORM AP 58.3% vs. Extended dataset AP 69,14%'; Mural 37.4->59.13, Block 59->75",
+  "test_set": "164 GSV validation images (Medellín)"
+ },
+ {
+  "id": "R2182",
+  "type": "local_add",
+  "model": "Dilated-FCN",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Cityscapes pre-trained (Rome)",
+    "y": 38.2
+   },
+   {
+    "x": 90,
+    "label": "fine-tuned on 90 Rome images (UB)",
+    "y": 43.8
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 Rome: 'Pre-trained ... 38.2' vs 'UB ... 43.8' (annotation-free Full Method 42.9)",
+  "test_set": "Rome, 10-fold over 100 annotated images"
+ },
+ {
+  "id": "R2182",
+  "type": "local_add",
+  "model": "Dilated-FCN",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Cityscapes pre-trained (Rio)",
+    "y": 38.5
+   },
+   {
+    "x": 90,
+    "label": "fine-tuned on 90 Rio images (UB)",
+    "y": 49.1
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 Rio: 'Pre-trained ... 38.5' vs 'UB ... 49.1' (Full Method 42.5)",
+  "test_set": "Rio, 10-fold over 100 images"
+ },
+ {
+  "id": "R2182",
+  "type": "local_add",
+  "model": "Dilated-FCN",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Cityscapes pre-trained (Tokyo)",
+    "y": 39.2
+   },
+   {
+    "x": 90,
+    "label": "fine-tuned on 90 Tokyo images (UB)",
+    "y": 48.3
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 Tokyo: 'Pre-trained ... 39.2' vs 'UB ... 48.3' (Full Method 42.8)",
+  "test_set": "Tokyo, 10-fold over 100 images"
+ },
+ {
+  "id": "R2182",
+  "type": "local_add",
+  "model": "Dilated-FCN",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "Cityscapes pre-trained (Taipei)",
+    "y": 35.1
+   },
+   {
+    "x": 90,
+    "label": "fine-tuned on 90 Taipei images (UB)",
+    "y": 46.4
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 Taipei: 'Pre-trained ... 35.1' vs 'UB ... 46.4' (Full Method 39.6)",
+  "test_set": "Taipei, 10-fold over 100 images"
+ },
+ {
+  "id": "R2651",
+  "type": "local_add",
+  "model": "YOLOv5x (Exp.1) / YOLOv5s (Exp.4)",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "other",
+  "points": [
+   {
+    "x": 0,
+    "label": "PothD only (Exp.1)",
+    "y": 0.49
+   },
+   {
+    "x": 1,
+    "label": "PothD + MarPoth combined training (Exp.4)",
+    "y": 0.74
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table II, 'mAP@0.5 MarPoth 0.49 0.46 0.65 0.74' (Exp.1-4); MarPoth = 277 images total, training count not stated; best model differs per experiment",
+  "test_set": "MarPoth validation (Morocco)"
+ },
+ {
+  "id": "R3298",
+  "type": "local_add",
+  "model": "RF-DETR",
+  "task": "detection",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "source (Chinese tree dataset) only",
+    "y": 0.78
+   },
+   {
+    "x": 254,
+    "label": "+254 GSV training images",
+    "y": 0.8
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Sec 4.2.1: 'only the source dataset ... F1-score of 0.78' -> mixed training 'F1-score of 0.80'; Table 1 GSV train 254 (secondary series; note typed 'curve')",
+  "test_set": "GSV target test (1,712 images)"
+ },
+ {
+  "id": "R2003",
+  "type": "local_add",
+  "model": "ResNet-18 auto-validation",
+  "task": "other",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "instances",
+  "points": [
+   {
+    "x": 0,
+    "label": "DC only (Seattle test)",
+    "y": 55.6
+   },
+   {
+    "x": 5677,
+    "label": "DC + Seattle (5,677 labels)",
+    "y": 71.9
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "R4: 'Seattle+DC improving from 55.6% to 71.9% for precision'; Table 5 Seattle train All Labels 5,677 (secondary series; note typed 'curve'); metric = precision %",
+  "test_set": "Seattle test split"
+ },
+ {
+  "id": "R0237",
+  "type": "curve",
+  "model": "MobileNetV3-Small species classifier",
+  "task": "other",
+  "metric": "accuracy",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "open-source dataset, no web images",
+    "y": 67.8
+   },
+   {
+    "x": 1500,
+    "label": "+~1500 web images",
+    "y": 73.0
+   },
+   {
+    "x": 3000,
+    "label": "+~3,000 web images",
+    "y": 88.6
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 10 Seoul Top-1 Acc: 67.80 / 73.00 / 88.60 (x = added web-sourced images)",
+  "test_set": "Seoul"
+ },
+ {
+  "id": "R0237",
+  "type": "curve",
+  "model": "MobileNetV3-Small species classifier",
+  "task": "other",
+  "metric": "accuracy",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "manual annotations, no web images",
+    "y": 80.26
+   },
+   {
+    "x": 2500,
+    "label": "+~2,500 web images",
+    "y": 83.8
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 10 Zhuhai Top-1 Acc: 80.26 / 83.80",
+  "test_set": "Zhuhai"
+ },
+ {
+  "id": "R0306",
+  "type": "curve",
+  "model": "Qwen2-VL 7B LoRA r64",
+  "task": "other",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "other",
+  "points": [
+   {
+    "x": 29000,
+    "label": "29k-YN pairs",
+    "y": 0.64
+   },
+   {
+    "x": 61000,
+    "label": "61k-Balanced-YN",
+    "y": 0.72
+   },
+   {
+    "x": 76000,
+    "label": "76k-Unbalanced-YN",
+    "y": 0.68
+   }
+  ],
+  "plateau_note": "数据平衡比数量更重要",
+  "evidence": "Table 2 F1 (Yes): 29k-YN 0.64, 61k-Balanced-YN 0.72, 76k-Unbalanced-YN 0.68; balance also changes",
+  "test_set": "social-group pair test set"
+ },
+ {
+  "id": "R0611",
+  "type": "curve",
+  "model": "Mask R-CNN",
+  "task": "segmentation",
+  "metric": "IoU",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 782,
+    "label": "782 real (ADE20K)",
+    "y": 0.605
+   },
+   {
+    "x": 1564,
+    "label": "782 real + 782 virtual",
+    "y": 0.679
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1 Bench, All Cities IoU: R-bench 0.605, RV-bench 0.679 (virtual only 782: 0.535)",
+  "test_set": "300 SVIs, Seattle/NYC/Chicago"
+ },
+ {
+  "id": "R0632",
+  "type": "curve",
+  "model": "YOLOv8",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 70,
+    "label": "70% train",
+    "y": 0.67
+   },
+   {
+    "x": 75,
+    "label": "75% train",
+    "y": 0.68
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Tables I-II YOLOv8 Paris Mean mAP50: 0.67 (70-30) vs 0.68 (75-25)",
+  "test_set": "Paris, split-dependent test"
+ },
+ {
+  "id": "R0632",
+  "type": "curve",
+  "model": "YOLOv8",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 70,
+    "label": "70% train",
+    "y": 0.71
+   },
+   {
+    "x": 75,
+    "label": "75% train",
+    "y": 0.72
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Tables I-II YOLOv8 Marseilles Mean mAP50: 0.71 vs 0.72",
+  "test_set": "Marseilles, split-dependent test"
+ },
+ {
+  "id": "R1061",
+  "type": "curve",
+  "model": "Mask R-CNN (R50-FPN)",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 5817,
+    "label": "Noisy (subset) 5,817",
+    "y": 5.9
+   },
+   {
+    "x": 769437,
+    "label": "Noisy (all) 769,437",
+    "y": 9.2
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table III: Mask R-CNN mAP@.5 Noisy (subset) 5.9, Noisy (all) 9.2; Clean (subset) 5,817 = 23.3",
+  "test_set": "PanorAMS clean test"
+ },
+ {
+  "id": "R1267",
+  "type": "curve",
+  "model": "Faster R-CNN-based (VGG16+BN) proposed",
+  "task": "detection",
+  "metric": "AP",
+  "metric_scale": "0-1",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 10,
+    "label": "10% of SVSO train (500 images)",
+    "y": 0.84
+   },
+   {
+    "x": 100,
+    "label": "full training set",
+    "y": 0.91
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Sec: 'only 10% of SVSO dataset training images (500 images) ... mAP score of 0.84 (0.91 mAP score when using the full training set)'",
+  "test_set": "SVSO validation set"
+ },
+ {
+  "id": "R1291",
+  "type": "curve",
+  "model": "YOLOv8",
+  "task": "detection",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "other",
+  "points": [
+   {
+    "x": 1,
+    "label": "Dataset 1 (initial, imbalanced)",
+    "y": 0.56
+   },
+   {
+    "x": 2,
+    "label": "Dataset 2 (expanded/balanced)",
+    "y": 0.55
+   }
+  ],
+  "plateau_note": "扩充后无提升",
+  "evidence": "Table 2 at 640 px: Dataset 1 F1 0.56, Dataset 2 F1 0.55; Table 1 per-class counts (e.g. Alligator 848->1.208); preprocessing/augmentation also changed",
+  "test_set": "not stated if identical"
+ },
+ {
+  "id": "R1325",
+  "type": "curve",
+  "model": "YOLOv5",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "other",
+  "points": [
+   {
+    "x": 1,
+    "label": "A: 600 street-view",
+    "y": 0.55
+   },
+   {
+    "x": 2,
+    "label": "A+B: +300 entrance photos",
+    "y": 0.612
+   },
+   {
+    "x": 3,
+    "label": "A+C: +630 open-dataset",
+    "y": 0.575
+   },
+   {
+    "x": 4,
+    "label": "A+B+C",
+    "y": 0.657
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table II validation mAP50: A 0.550, A+B 0.612, A+C 0.575, A+B+C 0.657 (x ordinal; composition differs)",
+  "test_set": "validation set"
+ },
+ {
+  "id": "R1559",
+  "type": "curve",
+  "model": "Faster R-CNN (R101-FPN)",
+  "task": "detection",
+  "metric": "mAP50-95",
+  "metric_scale": "0-100",
+  "x_unit": "instances",
+  "points": [
+   {
+    "x": 20,
+    "label": "MVD 20-shot",
+    "y": 1.2
+   },
+   {
+    "x": 120,
+    "label": "MVD 120-shot",
+    "y": 14.4
+   },
+   {
+    "x": 600,
+    "label": "MVD 600-shot",
+    "y": 25.9
+   },
+   {
+    "x": 2000,
+    "label": "MVD 2000-shot",
+    "y": 34.4
+   },
+   {
+    "x": 5122,
+    "label": "MVD full",
+    "y": 41.7
+   }
+  ],
+  "plateau_note": "全量前仍在上升",
+  "evidence": "Table III crosswalk AP: 1.2 / 14.4 / 25.9 / 34.4 / 41.7; Table I instance counts (full = 5122)",
+  "test_set": "MVD crosswalk test (630 instances)"
+ },
+ {
+  "id": "R1694",
+  "type": "curve",
+  "model": "YOLOv3",
+  "task": "detection",
+  "metric": "other",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 1500,
+    "label": "1500 train images",
+    "y": 0.78
+   },
+   {
+    "x": 2500,
+    "label": "2500 train images",
+    "y": 0.81
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1: 'Accuracy rate 0.78 0.81'; correct detections 10076 vs 11026",
+  "test_set": "26 roads, 6618 GSV panoramas vs surveyed trees"
+ },
+ {
+  "id": "R1845",
+  "type": "curve",
+  "model": "pixel-contrast seg. network (UDA)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 2500,
+    "label": "GTA2500 (stage II)",
+    "y": 66.9
+   },
+   {
+    "x": 5000,
+    "label": "GTA5000 (stage II)",
+    "y": 70.3
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table I average (7 categories): GTA2500 stage II 66.9, GTA5000 stage II 70.3; Table II (19 classes) 32.2 -> 34.4; x = labelled synthetic source images",
+  "test_set": "Cityscapes val (target)"
+ },
+ {
+  "id": "R1926",
+  "type": "curve",
+  "model": "Faster R-CNN (TF OD API)",
+  "task": "detection",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 1267,
+    "label": "exp1: 1,267 SS images",
+    "y": 62
+   },
+   {
+    "x": 1867,
+    "label": "exp2: 1,867 SS images",
+    "y": 72
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 vs Table 4: SS correctly predicted 697 (62%) -> 817 (72%); non-SS 83% -> 87%; Table 3 training counts; metric = SS detection rate %",
+  "test_set": "Santa Monica validation (1,133 SS + 2,000 non-SS)"
+ },
+ {
+  "id": "R1971",
+  "type": "curve",
+  "model": "HMSA (HRNet-W48+OCR)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 800,
+    "label": "stage 1, 800 train",
+    "y": 74.3
+   },
+   {
+    "x": 2500,
+    "label": "stage 5, 2,500 train",
+    "y": 88.6
+   }
+  ],
+  "plateau_note": "5轮后无明显提升",
+  "evidence": "Sec 3.2: 'initially uses 800 images' ... 'final stage was trained on 2,500 images ... 88.6 % mIoU'; Sec 3.3 'from 74.3% mIoU to 88.6%'; stage 3 = 83% (count not stated); active learning, eval set may differ",
+  "test_set": "held-out test (Boston/NYC)"
+ },
+ {
+  "id": "R1986",
+  "type": "curve",
+  "model": "Mask R-CNN (SpineNet-96)",
+  "task": "segmentation",
+  "metric": "AP",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "100 real",
+    "y": 0.366
+   },
+   {
+    "x": 100,
+    "label": "100 real + 100 CDT synthetic",
+    "y": 0.398
+   },
+   {
+    "x": 500,
+    "label": "100 real + 500 CDT",
+    "y": 0.473
+   },
+   {
+    "x": 1000,
+    "label": "100 real + 1,000 CDT",
+    "y": 0.511
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 7 Mask AP: 0.366 / 0.398 / 0.473 / 0.511 (x = synthetic images added)",
+  "test_set": "100 real images (Tokyo)"
+ },
+ {
+  "id": "R2003",
+  "type": "curve",
+  "model": "ResNet-18 auto-validation",
+  "task": "other",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "patches",
+  "points": [
+   {
+    "x": 1000,
+    "label": "1,000 crops",
+    "y": 61
+   },
+   {
+    "x": 213000,
+    "label": "full 213,000 crops",
+    "y": 79.7
+   }
+  ],
+  "plateau_note": "未见平台",
+  "evidence": "R3: 'With only 1,000 crops, our overall precision and recall was 61% and 63.9%, which improves to 79.7% and 80.4% with the full training set (213,000 crops)'; metric = precision %; other points only in Fig 8",
+  "test_set": "DC test set"
+ },
+ {
+  "id": "R2157",
+  "type": "curve",
+  "model": "GANet (ResNet-101)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 0,
+    "label": "fine only",
+    "y": 81.6
+   },
+   {
+    "x": 20000,
+    "label": "fine + ~20k coarse",
+    "y": 82.8
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1: 'GANet (Ours) ResNet-101 81.6' vs 'GANet‡ ... 82.8' (‡ = fine+coarse); ResNet-50 78.8 -> 81.1; class IoU",
+  "test_set": "Cityscapes test"
+ },
+ {
+  "id": "R2204",
+  "type": "curve",
+  "model": "ABDF (boosted decision forest)",
+  "task": "segmentation",
+  "metric": "accuracy",
+  "metric_scale": "0-100",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 10,
+    "label": "10 frames",
+    "y": 84.2
+   },
+   {
+    "x": 20,
+    "label": "20 frames",
+    "y": 86.37
+   },
+   {
+    "x": 50,
+    "label": "50 frames",
+    "y": 88.21
+   },
+   {
+    "x": 100,
+    "label": "100 frames",
+    "y": 90.11
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 2 PW-AR ABDF: 84.20 86.37 88.21 90.11 (CN method 70.12 at 50, 78.42 at 100)",
+  "test_set": "StreetVideo02"
+ },
+ {
+  "id": "R2298",
+  "type": "curve",
+  "model": "YOLOv5",
+  "task": "detection",
+  "metric": "mAP50",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 1000,
+    "label": "1K",
+    "y": 0.518
+   },
+   {
+    "x": 2000,
+    "label": "2K",
+    "y": 0.648
+   },
+   {
+    "x": 3000,
+    "label": "3K",
+    "y": 0.7
+   },
+   {
+    "x": 4000,
+    "label": "4K",
+    "y": 0.717
+   },
+   {
+    "x": 5000,
+    "label": "5K",
+    "y": 0.733
+   },
+   {
+    "x": 6000,
+    "label": "6K",
+    "y": 0.733
+   }
+  ],
+  "plateau_note": "约5千张后不再提升",
+  "evidence": "Table 5 mAP@0.5: SVRDD6K 0.733, 5K 0.733, 4K 0.717, 3K 0.700, 2K 0.648, 1K 0.518",
+  "test_set": "SVRDD test set"
+ },
+ {
+  "id": "R2503",
+  "type": "curve",
+  "model": "DeepLabV3 (MobileNetV2, finetuned)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-1",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 5,
+    "label": "5% patches, random sampling",
+    "y": 0.52
+   },
+   {
+    "x": 100,
+    "label": "full supervised",
+    "y": 0.73
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1 CamVid finetune=yes: Random 0.52, Supervised 0.73 (MEAL-FT 0.596)",
+  "test_set": "CamVid validation"
+ },
+ {
+  "id": "R2503",
+  "type": "curve",
+  "model": "DeepLabV3 (MobileNetV2, finetuned)",
+  "task": "segmentation",
+  "metric": "mIoU",
+  "metric_scale": "0-1",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 1,
+    "label": "1% patches, random sampling",
+    "y": 0.333
+   },
+   {
+    "x": 100,
+    "label": "full supervised",
+    "y": 0.618
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Table 1 Cityscapes finetune=yes, Init 32: Random 0.333, Supervised 0.618 (MEAL 0.402)",
+  "test_set": "Cityscapes validation"
+ },
+ {
+  "id": "R2585",
+  "type": "curve",
+  "model": "MCVXAI-VPD (YOLOv5+BiLSTM)",
+  "task": "detection",
+  "metric": "F1",
+  "metric_scale": "0-100",
+  "x_unit": "percent",
+  "points": [
+   {
+    "x": 70,
+    "label": "70% train",
+    "y": 81.87
+   },
+   {
+    "x": 80,
+    "label": "80% train",
+    "y": 85.09
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Text: 70%TRP 'accuy of 97.04% ... Fscore of 81.87%'; 80%TRP 'accuy of 98.20% ... Fscore of 85.09%'",
+  "test_set": "30% / 20% hold-out (differs)"
+ },
+ {
+  "id": "R3298",
+  "type": "curve",
+  "model": "RF-DETR",
+  "task": "detection",
+  "metric": "other",
+  "metric_scale": "0-100",
+  "x_unit": "instances",
+  "points": [
+   {
+    "x": 9366,
+    "label": "9,366 initial annotations",
+    "y": 74.8
+   },
+   {
+    "x": 23000,
+    "label": "~23,000 instances (hybrid AL+pseudo)",
+    "y": 87
+   }
+  ],
+  "plateau_note": "",
+  "evidence": "Sec 4.2 Annotation Limitations: '85.8% precision and 74.8% recall ... (9,366 initial annotations) ... approximately 23,000 instances ... 91.3% precision and 87% recall'; metric = recall %; enlarged set includes pseudo-labels",
+  "test_set": "GSV target test"
+ },
+ {
+  "id": "R3360",
+  "type": "curve",
+  "model": "SSD (VGG)",
+  "task": "detection",
+  "metric": "F1",
+  "metric_scale": "0-1",
+  "x_unit": "images",
+  "points": [
+   {
+    "x": 509,
+    "label": "loop 1",
+    "y": 0.71
+   },
+   {
+    "x": 607,
+    "label": "loop 2",
+    "y": 0.78
+   },
+   {
+    "x": 987,
+    "label": "loop 3",
+    "y": 0.79
+   },
+   {
+    "x": 1537,
+    "label": "loop 4",
+    "y": 0.84
+   },
+   {
+    "x": 2067,
+    "label": "loop 5",
+    "y": 0.86
+   },
+   {
+    "x": 2467,
+    "label": "loop 6",
+    "y": 0.85
+   },
+   {
+    "x": 2900,
+    "label": "loop 7",
+    "y": 0.86
+   }
+  ],
+  "plateau_note": "约2千张后不再提升",
+  "evidence": "Table 1 total images 509/607/987/1537/2067/2467/2900; Table 2 FS 0.71/0.78/0.79/0.84/0.86/0.85/0.86",
+  "test_set": "375 test images, 606 signs"
+ }
+]

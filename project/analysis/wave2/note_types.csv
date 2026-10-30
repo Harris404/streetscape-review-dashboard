@@ -1,0 +1,177 @@
+id,type,summary_zh
+R0015,qualitative,标注加到182张后增益不明显即停止；鱼眼增强小幅提升
+R0024,imbalance,各类mAP随标注实例数变化，坑洞1200例远好于横裂200例
+R0029,local_add,加200张东亚MVD图微调，mIoU从73.65升至82.57
+R0063,qualitative,仅500张图故选DeepLabV3+；水体样本少IoU最低
+R0072,qualitative,每类设施固定标300张，训到F1/mAP过0.7为止
+R0091,qualitative,团队小数据少，作者称更多数据会更好；部分屋顶类因样本少删去
+R0093,qualitative,LoRA小子集失败、全量微调好，但方法不同非纯数据量对比
+R0123,local_add,RDD2020外加1178张本地难例，AP 0.619升至0.746
+R0143,local_add,主动选200张低置信图重标微调，mIoU升8.7点至82.3%
+R0148,qualitative,因标注少选用U-Net，无学习曲线
+R0187,qualitative,去掉复杂场景训练数据后精度召回下降，属多样性消融
+R0237,curve,加网络图片训练分类器：首尔0/1500/3000张准确率持续上升
+R0294,qualitative,仅14张标注全景，作者称只作走廊基准不求泛化
+R0306,curve,样本对从29K增到61K/76K，F1-Yes 0.64升至0.72
+R0345,qualitative,仅用17% Cityscapes图训练，无学习曲线分析
+R0358,imbalance,少数类补64张网络图小幅提升；检测效果随类频率变化
+R0369,local_add,仅加70张本地标注图，mIoU从0.759升至0.897
+R0381,qualitative,作者推测复杂架构需更大训练集才能受益于多模态
+R0438,qualitative,训练集小导致YOLOv5n反胜大模型
+R0459,imbalance,属级F1与训练图数相关，约3000张才过半匹配；本地占比高更好
+R0463,qualitative,联邦学习：数据少国家需调权重，非数据量曲线
+R0468,imbalance,格窗、窄门等细分子类召回仅50-60%，需更多数据
+R0469,imbalance,代表性不足的类别表现最差，呼吁类别平衡与更多数据
+R0524,imbalance,带窗、高侧窗类样本少，真阳率较低
+R0541,qualitative,仅432张图，验证损失波动，作者称少于1000张常表现差
+R0546,imbalance,混合类、宗教类错误归因于训练图少和类别不平衡
+R0562,imbalance,稀有材料像素仅约1%，IoU仅2-13%；涂料类最好
+R0570,qualitative,用图像分割避免点云逐点标注；无数据量实验
+R0587,qualitative,人力限制只标100张，作者称更多标注可提升
+R0611,curve,782张真实图加782张虚拟图，长椅IoU 0.605升至0.679
+R0622,local_add,国际PSD加本地Porto 2044标注，Porto测试明显提升
+R0632,curve,训练比例70%升到75%，mAP50仅升约0.01
+R0643,qualitative,DINOv3微调样本少mIoU偏低；红绿灯实例少
+R0649,qualitative,预训练权重优于从零训练；类别不平衡仍存在
+R0657,local_add,众包数据外加312张人工全景，召回76.7%升至89.0%
+R0671,qualitative,预处理使约2530张图即够用，远少于前人
+R0716,local_add,Cityscapes外加500张本地行车记录仪帧，F1 0.77升至0.84
+R0747,qualitative,零样本Grounding DINO接近2000张监督YOLOv8
+R0750,qualitative,联邦客户端数量对比，非训练数据量研究
+R0759,qualitative,用IDD训练避免标注GSV，仅标30张作评估
+R0771,qualitative,半监督：增加无标注比例提升mAP，非标注量曲线
+R0772,qualitative,仅用约3%数据（50张校正图）训练小模型
+R0789,qualitative,无监督域适应生成伪标签，避免标注全景
+R0803,imbalance,部分标志类训练样本少，YOLOv5表现差
+R0806,imbalance,稀有类经增强与实地补充，使各类样本均超1000
+R0818,qualitative,训练集小故减少层数防过拟合
+R0864,qualitative,只研究增强扩充740张，组合增强未优于单一增强
+R0910,local_add,迁移旧金山：加本地图约150张达峰，数值仅在图中
+R0925,imbalance,垃圾箱类标注最少却F1最高（反例）
+R0993,qualitative,半监督在10%标注下优于全监督，无标注量曲线
+R1021,qualitative,两数据集召回差异归因于训练集大小不同
+R1032,qualitative,仅本地小数据集与先大数据预训练效果相当
+R1050,local_add,加540张本地特例图，检测率相对升58.9%（无绝对值）
+R1058,qualitative,仅约1000张图mAP 79.5%，作者预期更多图会提升
+R1061,curve,噪声标注5817张增至76.9万张，mAP50 5.9升至9.2，仍逊干净数据
+R1081,curve,训练图100-1800张，约1200张后F1稳定在0.8（数值仅在图中）
+R1086,qualitative,约300张与3000张分属不同数据集，IoU差约0.1，不可直接比
+R1094,local_add,仅加20张CDOT本地图迁移学习，F1 0.50升至0.78
+R1131,local_add,温带模型加504张北极图微调，北极测试电杆IoU 56%升至61%
+R1139,local_add,加200张墨西哥城图，当地mAP50 0.123升至0.220
+R1140,qualitative,后视镜漏检约40%，计划增加训练数据
+R1152,qualitative,仅157张图AP超80%，但为单类单区域简化场景
+R1156,qualitative,约1700张图即达0.79 IoU；预训练加增强提升明显
+R1181,qualitative,合成图200张不够改用500张；纯合成约达真实的30%
+R1184,local_add,PSD加本地PTD训练，Porto测试各类精度召回大升
+R1185,qualitative,数据精简去噪6000→3077张反使mAP大升，属质量非数量
+R1215,imbalance,类别极不平衡（46对7.6万标签），低频类表现差
+R1220,qualitative,mAP一般归因于数据复杂与不足，无学习曲线
+R1221,qualitative,增加井盖类标注提升坑洞AP，非数据量曲线
+R1262,qualitative,RDD2022预训练迁移使mAP升1.4%
+R1267,curve,只用10%训练图（500张）mAP 0.84，全量0.91
+R1287,qualitative,教师-学生蒸馏，学生仅98张非IID图
+R1291,curve,扩充平衡数据集后F1几乎不变（0.56对0.55）
+R1325,curve,600张街景加入口照片/开放数据，mAP50 0.550升至0.657
+R1394,imbalance,两树种训练数据少致准确率低，未校正不平衡
+R1425,qualitative,伪标签扩充108张训练集，命中率小升
+R1430,imbalance,样本多的树种更易识别，平衡损失对少样本类帮助大
+R1437,imbalance,金属类训练数据极少IoU最低，涂料最好
+R1443,qualitative,新城市mAP下降，需城市专属微调；稀有符号样本少
+R1471,qualitative,标签噪声实验与弱监督，非数据量曲线
+R1477,local_add,加10% Cityscapes数据微调，IoU 81.5升至83.8
+R1478,imbalance,目标域无标注；少于500个的稀有类适应差
+R1506,local_add,STORM外加373张本地GSV，AP 58.3%升至69.14%
+R1528,qualitative,Focal loss+Adam比交叉熵+SGD好4%
+R1548,qualitative,训练集小、稀有物体限制效果，作者称更多数据会大幅提升
+R1559,curve,斑马线20→全量真实样本AP 1.2→41.7；合成数据仅低样本时有用
+R1619,qualitative,作者称数据越多预训练模型越好，无曲线
+R1642,qualitative,误识别因训练数据缺少某些模式，需更多样数据
+R1652,qualitative,127张小样本，靠ImageNet/Cityscapes迁移冻结层
+R1657,qualitative,合成数据自监督训练，避免人工标注
+R1661,qualitative,仅490张训练图致召回低，建议加本地门样式图
+R1683,qualitative,17K涂鸦集比STORM约1K张mAP高，但测试集不同不可比
+R1685,qualitative,语义上下文增益小，可能因数据集小
+R1694,curve,训练图1500增到2500张，树木检测率0.78升至0.81
+R1715,qualitative,作者认为需要更多人行道图像，无曲线
+R1717,imbalance,榉树等类AP低，部分因该类标注图太少
+R1718,qualitative,439张23.74%对3736张63.17%，但增强和测试集均不同
+R1749,qualitative,66张与265张训练结果来自不同数据版本，不可直接比
+R1773,imbalance,菠萝蜜仅221实例AP 0.23，作者称需数据翻倍
+R1784,imbalance,训练数据多且外观一致的类得分高，床垫仅50例得0
+R1790,qualitative,半监督加1476张无标注图增益小；预训练远胜从零
+R1818,qualitative,作者称需更大更多样数据集提高稳健性
+R1834,imbalance,各类mAP50从3到93不等，差类归因样本少或画质
+R1845,curve,合成源域GTA从2500增到5000张，目标mIoU 66.9升至70.3
+R1880,qualitative,精度低部分因漏标；计划加训练图
+R1897,local_add,公开立面集外加537张自标街景，IoU升1-9.5%（仅相对值）
+R1904,qualitative,可用训练图多的国家F1更高（跨国比较）
+R1906,qualitative,858个矩形生成8.7万训练块，首轮即高准确率
+R1910,qualitative,引用TF OD API需每类百张以上图，无曲线
+R1926,curve,软层建筑训练图1267增到1867张，正检率62%升至72%
+R1928,qualitative,仅48张图配合分层训练即足够
+R1944,qualitative,CMP合成增强数据替代仅矫正立面，F1大升，属增强策略
+R1951,qualitative,合并类别与划分比例影响mAP，变量混杂
+R1971,curve,主动学习训练图800增到2500张，mIoU 74.3%升至88.6%
+R1986,curve,100张真实图加100/500/1000张合成图，mask AP持续上升
+R1999,qualitative,作者称扩大小数据集可提升，无曲线
+R2001,qualitative,每稀有类加约300张生成图，平均top-1升4.65%
+R2003,curve,训练块1000增到21.3万，精度61%升至79.7%，未见平台
+R2012,imbalance,小数据集类别不平衡：窗/招牌好，拱/悬挑差
+R2024,qualitative,方法每城只需约300张图，远少于对比方法
+R2055,imbalance,行人、标志、河流因样本不足准确率低
+R2063,imbalance,行人、标志等小物体因样本不足准确率低
+R2066,qualitative,标注耗时故引入void标签，无曲线
+R2086,imbalance,实例级增强使少数类自行车AP升3.11%
+R2091,qualitative,500张自建电杆集不够，先用2万张预训练
+R2105,imbalance,差路面样本太少被合并；数据稀少未用CNN特征
+R2157,curve,加入Cityscapes粗标注数据，类别IoU 81.6升至82.8
+R2164,qualitative,旋转增强8倍使mAP50升4-6%，属增强
+R2181,qualitative,DPM用1.3万框子集训练精度几乎不变，未给数值
+R2182,local_add,四城各用90张目标城市标注微调，mIoU均高于仅预训练
+R2199,imbalance,每类少于10个样本时类平均精度骤降，建议每种超100例
+R2202,qualitative,训练集小，约1万步后过拟合
+R2204,curve,训练帧10/20/50/100，像素准确率84.2%升至90.1%
+R2225,qualitative,Cityscapes预训练使320张GSV训练图即够
+R2235,imbalance,少于100实例的类被剔除，仅保留45类
+R2238,qualitative,U-Net仅150张训练图且不平衡，F1仅55.91%
+R2243,qualitative,推理图像量越多定位越准，非训练标注量
+R2252,qualitative,Cityscapes预训练贡献可忽略；重加权帮助少数类
+R2260,imbalance,每类最多30张，图极少的类别增强无效易过拟合
+R2261,imbalance,招牌类实例少，召回低于店招类
+R2267,qualitative,2657类标注成本高，混用商品图与域适应
+R2298,curve,训练图1K到6K，mAP50从0.518升到0.733，约5K后持平
+R2299,qualitative,大模型增益小，作者认为数据量不足
+R2301,qualitative,无真实部件标签，合成到真实迁移提升
+R2351,local_add,同R1897：加537张自标街景，IoU升1-9.5%（仅相对值）
+R2401,qualitative,零样本无故障标签mAP50 0.61对监督0.67
+R2419,qualitative,选5378张训练子集以匹配Cityscapes规模
+R2427,qualitative,不同版本训练图225-900张的验证损失，验证集不同
+R2434,qualitative,方法无需缺失坡道标签；预期基线随标注增多而提升
+R2480,curve,训练数据10%/50%/100%性能稳定上升（数值仅在图中）
+R2495,qualitative,拆成10类后每类标签变少，呼吁每类更多图
+R2502,imbalance,召回低归因于标注不平衡
+R2503,curve,随机选5%/1%数据对比全量：CamVid 0.52对0.73
+R2510,imbalance,各类实例112至1.8万，稀有类检测率最差
+R2511,qualitative,称所选各数据集图数效果最佳，无曲线
+R2544,qualitative,增加窗户类作训练目标提升立面检测AP
+R2573,qualitative,只标注约4%（450张）图像用于训练
+R2585,curve,训练比例70%升到80%，F1 81.87%升至85.09%
+R2621,qualitative,先在大而多样数据集预训练再微调优于只用目标集
+R2640,qualitative,弱监督无变化标签mIoU约0.2，对比全监督0.32
+R2651,local_add,加入摩洛哥本地数据联合训练，mAP50 0.49升至0.74
+R2708,qualitative,旋转裁剪增强未提升整体性能
+R2793,imbalance,灾害类图虽少但F1高于裂缝（反例）
+R2863,qualitative,人工标注GSV图太少致Detectron2 mAP低
+R2886,qualitative,作者结论：模型需要更多更好的数据
+R2950,imbalance,仅146个框，各类表现与训练样本数相关
+R3022,qualitative,仅51张图，迁移学习只训头部
+R3298,curve,标注9366增到约2.3万实例，召回74.8%升至87%
+R3331,qualitative,受算力限制只用10%数据训练；预训练影响小
+R3337,qualitative,训练图多的国家F1最高，跨国迁移差
+R3339,imbalance,次要材料类仅46-2000标签，表现弱
+R3345,qualitative,仅100张图出现过拟合，无法扩充
+R3347,qualitative,439张对3736张IoU差大，但增强和测试集不同
+R3351,qualitative,Dataset0已达高精度，但与全量结果测试集不同不可比
+R3360,curve,主动学习训练图509增到2900张，F值0.71→0.86，约2067张后持平
+R0229,qualitative,计划划分比例，称小样本/域适应可减数据，无结果

@@ -1,0 +1,999 @@
+﻿rec_id,model_raw,model,backbone,task,pretrained_on,trained_by_authors,role,theme,year
+R0003,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0004,FCN,FCN,,semantic segmentation,ADE20K,none,main,heritage & tourism,2026
+R0005,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0006,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0007,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,urban form & morphology,2026
+R0011,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0012,FCN-8s (FCN-based segmentation tool of Yao et al. 2019),FCN,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0012,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0012,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0012,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0012,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0013,FCN (segmentation tool of Yao et al. 2019),FCN,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2025
+R0021,OVSeg,OVSeg,Swin-Base (mask generation) + CLIP (classification),semantic segmentation,,none,main,walkability & active travel,2026
+R0021,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,walkability & active travel,2026
+R0021,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,walkability & active travel,2026
+R0022,PSPNet,PSPNet,ResNet-50-Dilated + PPM,semantic segmentation,ADE20K,none,main,transport & road safety,2026
+R0025,SegFormer,SegFormer,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0039,DeepLabv3+,DeepLabv3+,improved ResNet,semantic segmentation,,unclear,main,heritage & tourism,2026
+R0039,YOLO,YOLO,,object detection,,none,mentioned,heritage & tourism,2026
+R0040,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0052,DeepLab v3 (MATLAB pretrained network),DeepLabv3,,semantic segmentation,CamVid,none,main,health & wellbeing,2026
+R0053,DeepLabv3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,unclear,main,equity & environmental justice,2026
+R0055,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,urban form & morphology,2026
+R0058,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0058,SAM,SAM family,,other,,none,main,perception & aesthetics,2026
+R0058,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0058,SegFormer,SegFormer,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0061,HRNetV2-W48,HRNet(+OCR),HRNetV2-W48,semantic segmentation,ADE20K,none,main,housing & economy,2025
+R0061,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,housing & economy,2025
+R0063,DeepLabV3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,fine-tune,main,health & wellbeing,2026
+R0063,FCN-8s,FCN,VGG-16,semantic segmentation,,unclear,comparison,health & wellbeing,2026
+R0063,U-Net,U-Net,ResNet-50,semantic segmentation,,unclear,comparison,health & wellbeing,2026
+R0063,PSPNet,PSPNet,ResNet-101,semantic segmentation,,unclear,comparison,health & wellbeing,2026
+R0063,SegFormer,SegFormer,,semantic segmentation,,none,mentioned,health & wellbeing,2026
+R0064,"PSPNet (MIT CSAIL semantic-segmentation-pytorch, ResNet50-dilated + PPM_deepsup)",PSPNet,ResNet50-dilated,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0064,FCN,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2026
+R0064,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2026
+R0065,SegFormer-B5,SegFormer,MiT-B5,semantic segmentation,ADE20K,none,main,walkability & active travel,2025
+R0065,DeepLabV3,DeepLabv3,,semantic segmentation,ADE20K,none,comparison,walkability & active travel,2025
+R0065,Swin Transformer,Swin (head unspecified),,semantic segmentation,ADE20K,none,mentioned,walkability & active travel,2025
+R0065,SETR,SETR,,semantic segmentation,ADE20K,none,mentioned,walkability & active travel,2025
+R0066,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0066,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0068,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,fine-tune,main,health & wellbeing,2026
+R0069,"MIT CSAIL semantic segmentation model (ResNet50-dilated + PPM_deepsup, PSPNet-style)",PSPNet,ResNet50-dilated,semantic segmentation,ADE20K,none,main,infrastructure & assets,2026
+R0071,ENet,ENet,,semantic segmentation,Cityscapes,from-scratch,main,"crime, disorder & social",2025
+R0076,SegFormer-B0,SegFormer,MiT-B0,semantic segmentation,Cityscapes,none,main,land use & urban function,2026
+R0076,SegNet,SegNet,,semantic segmentation,,none,mentioned,land use & urban function,2026
+R0076,FCN,FCN,,semantic segmentation,,none,mentioned,land use & urban function,2026
+R0076,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,land use & urban function,2026
+R0079,unnamed,unnamed,,semantic segmentation,,unclear,main,walkability & active travel,2026
+R0081,PSPNet,PSPNet,ResNet-101,semantic segmentation,Cityscapes,fine-tune,main,housing & economy,2027
+R0081,Mask R-CNN,Mask R-CNN,,instance segmentation,,unclear,main,housing & economy,2027
+R0082,SegFormer-B4,SegFormer,MiT-B4,semantic segmentation,ADE20K,none,main,thermal environment & climate,2025
+R0084,MobileNetV3-Large segmentation model,ENet,MobileNetV3-Large,semantic segmentation,Cityscapes,unclear,main,walkability & active travel,2026
+R0089,unnamed,unnamed,,semantic segmentation,,unclear,main,perception & aesthetics,2026
+R0096,HRNetV2,HRNet(+OCR),,semantic segmentation,ADE20K,fine-tune,main,land use & urban function,2026
+R0097,Mask2Former,Mask2Former,Swin-L (IN21k),semantic segmentation,Mapillary Vistas,none,main,thermal environment & climate,2026
+R0100,HRNetV2+OCR,HRNet(+OCR),,semantic segmentation,,none,main,walkability & active travel,2025
+R0103,Detectron2,Detectron2 (unspecified),,semantic segmentation,,none,main,health & wellbeing,2026
+R0106,LaDeco,DeepLabv3 (LaDeco),ResNeSt-269,semantic segmentation,,none,main,health & wellbeing,2026
+R0106,DeepLabV3,DeepLabv3,ResNeSt-269,semantic segmentation,,none,main,health & wellbeing,2026
+R0107,Swin Transformer,Swin (head unspecified),Swin Transformer,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0107,YOLOv7,YOLO,,object detection,,unclear,main,health & wellbeing,2026
+R0114,YOLOv8,YOLO,,object detection,Roboflow public pedestrian datasets,unclear,main,"crime, disorder & social",2026
+R0115,Mask2Former,Mask2Former,,semantic segmentation,,none,main,greenery & vegetation,2026
+R0118,HRNet-V2-W48,HRNet(+OCR),HRNetV2-W48,semantic segmentation,ADE20K,none,main,housing & economy,2026
+R0118,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,housing & economy,2026
+R0118,UPerNet,UperNet,,semantic segmentation,,none,mentioned,housing & economy,2026
+R0119,FCN,FCN,,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0121,SegFormer-B4,SegFormer,hierarchical Transformer encoder (MiT-B4) + MLP decoder,semantic segmentation,ADE20K,fine-tune,main,health & wellbeing,2026
+R0121,unnamed,unnamed,,object detection,,unclear,main,health & wellbeing,2026
+R0125,"MIT CSAIL semantic segmentation model (ResNet50-dilated + PPM-deepsup, PSPNet-style)",PSPNet,ResNet50-dilated,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0126,SegFormer,SegFormer,,semantic segmentation,Cityscapes,none,main,land use & urban function,2026
+R0126,unnamed (window & doorway segmentation model),unnamed,,semantic segmentation,,unclear,main,land use & urban function,2026
+R0126,YOLOv7,YOLO,,object detection,,unclear,main,land use & urban function,2026
+R0127,OneFormer,OneFormer,Swin-L,panoptic segmentation,ADE20K,none,main,greenery & vegetation,2026
+R0127,OneFormer,OneFormer,Swin-L,panoptic segmentation,Cityscapes; COCO; Mapillary Vistas,none,comparison,greenery & vegetation,2026
+R0132,FCN,FCN,,semantic segmentation,,none,main,perception & aesthetics,2026
+R0141,Mask2Former,Mask2Former,,semantic segmentation,,none,main,health & wellbeing,2026
+R0142,"FCN (Yao et al., 2019)",FCN,,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0143,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,fine-tune,main,transport & road safety,2026
+R0144,FCN,FCN,VGG-16,semantic segmentation,ADE20K; ImageNet (backbone only),from-scratch,main,heritage & tourism,2026
+R0150,OneFormer,OneFormer,,semantic segmentation,ADE20K,none,main,transport & road safety,2025
+R0150,YOLOv10-L,YOLO,,object detection,COCO,none,main,transport & road safety,2025
+R0150,OneFormer (object detection module),OneFormer,,object detection,,none,mentioned,transport & road safety,2025
+R0151,MMSegmentation ensemble of 32 Cityscapes-trained models (individual models listed only in Appendix 1),MMSegmentation ensemble of 32 Cityscapes-trained models (individual models listed only in Appendix 1),,semantic segmentation,Cityscapes,unclear,main,thermal environment & climate,2026
+R0151,unnamed ADE20K-trained MMSegmentation model (tree vs non-tree vegetation),unnamed,,semantic segmentation,ADE20K,unclear,main,thermal environment & climate,2026
+R0160,DeepLabV3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,none,main,health & wellbeing,2026
+R0162,DeepLabv3+,DeepLabv3+,Xception,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0162,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,health & wellbeing,2026
+R0163,PSPNet,PSPNet,ResNet50dilated + PPM_deepsup,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0168,DeepLabv3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,from-scratch,main,greenery & vegetation,2026
+R0170,Mask2Former,Mask2Former,,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2026
+R0170,Treepedia,Treepedia,,semantic segmentation,,none,mentioned,greenery & vegetation,2026
+R0172,Grounded-Segment-Anything (GSA): Grounding DINO,Grounded-SAM,,object detection,,none,main,perception & aesthetics,2026
+R0172,Grounded-Segment-Anything (GSA): SAM,Grounded-SAM,ViT,instance segmentation,,none,main,perception & aesthetics,2026
+R0172,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0172,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0173,DeepLabV3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,from-scratch,main,housing & economy,2026
+R0173,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2026
+R0173,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,housing & economy,2026
+R0174,OneFormer,OneFormer,,panoptic segmentation,Mapillary Vistas,none,main,transport & road safety,2026
+R0176,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,heritage & tourism,2026
+R0182,DeepLab V3,DeepLabv3,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0183,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,thermal environment & climate,2026
+R0183,YOLO,YOLO,,object detection,,none,mentioned,thermal environment & climate,2026
+R0183,SegNet,SegNet,,semantic segmentation,,none,mentioned,thermal environment & climate,2026
+R0186,SegFormer-B5,SegFormer,MiT-B5,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2026
+R0186,DeepLabV3,DeepLabv3,,semantic segmentation,ADE20K,none,comparison,"crime, disorder & social",2026
+R0186,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2026
+R0188,DeepLabV3-MobileNetV3,DeepLabv3,MobileNetV3,semantic segmentation,Cityscapes,none,main,walkability & active travel,2025
+R0190,PSPNet,PSPNet,,semantic segmentation,,none,main,equity & environmental justice,2025
+R0197,Mask2Former,Mask2Former,,semantic segmentation,ADE20K,none,main,other,2026
+R0201,DeepLabV3+,DeepLabv3+,modified Xception,semantic segmentation,,unclear,main,equity & environmental justice,2026
+R0205,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0205,SegFormer,SegFormer,,semantic segmentation,,none,comparison,perception & aesthetics,2025
+R0206,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas,none,main,health & wellbeing,2026
+R0207,unnamed,unnamed,,semantic segmentation,,unclear,main,greenery & vegetation,2026
+R0208,DeepLabV3+,DeepLabv3+,MobileNetV2,semantic segmentation,,unclear,main,perception & aesthetics,2025
+R0208,PSPNet,PSPNet,ResNet-50,semantic segmentation,,unclear,comparison,perception & aesthetics,2025
+R0208,U-Net,U-Net,VGG16,semantic segmentation,,unclear,comparison,perception & aesthetics,2025
+R0208,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0211,ViT-Adapter,ViT-Adapter,ViT,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0211,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0211,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,none,mentioned,perception & aesthetics,2026
+R0211,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0212,PPM_deepsup (MIT CSAIL semantic segmentation model),PSPNet (MIT CSAIL),ResNet50dilated,semantic segmentation,ADE20K,none,comparison,equity & environmental justice,2026
+R0213,Mask2Former,Mask2Former,,semantic segmentation,,none,main,perception & aesthetics,2026
+R0219,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2026
+R0225,SegFormer,SegFormer,,semantic segmentation,ADE20K,unclear,main,urban form & morphology,2026
+R0228,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,greenery & vegetation,2025
+R0230,Swin Transformer,Swin (head unspecified),Swin,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2026
+R0230,YOLOv7,YOLO,,object detection,,unclear,main,"crime, disorder & social",2026
+R0231,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0232,DeepLabV3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0232,PSPNet,PSPNet,ResNet-50,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0241,DPT (Dense Prediction Transformer),DPT,,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2026
+R0244,SegFormer-B0,SegFormer,MiT-B0,semantic segmentation,ADE20K,none,main,thermal environment & climate,2026
+R0246,DeepLab V3,DeepLabv3,ResNet-50,semantic segmentation,Cityscapes,fine-tune,main,thermal environment & climate,2026
+R0250,ZenSVI segmentation (CNN),ZenSVI segmentation (CNN),,semantic segmentation,Mapillary Vistas,none,main,"crime, disorder & social",2026
+R0251,unnamed,unnamed,,semantic segmentation,,unclear,main,health & wellbeing,2026
+R0255,DeepLabv3+,DeepLabv3+,,semantic segmentation,,fine-tune,main,walkability & active travel,2026
+R0260,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,land use & urban function,2026
+R0261,PSPNet,PSPNet,,semantic segmentation,,none,main,health & wellbeing,2026
+R0262,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes; SSGS,fine-tune,main,perception & aesthetics,2026
+R0262,PSPNet,PSPNet,,semantic segmentation,,unclear,comparison,perception & aesthetics,2026
+R0262,SegNet,SegNet,,semantic segmentation,,unclear,comparison,perception & aesthetics,2026
+R0262,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0263,BEiT,BEiT,,semantic segmentation,,none,main,thermal environment & climate,2026
+R0265,Semantic-SAM,SAM family,,semantic segmentation,,none,main,transport & road safety,2026
+R0267,NVIDIA Hierarchical Multi-Scale Attention,HMSA (NVIDIA),,semantic segmentation,Mapillary Vistas,none,main,transport & road safety,2026
+R0267,YOLOv7x6,YOLO,,object detection,COCO,none,main,transport & road safety,2026
+R0270,DeepLab v3,DeepLabv3,,semantic segmentation,ADE20K,unclear,main,heritage & tourism,2026
+R0271,HRNetV2,HRNet(+OCR),,semantic segmentation,ADE20K,none,main,housing & economy,2026
+R0271,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,unclear,main,housing & economy,2026
+R0274,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2026
+R0277,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas,none,main,transport & road safety,2026
+R0277,Dist-YOLOv5,YOLO,,object detection,COCO,none,main,transport & road safety,2026
+R0282,Mask2Former,Mask2Former,,semantic segmentation,,none,main,heritage & tourism,2026
+R0284,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0284,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0284,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0285,FCN,FCN,,semantic segmentation,ADE20K,none,main,equity & environmental justice,2026
+R0286,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,land use & urban function,2026
+R0290,LaDeco (DeepLabV3),DeepLabv3 (LaDeco),ResNet-269,semantic segmentation,,none,main,perception & aesthetics,2026
+R0291,PSPNet (MIT CSAIL semantic segmentation model),PSPNet,ResNet-50 (dilated),semantic segmentation,ADE20K,none,main,housing & economy,2026
+R0291,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2026
+R0293,SegFormer,SegFormer,,semantic segmentation,,none,main,transport & road safety,2026
+R0296,PSPNet,PSPNet,,semantic segmentation,,none,main,health & wellbeing,2026
+R0297,Mask2Former,Mask2Former,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0297,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0298,MIT CSAIL semantic segmentation model (PSPNet-style PPM decoder),PSPNet,ResNet-50 dilated,semantic segmentation,ADE20K,none,main,urban form & morphology,2025
+R0300,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2026
+R0303,Mask2Former,Mask2Former,,panoptic segmentation,COCO,unclear,main,perception & aesthetics,2026
+R0303,MaskFormer,MaskFormer,,panoptic segmentation,,none,mentioned,perception & aesthetics,2026
+R0305,PSPNet (MIT CSAIL SemSeg ResNet50-dilated + PPM-deepsup),PSPNet,ResNet-50 (dilated),semantic segmentation,ADE20K,fine-tune,main,greenery & vegetation,2026
+R0319,unnamed,unnamed,,semantic segmentation,,unclear,main,equity & environmental justice,2026
+R0321,PSPNet,PSPNet,,semantic segmentation,,unclear,main,health & wellbeing,2025
+R0325,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2026
+R0325,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0327,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0331,OneFormer,OneFormer,,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0331,Mask2Former,Mask2Former,,semantic segmentation,,none,mentioned,transport & road safety,2026
+R0338,DeepLabV3 (GluonCV Deeplab_ResNet101_CityS),DeepLabv3,ResNet-101,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0340,FCN,FCN,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2026
+R0340,SegFormer,SegFormer,,semantic segmentation,ADE20K; Cityscapes,unclear,comparison,perception & aesthetics,2026
+R0340,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K; Cityscapes,unclear,comparison,perception & aesthetics,2026
+R0341,U-Net,U-Net,VGG16,semantic segmentation,Cityscapes,fine-tune,main,perception & aesthetics,2025
+R0344,Detectron2 panoptic segmentation model (Panoptic FPN R101-FPN),Panoptic FPN,ResNet-101 FPN,panoptic segmentation,COCO,none,main,health & wellbeing,2026
+R0348,YOLOv8,YOLO,,object detection,,unclear,main,perception & aesthetics,2026
+R0348,SAM,SAM family,,other,,none,main,perception & aesthetics,2026
+R0350,SegFormer-B5,SegFormer,MiT-B5,semantic segmentation,Cityscapes,none,main,walkability & active travel,2026
+R0361,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0361,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0361,UNet,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0364,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0368,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0371,PixelLib (DeepLabv3+),DeepLabv3+,,semantic segmentation,ADE20K,none,main,transport & road safety,2026
+R0372,YOLOv5,YOLO,,object detection,,none,main,walkability & active travel,2026
+R0374,SegFormer-B0,SegFormer,MiT-B0,semantic segmentation,Cityscapes,none,main,thermal environment & climate,2026
+R0375,DeepLabv3+,DeepLabv3+,MobileNet,semantic segmentation,Cityscapes,from-scratch,main,land use & urban function,2026
+R0378,Mask2Former,Mask2Former,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0382,DeepLabV3+,DeepLabv3+,ResNet-50-d8,semantic segmentation,Cityscapes,fine-tune,main,walkability & active travel,2026
+R0385,DPT (Dense Prediction Transformer),DPT,ViT,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0391,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,walkability & active travel,2026
+R0392,FCN (Fully Convolutional Network),FCN,,semantic segmentation,,unclear,main,perception & aesthetics,2026
+R0393,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0394,YOLO11x,YOLO,,object detection,COCO,none,main,perception & aesthetics,2026
+R0394,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas,none,main,perception & aesthetics,2026
+R0394,DETR,DETR,,object detection,,none,mentioned,perception & aesthetics,2026
+R0394,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0394,FCN-8s,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0397,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas v2.0,none,main,heritage & tourism,2026
+R0404,BEiT,BEiT,Transformer (BEiT),semantic segmentation,ImageNet; ADE20K,unclear,main,perception & aesthetics,2026
+R0408,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes; ADE20K,none,main,"environmental quality (air, noise, light)",2026
+R0409,DeepLab-V3+,DeepLabv3+,,semantic segmentation,Cityscapes,fine-tune,main,heritage & tourism,2026
+R0412,Google Cloud Vision API (OCR text detection),Google Cloud Vision API (OCR text detection),,scene-text detection,,none,main,"crime, disorder & social",2026
+R0413,SegFormer-B5,SegFormer,MiT-B5,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2026
+R0413,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0414,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0420,SegFormer-B5,SegFormer,MiT-B5,semantic segmentation,Cityscapes,none,main,other,2026
+R0420,GrabCut,GrabCut,,other,,none,main,other,2026
+R0421,PSPNet,PSPNet,,semantic segmentation,ADE20K,from-scratch,main,perception & aesthetics,2026
+R0421,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0421,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2026
+R0423,PSPNet (psp_resnet101_citys),PSPNet,ResNet-101,semantic segmentation,Cityscapes,none,main,transport & road safety,2026
+R0425,U-Net,U-Net,,semantic segmentation,Cityscapes,from-scratch,main,thermal environment & climate,2026
+R0425,SegNet,SegNet,,semantic segmentation,Cityscapes,from-scratch,comparison,thermal environment & climate,2026
+R0425,PSPNet,PSPNet,,semantic segmentation,Cityscapes,from-scratch,comparison,thermal environment & climate,2026
+R0431,Mask2Former,Mask2Former,Swin-L,semantic segmentation,Mapillary Vistas,fine-tune,main,thermal environment & climate,2026
+R0437,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,transport & road safety,2026
+R0439,SegFormer,SegFormer,,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0441,YOLOv11,YOLO,CSP backbone + PANet neck,object detection,COCO,none,main,heritage & tourism,2026
+R0441,HRNetV2-OCR + PSA,HRNet(+OCR),HRNetV2,semantic segmentation,,none,main,heritage & tourism,2026
+R0441,DeepLabv3 (DeepLab-V3-A1),DeepLabv3,Xception,semantic segmentation,,unclear,mentioned,heritage & tourism,2026
+R0445,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,land use & urban function,2026
+R0452,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R0460,DPT,DPT,Vision Transformer,semantic segmentation,ADE20K,none,main,perception & aesthetics,2026
+R0461,unnamed,unnamed,,semantic segmentation,,unclear,main,walkability & active travel,2026
+R0464,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,other,2025
+R0466,DeepLabv3,DeepLabv3,Xception,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2026
+R0472,Faster R-CNN,Faster R-CNN,,object detection,COCO,none,main,transport & road safety,2026
+R0473,MIT CSAIL semantic segmentation model (ResNet50-dilated + PPM_deepsup),PSPNet (MIT CSAIL),ResNet50-dilated,semantic segmentation,ADE20K,none,main,thermal environment & climate,2026
+R0476,SegNet,SegNet,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0476,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0477,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2026
+R0481,SegFormer,SegFormer,,semantic segmentation,ADE20K,none,main,housing & economy,2026
+R0482,Mask2Former,Mask2Former,,semantic segmentation,ADE20K,none,main,equity & environmental justice,2026
+R0482,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,equity & environmental justice,2026
+R0482,UNet,U-Net,,semantic segmentation,,none,mentioned,equity & environmental justice,2026
+R0482,DeepLabv3,DeepLabv3,,semantic segmentation,,none,mentioned,equity & environmental justice,2026
+R0483,PSPNet,PSPNet,,semantic segmentation,ADE20K (inferred from 150 categories; text cites PASCAL VOC/Cityscapes benchmarks),none,main,equity & environmental justice,2026
+R0483,Mask R-CNN,Mask R-CNN,,instance segmentation,COCO,none,main,equity & environmental justice,2026
+R0485,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2026
+R0489,DeepLabv3+,DeepLabv3+,Xception,semantic segmentation,ADE20K,none,main,heritage & tourism,2026
+R0493,SegNet (improved),SegNet,ResNet-50,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0493,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0493,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0497,DeepLab v3,DeepLabv3,,semantic segmentation,,none,main,thermal environment & climate,2026
+R0497,SAM,SAM family,,other,,none,mentioned,thermal environment & climate,2026
+R0497,PSPNet,PSPNet,,semantic segmentation,Cityscapes; ADE20K,none,mentioned,thermal environment & climate,2026
+R0497,FCN,FCN,,semantic segmentation,Cityscapes; ADE20K,none,mentioned,thermal environment & climate,2026
+R0498,DeepLab,DeepLab (unspecified),,semantic segmentation,Cityscapes,none,main,walkability & active travel,2026
+R0498,SegNet,SegNet,,semantic segmentation,CamVid,none,main,walkability & active travel,2026
+R0502,unnamed,unnamed,,semantic segmentation,,unclear,main,land use & urban function,2025
+R0503,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0503,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,health & wellbeing,2025
+R0503,YOLO,YOLO,,object detection,,none,mentioned,health & wellbeing,2025
+R0503,U-Net,U-Net,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0503,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0503,Faster R-CNN,Faster R-CNN,,object detection,,none,mentioned,health & wellbeing,2025
+R0518,HRNet,HRNet(+OCR),,semantic segmentation,,none,main,transport & road safety,2025
+R0526,FCN,FCN,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0529,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R0531,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,equity & environmental justice,2025
+R0531,FCN,FCN,,semantic segmentation,,none,mentioned,equity & environmental justice,2025
+R0531,SegNet,SegNet,,semantic segmentation,,none,mentioned,equity & environmental justice,2025
+R0531,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,equity & environmental justice,2025
+R0533,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2024
+R0533,Faster R-CNN,Faster R-CNN,,object detection,COCO,none,main,transport & road safety,2024
+R0537,SegNet,SegNet,VGG16,semantic segmentation,ADE20K,none,main,greenery & vegetation,2025
+R0540,unnamed,unnamed,,semantic segmentation,,unclear,main,perception & aesthetics,2025
+R0547,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2025
+R0550,EfficientViT,EfficientViT,,semantic segmentation,Cityscapes,unclear,main,greenery & vegetation,2025
+R0550,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,greenery & vegetation,2025
+R0551,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes; SGSS,from-scratch,main,greenery & vegetation,2025
+R0552,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,transport & road safety,2024
+R0556,FCN,FCN,,semantic segmentation,Cityscapes,fine-tune,main,perception & aesthetics,2025
+R0560,FCN-8s,FCN,,semantic segmentation,,unclear,main,perception & aesthetics,2024
+R0560,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0560,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0563,OneFormer,OneFormer,Swin-L,semantic segmentation,ADE20K,none,main,housing & economy,2025
+R0571,FCN,FCN,,semantic segmentation,Cityscapes,unclear,main,health & wellbeing,2025
+R0573,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,from-scratch,main,equity & environmental justice,2025
+R0575,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,other,2025
+R0577,Mask2Former,Mask2Former,,panoptic segmentation,Mapillary Vistas,none,main,perception & aesthetics,2025
+R0583,DeepLabV3Plus-MobileNet,DeepLabv3+,MobileNet,semantic segmentation,Cityscapes,none,main,transport & road safety,2024
+R0588,MaskFormer,MaskFormer,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2025
+R0594,SegNeXt (with FreqFusion),SegNeXt,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0598,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0598,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0598,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0598,OCRNet,HRNet(+OCR),,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0598,CCNet,CCNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0601,Segmenter,Segmenter,ViT,semantic segmentation,ImageNet,fine-tune,main,transport & road safety,2025
+R0601,MaskFormer,MaskFormer,,semantic segmentation,,none,mentioned,transport & road safety,2025
+R0602,DeepLabv3+,DeepLabv3+,,semantic segmentation,,unclear,main,"crime, disorder & social",2025
+R0602,Week 3-facade model (facade segmentation with object-detection proposal generator),Week 3-facade model (facade segmentation with object-detection proposal generator),,semantic segmentation,,unclear,main,"crime, disorder & social",2025
+R0603,DeepLabv3+,DeepLabv3+,,semantic segmentation,,unclear,main,housing & economy,2025
+R0605,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,housing & economy,2024
+R0605,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2024
+R0607,PSPNet,PSPNet,,semantic segmentation,,none,main,health & wellbeing,2025
+R0608,unnamed,unnamed,,object detection,,unclear,main,land use & urban function,2025
+R0609,FCN,FCN,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0609,SegNet,SegNet,,semantic segmentation,"own physical-disorder annotations of 200,000 Chinese SVIs (Chen et al., 2023)",unclear,main,perception & aesthetics,2025
+R0615,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,transport & road safety,2024
+R0616,ResNet50 with segmentation head (perception),ResNet50 with segmentation head (perception),ResNet-50,other,,unclear,main,perception & aesthetics,2025
+R0618,Mask2Former,Mask2Former,,semantic segmentation,ADE20K,none,main,walkability & active travel,2025
+R0623,DeepLabV3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2024
+R0623,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0623,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0623,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0624,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0626,U-Net,U-Net,,semantic segmentation,,unclear,main,equity & environmental justice,2024
+R0628,SegNet,SegNet,,semantic segmentation,Cityscapes; CamVid,fine-tune,main,perception & aesthetics,2025
+R0639,unnamed,unnamed,,semantic segmentation,ADE20K,none,main,heritage & tourism,2025
+R0639,SegNet,SegNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0639,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0639,DeepLabV3,DeepLabv3,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0640,Mask2Former,Mask2Former,Swin (ImageNet-22K pretrained; variant not stated),semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0640,Segmenter,Segmenter,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0640,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0640,HRNet,HRNet(+OCR),,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0642,Mask2Former,Mask2Former,Swin-B,semantic segmentation,ADE20K; ImageNet,unclear,main,perception & aesthetics,2025
+R0644,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,equity & environmental justice,2025
+R0644,UPerNet,UperNet,ResNet-101,semantic segmentation,ADE20K,none,mentioned,equity & environmental justice,2025
+R0644,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,mentioned,equity & environmental justice,2025
+R0647,DeepLabv3,DeepLabv3,ResNet-101,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2025
+R0647,MSI-Net,MSI-Net,VGG16,other,SALICON,none,main,perception & aesthetics,2025
+R0654,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0654,FCN,FCN,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0654,U-Net,U-Net,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0654,SegNet,SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0654,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0655,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2025
+R0655,FCN-8s,FCN,,semantic segmentation,,none,mentioned,"crime, disorder & social",2025
+R0655,SegNet,SegNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2025
+R0655,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2025
+R0660,DeepLabv3,DeepLabv3,,semantic segmentation,ADE20K,none,main,heritage & tourism,2025
+R0660,SegNet,SegNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0662,DeepLabv3,DeepLabv3,,semantic segmentation,,from-scratch,main,walkability & active travel,2025
+R0662,SAM2,SAM family,ViT,semantic segmentation,SA-1B/SA-V (not stated),none,main,walkability & active travel,2025
+R0668,unnamed,unnamed,,semantic segmentation,ADE20K,unclear,main,greenery & vegetation,2025
+R0668,Treepedia,Treepedia,,other,,none,mentioned,greenery & vegetation,2025
+R0673,NUS Global Streetscapes (precomputed segmentation),NUS Global Streetscapes (precomputed segmentation),,semantic segmentation,,none,main,"crime, disorder & social",2025
+R0674,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,thermal environment & climate,2025
+R0680,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2025
+R0680,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0681,LaDeco,DeepLabv3 (LaDeco),,other,,unclear,main,other,2025
+R0681,DeepLabV3,DeepLabv3,,semantic segmentation,LaDeco dataset,unclear,main,other,2025
+R0681,SegNet,SegNet,,semantic segmentation,,none,mentioned,other,2025
+R0683,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2025
+R0685,DeepLabv3+,DeepLabv3+,ResNet-101,semantic segmentation,ADE20K,fine-tune,main,heritage & tourism,2025
+R0685,UNet,U-Net,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0685,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0691,FCN-8s,FCN,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0693,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0693,FCN,FCN,,semantic segmentation,NightCity,none,main,health & wellbeing,2025
+R0693,PP-YOLOE,YOLO,,object detection,COCO,none,main,health & wellbeing,2025
+R0710,MP-Former,MP-Former,Swin-L,semantic segmentation,Cityscapes,unclear,main,greenery & vegetation,2025
+R0710,Mask2Former,Mask2Former,,other,,none,mentioned,greenery & vegetation,2025
+R0710,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2025
+R0710,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2025
+R0710,FCN-8s,FCN,,semantic segmentation,,none,mentioned,greenery & vegetation,2025
+R0710,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,greenery & vegetation,2025
+R0712,PSPNet,PSPNet,,semantic segmentation,,none,main,urban form & morphology,2025
+R0721,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0722,DeepLabv3+,DeepLabv3+,ResNet-101,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2025
+R0723,Segmenter,Segmenter,,semantic segmentation,,none,main,transport & road safety,2025
+R0727,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,heritage & tourism,2025
+R0727,FCN,FCN,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0727,SegNet,SegNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0728,DeepLabV3Plus-ResNet101 (VainF DeepLabV3Plus-Pytorch),DeepLabv3+,ResNet-101,semantic segmentation,,unclear,main,perception & aesthetics,2025
+R0729,"PSPNet (MIT CSAIL semantic segmentation, ResNet50-dilated + PPM_deepsup)",PSPNet,ResNet50-dilated,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0729,UniSal (saliency prediction),UniSal (saliency prediction),,other,SALICON,none,main,perception & aesthetics,2025
+R0730,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2025
+R0730,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0730,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0730,SegNet,SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0732,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0735,DeepLabV3,DeepLabv3,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2024
+R0736,DeepLabV3+,DeepLabv3+,ResNet-50,semantic segmentation,Cityscapes,none,main,transport & road safety,2025
+R0736,SAM,SAM family,,other,,none,mentioned,transport & road safety,2025
+R0737,DeepLabv3+ (optimized),DeepLabv3+,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0741,DeepLabV3+ (SVI-SemSeg),DeepLabv3+,Xception,semantic segmentation,CamVid,from-scratch,main,perception & aesthetics,2025
+R0744,unnamed,unnamed,,semantic segmentation,,unclear,main,heritage & tourism,2025
+R0748,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2025
+R0748,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0751,unnamed,unnamed,,semantic segmentation,,none,main,walkability & active travel,2025
+R0752,DeepLabV3+ (also called DeepLabv3 in text),DeepLabv3+,,semantic segmentation,ADE20K,unclear,main,urban form & morphology,2025
+R0752,FCN,FCN,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,Dilated Convolution,Dilated Convolution,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,SegNet,SegNet,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,U2Net,U2Net,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,SegFormer,SegFormer,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,SegNeXt,SegNeXt,,semantic segmentation,,none,mentioned,urban form & morphology,2025
+R0752,YOLO,YOLO,,object detection,,none,mentioned,urban form & morphology,2025
+R0754,MIT CSAIL semantic segmentation (ResNet50dilated + PPM_deepsup),PSPNet (MIT CSAIL),ResNet50dilated,semantic segmentation,ADE20K,none,main,"environmental quality (air, noise, light)",2025
+R0755,FCN (fully convolutional neural network; Yao et al. 2019 framework),FCN,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0759,DeepLabV3 (with OSA),DeepLabv3,ResNet34,semantic segmentation,"India Driving Dataset (IDD), relabelled sky/background",from-scratch,main,health & wellbeing,2025
+R0759,"ResiDualGAN + OSA (DeepLabV3 segmenter, learnable resizer) [UAV imagery]",Segmenter,ResNet34,semantic segmentation,ISPRS Potsdam,from-scratch,main,health & wellbeing,2025
+R0759,DeepLabV3 baseline / DeepLabV3+OSA / ResiDualGAN (bilinear) variants [UAV imagery],DeepLabv3+,ResNet34,semantic segmentation,ISPRS Potsdam,from-scratch,comparison,health & wellbeing,2025
+R0759,DeepLabV3+ (dual-stream Xception),DeepLabv3+,Xception,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0759,MFNet,MFNet,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0766,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,greenery & vegetation,2025
+R0767,PSPNet,PSPNet,,semantic segmentation,,none,main,land use & urban function,2024
+R0768,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2024
+R0774,DeepLabV3,DeepLabv3,ResNet50,semantic segmentation,Cityscapes,from-scratch,main,thermal environment & climate,2025
+R0778,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0778,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0778,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0778,FCN-8s,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0779,PSPNet,PSPNet,ResNet-101,semantic segmentation,Cityscapes; ImageNet,none,main,thermal environment & climate,2025
+R0779,eCognition KNN (remote sensing image segmentation),eCognition KNN (remote sensing image segmentation),,other,,from-scratch,main,thermal environment & climate,2025
+R0787,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2025
+R0797,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0799,FCN-8s,FCN,,semantic segmentation,,unclear,main,health & wellbeing,2025
+R0811,PSPNet,PSPNet,ResNet-50,semantic segmentation,ADE20K,none,main,transport & road safety,2025
+R0819,SegFormer,SegFormer,,semantic segmentation,Cityscapes; ADE20K,unclear,main,walkability & active travel,2024
+R0830,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2025
+R0830,Faster R-CNN,Faster R-CNN,,object detection,COCO,none,main,transport & road safety,2025
+R0834,DeepLabV3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0837,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas,none,main,housing & economy,2025
+R0838,DeepLabv3,DeepLabv3,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2025
+R0839,PSPNet,PSPNet,,semantic segmentation,,none,main,perception & aesthetics,2024
+R0839,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,mentioned,perception & aesthetics,2024
+R0839,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0839,Panoptic-DeepLab (SENet-improved),DeepLab (unspecified),,panoptic segmentation,,none,mentioned,perception & aesthetics,2024
+R0839,DeepLabv3+ (improved),DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0839,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0839,FDSANet,FDSANet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R0842,Xception model (semantic segmentation),Xception model (semantic segmentation),Xception,semantic segmentation,ADE20K,none,main,equity & environmental justice,2025
+R0847,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2025
+R0848,OneFormer,OneFormer,,semantic segmentation,ADE20K,none,main,heritage & tourism,2025
+R0848,FCN-8s,FCN,,semantic segmentation,ADE20K,none,main,heritage & tourism,2025
+R0848,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,heritage & tourism,2025
+R0849,DeepLabv3+,DeepLabv3+,,semantic segmentation,Mapillary Vistas,none,main,health & wellbeing,2025
+R0854,DeepLab v3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,housing & economy,2025
+R0857,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,other,2025
+R0858,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2025
+R0858,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,mentioned,health & wellbeing,2025
+R0860,unnamed,unnamed,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0867,DeepLabv3+,DeepLabv3+,,semantic segmentation,CamVid,unclear,main,heritage & tourism,2025
+R0868,DeepLab-ResNeSt269,DeepLabv3 (ResNeSt),ResNeSt-269,semantic segmentation,ADE20K,none,main,equity & environmental justice,2025
+R0868,SegNet,SegNet,,semantic segmentation,,none,mentioned,equity & environmental justice,2025
+R0869,FCN-8s,FCN,,semantic segmentation,,none,main,perception & aesthetics,2024
+R0870,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,perception & aesthetics,2025
+R0870,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0870,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R0873,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2025
+R0878,unnamed,unnamed,,semantic segmentation,,unclear,main,land use & urban function,2025
+R0886,HRNet,HRNet(+OCR),,semantic segmentation,,none,main,health & wellbeing,2025
+R0886,Faster R-CNN,Faster R-CNN,,object detection,COCO,none,main,health & wellbeing,2025
+R0886,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,health & wellbeing,2025
+R0886,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,health & wellbeing,2025
+R0896,DeepLabV3,DeepLabv3,ResNet-101,semantic segmentation,COCO,none,main,other,2025
+R0896,PP-LiteSeg (PaddleSeg 2.9),PP-LiteSeg,STDC,semantic segmentation,Cityscapes; Mapillary Vistas,unclear,main,other,2025
+R0899,DeepLab-V3 (also called DeepLabv3+ in Sec. 4),DeepLabv3+,,semantic segmentation,Cityscapes,none,main,equity & environmental justice,2025
+R0903,FCN (CUG Wuhan Guan Qingfeng team model),FCN,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2025
+R0904,PSPNet,PSPNet,ResNet-101,semantic segmentation,ADE20K,fine-tune,main,health & wellbeing,2025
+R0905,DeepLabv3 (VainF DeepLabV3Plus-Pytorch),DeepLabv3+,,semantic segmentation,,none,main,transport & road safety,2025
+R0908,PSPNet,PSPNet,,semantic segmentation,,none,main,greenery & vegetation,2024
+R0908,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R0908,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R0912,DeepLabV3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,from-scratch,main,transport & road safety,2025
+R0919,DeepLabv3+,DeepLabv3+,Xception (only mentioned for benchmark mIoU; not explicit),semantic segmentation,Cityscapes,none,main,walkability & active travel,2025
+R0923,Mask2Former,Mask2Former,,semantic segmentation,Cityscapes,none,main,health & wellbeing,2025
+R0928,PSPNet,PSPNet,,semantic segmentation,ADE20K,unclear,main,land use & urban function,2025
+R0929,FCN,FCN,,semantic segmentation,,unclear,main,infrastructure & assets,2025
+R0932,SegNet,SegNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R0932,FCN,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2024
+R0932,DeepLab V3+,DeepLabv3+,,semantic segmentation,ADE20K,none,mentioned,walkability & active travel,2024
+R0932,DeepLabv3,DeepLabv3,,semantic segmentation,,none,mentioned,walkability & active travel,2024
+R0933,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R0935,unnamed,unnamed,ResNet-50,semantic segmentation,ADE20K,none,main,perception & aesthetics,2025
+R0938,PSPNet,PSPNet,ResNet50-Dilated,semantic segmentation,ADE20K,none,main,greenery & vegetation,2025
+R0944,unnamed,unnamed,,semantic segmentation,,unclear,main,health & wellbeing,2025
+R0948,OCRNet+HRNetV2-W48,HRNet(+OCR),HRNetV2-W48,semantic segmentation,ADE20K,none,main,transport & road safety,2025
+R0948,YOLOv8,YOLO,,instance segmentation,,fine-tune,main,transport & road safety,2025
+R0954,InternImage-XL + UperNet,InternImage+UperNet,InternImage-XL,semantic segmentation,Cityscapes; ADE20K,none,main,greenery & vegetation,2025
+R0954,unnamed,unnamed,,semantic segmentation,,none,comparison,greenery & vegetation,2025
+R0955,In-Place ABN (DeepLabv3+ head),DeepLabv3+,WideResNet38,semantic segmentation,Mapillary Vistas,none,main,health & wellbeing,2025
+R0956,SegNet,SegNet,,semantic segmentation,ADE20K,unclear,main,greenery & vegetation,2025
+R0957,Panoptic FPN,Panoptic FPN,,panoptic segmentation,COCO,none,main,walkability & active travel,2024
+R0966,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2025
+R0966,FCN,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2025
+R0966,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2025
+R0966,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,walkability & active travel,2025
+R0971,Mask2Former,Mask2Former,Swin-Large,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2025
+R0977,Detectron2,Detectron2 (unspecified),,semantic segmentation,,none,main,"environmental quality (air, noise, light)",2025
+R0977,unnamed (Transformer-based zero-shot object detector),unnamed,,object detection,,none,main,"environmental quality (air, noise, light)",2025
+R0977,unnamed (image segmentation of detected trees),unnamed,,instance segmentation,,none,main,"environmental quality (air, noise, light)",2025
+R0981,DeepLabv3+ (MIT ADE20K model via Baidu PaddleHub),DeepLabv3+,ConvNeXt,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R0981,YOLOv3,YOLO,ResNet50,object detection,COCO,none,main,perception & aesthetics,2024
+R0982,InternImage-XL + UperNet,InternImage+UperNet,InternImage-XL,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2025
+R0987,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,perception & aesthetics,2025
+R0988,SegFormer,SegFormer,,semantic segmentation,Cityscapes; ADE20K,none,main,walkability & active travel,2025
+R0991,Pedestron,Pedestron,,object detection,,none,main,health & wellbeing,2024
+R0992,FCN,FCN,,semantic segmentation,,none,main,heritage & tourism,2025
+R0996,U-Net,U-Net,,semantic segmentation,ApolloScape,from-scratch,main,"environmental quality (air, noise, light)",2025
+R1001,FCN,FCN,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2022
+R1004,PSPNet,PSPNet,ResNet-101,semantic segmentation,Places2,unclear,main,perception & aesthetics,2023
+R1004,FCN,FCN,,semantic segmentation,,unclear,comparison,perception & aesthetics,2023
+R1004,U-Net,U-Net,,semantic segmentation,,unclear,comparison,perception & aesthetics,2023
+R1004,FCN-8s,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1004,U2-Net,U2-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1005,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,housing & economy,2024
+R1007,PSPNet,PSPNet,,semantic segmentation,,none,main,housing & economy,2023
+R1007,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2023
+R1007,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,housing & economy,2023
+R1008,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,urban form & morphology,2024
+R1011,YOLOv5,YOLO,,object detection,COCO,none,main,transport & road safety,2023
+R1011,DeepSORT,DeepSORT,,other,,none,main,transport & road safety,2023
+R1011,EasyOCR,EasyOCR,,scene-text detection,,none,main,transport & road safety,2023
+R1017,Mapillary Seamless Scene Segmentation,SeamSeg,FPN with DeepLab-like module,panoptic segmentation,Mapillary Vistas,none,main,perception & aesthetics,2023
+R1017,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,mentioned,perception & aesthetics,2023
+R1017,DeepLab2,DeepLab (unspecified),ResNet-101,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1019,FCN,FCN,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1022,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2022
+R1026,FCN,FCN,,semantic segmentation,ADE20K,none,main,urban form & morphology,2024
+R1026,FCN-8s,FCN,,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1026,SegNet,SegNet,,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1026,DMA-Net,DMA-Net,,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1028,Xception-71 CNN,DeepLabv3+,Xception-71,semantic segmentation,Cityscapes,none,main,walkability & active travel,2023
+R1035,DPT (Dense Prediction Transformer),DPT,,semantic segmentation,ADE20K,none,main,urban form & morphology,2023
+R1035,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,urban form & morphology,2023
+R1035,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,urban form & morphology,2023
+R1037,SegNet,SegNet,,semantic segmentation,,unclear,main,perception & aesthetics,2023
+R1054,SegNet,SegNet,ResNet-50 (dilated; config ade20k-resnet50dilated-ppm_deepsup),semantic segmentation,ADE20K,fine-tune,main,perception & aesthetics,2023
+R1057,PSPNet,PSPNet,,semantic segmentation,,none,main,housing & economy,2023
+R1057,Mask R-CNN,Mask R-CNN,,instance segmentation,,unclear,main,housing & economy,2023
+R1057,FCN,FCN,,semantic segmentation,,none,mentioned,housing & economy,2023
+R1057,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2023
+R1059,FCN-8s,FCN,,semantic segmentation,,none,main,health & wellbeing,2024
+R1059,U-Net,U-Net,,semantic segmentation,,none,mentioned,health & wellbeing,2024
+R1066,DPT (Vision Transformers for Dense Prediction),DPT,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1066,Mask R-CNN,Mask R-CNN,,other,,unclear,main,perception & aesthetics,2024
+R1068,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2023
+R1082,Mask2Former,Mask2Former,,semantic segmentation,Mapillary Vistas,none,main,urban form & morphology,2023
+R1088,"Treepedia (object-based image analysis, Li et al. 2015)",Treepedia,,other,,none,main,"environmental quality (air, noise, light)",2022
+R1089,DeepLabv3+,DeepLabv3+,,semantic segmentation,,unclear,main,housing & economy,2024
+R1097,PSPNet,PSPNet,,semantic segmentation,ADE20K,fine-tune,main,transport & road safety,2023
+R1098,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2023
+R1098,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1098,DeepLab-v2,DeepLab (unspecified),,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1098,DPN,DPN,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1098,CRF-RNN,CRF-RNN,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1099,FCN (model built by Yao et al.),FCN,,semantic segmentation,,none,main,health & wellbeing,2022
+R1101,DeepLabV3+,DeepLabv3+,ResNet-101,semantic segmentation,Cityscapes,unclear,main,health & wellbeing,2023
+R1102,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2022
+R1102,YOLOv3,YOLO,,object detection,COCO,none,main,walkability & active travel,2022
+R1110,Dilated ResNet-105,Dilated ResNet (Wolfram),Dilated ResNet-105,semantic segmentation,Cityscapes,none,main,land use & urban function,2023
+R1110,Ademxapp Model A1,Ademxapp (Wolfram),,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2023
+R1110,Multi-scale Context Aggregation Net,Multi-scale Context Agg.,,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2023
+R1112,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,equity & environmental justice,2023
+R1113,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2022
+R1114,Treepedia 2.0 DCNN,Treepedia,,semantic segmentation,,none,main,thermal environment & climate,2024
+R1114,SegNet,SegNet,,semantic segmentation,,none,main,thermal environment & climate,2024
+R1121,Mask2Former,Mask2Former,,semantic segmentation,,none,main,greenery & vegetation,2024
+R1122,FCN,FCN,,semantic segmentation,ADE20K,unclear,main,transport & road safety,2023
+R1128,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,perception & aesthetics,2023
+R1128,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1128,U-net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1128,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1128,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1132,PSPNet,PSPNet,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2024
+R1132,FCN-8s,FCN,,semantic segmentation,,none,mentioned,health & wellbeing,2024
+R1132,SegNet,SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2024
+R1132,FCN,FCN,,semantic segmentation,,none,mentioned,health & wellbeing,2024
+R1138,Dilated ResNet-105,Dilated ResNet (Wolfram),ResNet-105 (dilated),semantic segmentation,Cityscapes,none,main,land use & urban function,2024
+R1138,Ademxapp Model A1,Ademxapp (Wolfram),,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2024
+R1138,Multi-scale Context Aggregation Net,Multi-scale Context Agg.,,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2024
+R1142,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,equity & environmental justice,2024
+R1143,GluonCV,GluonCV,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2024
+R1144,YOLOv5x,YOLO,CSP (YOLOv5),object detection,COCO,none,main,transport & road safety,2023
+R1144,PSPNet101,PSPNet,ResNet-101,semantic segmentation,Cityscapes,none,main,transport & road safety,2023
+R1148,Mask2Former,Mask2Former,,semantic segmentation,Cityscapes,none,main,urban form & morphology,2024
+R1148,FCN-8s,FCN,,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1148,SegNet,SegNet,,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1148,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,urban form & morphology,2024
+R1148,YOLO,YOLO,,object detection,,none,mentioned,urban form & morphology,2024
+R1151,PSPNet,PSPNet,ResNet,semantic segmentation,,none,main,greenery & vegetation,2023
+R1151,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2023
+R1151,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,greenery & vegetation,2023
+R1155,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes; ADE20K; S-S-G-S (authors' group street greenery dataset),unclear,main,health & wellbeing,2023
+R1155,SegNet,SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2023
+R1155,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,health & wellbeing,2023
+R1161,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2023
+R1175,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,perception & aesthetics,2023
+R1180,UperNet,UperNet,Swin-B,semantic segmentation,ADE20K,none,main,housing & economy,2023
+R1180,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,mentioned,housing & economy,2023
+R1180,YOLOX,YOLO,,object detection,,none,mentioned,housing & economy,2023
+R1180,CCNet,CCNet,,semantic segmentation,,none,mentioned,housing & economy,2023
+R1182,Ademxapp Model A1,Ademxapp (Wolfram),,semantic segmentation,Cityscapes,none,main,urban form & morphology,2022
+R1193,SSD MobileNetV3,ENet,MobileNetV3,object detection,,none,main,land use & urban function,2023
+R1202,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,housing & economy,2024
+R1203,LM-DeepLabv3+,DeepLabv3+,MobileNetV2,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2024
+R1203,YOLOv5,YOLO,,object detection,COCO,none,main,perception & aesthetics,2024
+R1203,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1203,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1204,DeepLabV3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,from-scratch,main,greenery & vegetation,2024
+R1205,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,health & wellbeing,2023
+R1207,MaskFormer,MaskFormer,,semantic segmentation,ADE20K,none,main,health & wellbeing,2023
+R1207,DPT-Large,DPT,,other,MIX 6,none,main,health & wellbeing,2023
+R1207,YOLO,YOLO,,object detection,,none,mentioned,health & wellbeing,2023
+R1207,SegNet,SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2023
+R1209,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2024
+R1211,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2023
+R1217,DeepLabv3+,DeepLabv3+,Xception-71,semantic segmentation,ImageNet; MS-COCO; Cityscapes,none,main,walkability & active travel,2024
+R1224,YOLOv7,YOLO,,object detection,MS COCO,none,main,"environmental quality (air, noise, light)",2023
+R1224,DeepLabv3,DeepLabv3,Xception-65,semantic segmentation,ADE20K,none,main,"environmental quality (air, noise, light)",2023
+R1225,DeepLab V3+ (trained by Yao et al.),DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1225,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1225,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1225,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1225,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1227,unnamed,unnamed,,semantic segmentation,,none,main,"environmental quality (air, noise, light)",2023
+R1227,DPT,DPT,vision transformer,semantic segmentation,,none,mentioned,"environmental quality (air, noise, light)",2023
+R1232,DeepLabV3+ (xception71_dpc_cityscapes_trainfine),DeepLabv3+,Xception-71,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2024
+R1232,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1232,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1236,FCN-8s,FCN,,semantic segmentation,ADE20K,fine-tune,main,urban form & morphology,2024
+R1238,FCN,FCN,,semantic segmentation,,none,main,greenery & vegetation,2024
+R1238,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1239,DeepLabv3,DeepLabv3,ResNet-101,semantic segmentation,Cityscapes,none,main,transport & road safety,2023
+R1239,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,transport & road safety,2023
+R1239,DANet,DANet,,semantic segmentation,,none,mentioned,transport & road safety,2023
+R1239,FCN,FCN,,semantic segmentation,,none,mentioned,transport & road safety,2023
+R1239,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,transport & road safety,2023
+R1242,FCN-8s (China University of Geosciences HPC Lab),FCN,,semantic segmentation,ADE20K,unclear,main,greenery & vegetation,2024
+R1242,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1242,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1245,DeepLabv3+ (MATLAB deeplabv3plusResnet18CamVid),DeepLabv3+,ResNet-18,semantic segmentation,CamVid,unclear,main,walkability & active travel,2023
+R1248,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2023
+R1248,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,"crime, disorder & social",2023
+R1251,Mask2Former,Mask2Former,,panoptic segmentation,Mapillary Vistas,none,main,perception & aesthetics,2023
+R1255,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,"environmental quality (air, noise, light)",2023
+R1259,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R1259,Vision Transformer,Vision Transformer,,semantic segmentation,,none,mentioned,walkability & active travel,2024
+R1261,DeepLabv3,DeepLabv3,,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R1261,FCN-8s,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2024
+R1265,SegNet,SegNet,,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2023
+R1265,FCN,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2023
+R1270,FCN,FCN,,semantic segmentation,ADE20K,none,main,heritage & tourism,2024
+R1270,U-Net,U-Net,,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1270,SegNet,SegNet,,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1270,"DeepLab (v1, v2, v3)",DeepLab (unspecified),,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1270,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1270,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,mentioned,heritage & tourism,2024
+R1270,RefineNet,ENet,,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1270,E-Net,E-Net,,semantic segmentation,,none,mentioned,heritage & tourism,2024
+R1272,Fast R-CNN,Fast R-CNN,,object detection,,unclear,main,transport & road safety,2024
+R1272,DeepSort,DeepSort,,other,,unclear,main,transport & road safety,2024
+R1272,"MIT CSAIL ADE20K semantic segmentation model (Zhou et al., 2019)",PSPNet (MIT CSAIL),,semantic segmentation,ADE20K,none,main,transport & road safety,2024
+R1275,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2022
+R1280,Mask2Former,Mask2Former,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1280,ResNet50,ResNet50,ResNet-50,semantic segmentation,ADE20K,none,comparison,perception & aesthetics,2024
+R1280,SETR,SETR,,semantic segmentation,ADE20K,none,comparison,perception & aesthetics,2024
+R1282,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2023
+R1282,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,walkability & active travel,2023
+R1285,SegFormer,SegFormer,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2024
+R1285,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1285,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1286,PSPNet,PSPNet,,semantic segmentation,,none,main,perception & aesthetics,2023
+R1292,unnamed,unnamed,,object detection,,unclear,main,"environmental quality (air, noise, light)",2023
+R1293,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2024
+R1295,unnamed,unnamed,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2024
+R1298,"Hierarchical Multi-Scale Attention (Tao, Sapra & Catanzaro 2020)",HMSA (NVIDIA),,semantic segmentation,Mapillary Vistas; Cityscapes,none,main,housing & economy,2023
+R1298,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2023
+R1301,FCN-8s,FCN,,semantic segmentation,,none,main,greenery & vegetation,2023
+R1302,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2023
+R1302,Tracktor++,Tracktor++,,other,BDD100K; MOT17,none,main,walkability & active travel,2023
+R1302,Faster R-CNN,Faster R-CNN,ResNet-101 + FPN,object detection,BDD100K; MOT17,none,main,walkability & active travel,2023
+R1302,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2023
+R1302,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,walkability & active travel,2023
+R1302,YOLO,YOLO,,object detection,,none,mentioned,walkability & active travel,2023
+R1307,unnamed,unnamed,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2024
+R1310,PSPNet,PSPNet,ResNet-101,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2022
+R1313,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1313,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1313,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1313,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1315,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2023
+R1315,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,walkability & active travel,2023
+R1316,Faster R-CNN,Faster R-CNN,,object detection,,unclear,main,"crime, disorder & social",2022
+R1316,PSPNet,PSPNet,,semantic segmentation,,unclear,main,"crime, disorder & social",2022
+R1319,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2024
+R1319,FCN,FCN,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1319,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1319,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2024
+R1323,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2024
+R1324,SegNet (improved),SegNet,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2024
+R1324,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1326,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2023
+R1328,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2023
+R1340,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,"environmental quality (air, noise, light)",2024
+R1344,DeepLab V3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2023
+R1344,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1344,SegFormer,SegFormer,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1348,PSPNet,PSPNet,,semantic segmentation,Cityscapes,unclear,main,thermal environment & climate,2024
+R1348,SegNet,SegNet,,semantic segmentation,,none,mentioned,thermal environment & climate,2024
+R1348,FCN,FCN,,semantic segmentation,,none,mentioned,thermal environment & climate,2024
+R1352,SegFormer-B5,SegFormer,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2024
+R1352,SegFormer-B1,SegFormer,,semantic segmentation,Cityscapes,none,comparison,perception & aesthetics,2024
+R1352,OCRNet,HRNet(+OCR),,semantic segmentation,Cityscapes,none,comparison,perception & aesthetics,2024
+R1352,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,comparison,perception & aesthetics,2024
+R1352,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,comparison,perception & aesthetics,2024
+R1352,FCN,FCN,,semantic segmentation,Cityscapes,none,comparison,perception & aesthetics,2024
+R1352,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R1360,DeepLabv3+,DeepLabv3+,,semantic segmentation,CamVid,none,main,"environmental quality (air, noise, light)",2024
+R1364,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2024
+R1376,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2024
+R1379,DeepLab V3,DeepLabv3,,semantic segmentation,Cityscapes,none,main,infrastructure & assets,2023
+R1380,PSPNet,PSPNet,,semantic segmentation,ADE20K,unclear,main,housing & economy,2023
+R1385,HRNetV2-W48,HRNet(+OCR),HRNetV2-W48,semantic segmentation,ADE20K,none,main,equity & environmental justice,2023
+R1387,PSPNet,PSPNet,,semantic segmentation,,unclear,main,land use & urban function,2024
+R1390,DeepLab V3,DeepLabv3,,semantic segmentation,ADE20K,none,main,walkability & active travel,2023
+R1392,DeeplabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,thermal environment & climate,2024
+R1392,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,thermal environment & climate,2024
+R1392,SegNet,SegNet,,semantic segmentation,,none,mentioned,thermal environment & climate,2024
+R1392,DeeplabV3,DeepLabv3,,semantic segmentation,,none,mentioned,thermal environment & climate,2024
+R1401,CUG.HPSCIL laboratory image semantic recognition software,CUG.HPSCIL laboratory image semantic recognition software,,semantic segmentation,,none,main,walkability & active travel,2023
+R1402,SegNet,SegNet,,semantic segmentation,Cityscapes,fine-tune,main,health & wellbeing,2023
+R1411,"DeepLabV3 (In-Place ABN, Bulo et al. 2018)",DeepLabv3,WideResNet-38,semantic segmentation,Cityscapes; Mapillary Vistas,unclear,main,walkability & active travel,2023
+R1412,DeepLab V3+,DeepLabv3+,Xception-71,semantic segmentation,Cityscapes,none,main,health & wellbeing,2024
+R1413,FCN,FCN,,semantic segmentation,,unclear,main,perception & aesthetics,2023
+R1421,DeepLabV3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2023
+R1421,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1421,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2023
+R1428,SegNet,SegNet,,semantic segmentation,ADE20K,unclear,main,thermal environment & climate,2024
+R1432,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2024
+R1432,YOLOv5,YOLO,,object detection,COCO,none,main,transport & road safety,2024
+R1434,DeeplabV3,DeepLabv3,ResNet-101,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2023
+R1454,SegNet,SegNet,,semantic segmentation,1000 manually labelled street view images (Ye et al. 2019 model),unclear,main,land use & urban function,2024
+R1460,Faster R-CNN,Faster R-CNN,ResNeSt-269,object detection,COCO,none,main,"crime, disorder & social",2023
+R1460,PSPNet,PSPNet,ResNet-101,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2023
+R1461,VPLR (Video Propagation and Label Relaxation),VPLR (Video Propagation and Label Relaxation),,semantic segmentation,Cityscapes,unclear,main,walkability & active travel,2023
+R1461,Fast-SCNN,Fast-SCNN,,semantic segmentation,Cityscapes,unclear,main,walkability & active travel,2023
+R1461,DeepLabV3,DeepLabv3,,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2023
+R1461,ResNeSt,DeepLabv3 (ResNeSt),ResNeSt,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2023
+R1461,"unnamed (other models among 16 tested, Appendix 1 not in text)",unnamed,,semantic segmentation,ADE20K; Cityscapes,unclear,comparison,walkability & active travel,2023
+R1461,DeepLab v3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,mentioned,walkability & active travel,2023
+R1461,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2023
+R1461,FCN-8s,FCN,,semantic segmentation,ADE20K; Cityscapes,none,mentioned,walkability & active travel,2023
+R1461,PSPNet,PSPNet,,semantic segmentation,Cityscapes; ADE20K,none,mentioned,walkability & active travel,2023
+R1465,Panoptic FPN,Panoptic FPN,,panoptic segmentation,COCO,none,main,transport & road safety,2024
+R1472,MMSegmentation,MMSegmentation,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2024
+R1476,Xception,Xception,Xception,semantic segmentation,ADE20K,none,main,equity & environmental justice,2024
+R1483,unnamed,unnamed,,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2024
+R1486,Faster R-CNN NAS,Faster R-CNN,NAS,object detection,COCO,none,main,walkability & active travel,2024
+R1486,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R1493,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2023
+R1494,U-Net,U-Net,MobileNetV1,semantic segmentation,Cityscapes (relabelled binary green vegetation),from-scratch,main,equity & environmental justice,2024
+R1494,DeepLabV3+,DeepLabv3+,MobileNetV1,semantic segmentation,Cityscapes (relabelled binary green vegetation),from-scratch,comparison,equity & environmental justice,2024
+R1494,PSPNet,PSPNet,MobileNetV1,semantic segmentation,Cityscapes (relabelled binary green vegetation),from-scratch,comparison,equity & environmental justice,2024
+R1494,SegNet,SegNet,MobileNetV1,semantic segmentation,Cityscapes (relabelled binary green vegetation),from-scratch,comparison,equity & environmental justice,2024
+R1511,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,health & wellbeing,2022
+R1513,FCN,FCN,,semantic segmentation,,unclear,main,walkability & active travel,2021
+R1534,Dilated ResNet-105,Dilated ResNet (Wolfram),DRN-105,semantic segmentation,Cityscapes,none,main,health & wellbeing,2021
+R1534,Ademxapp Model A1,Ademxapp (Wolfram),,semantic segmentation,Cityscapes,none,comparison,health & wellbeing,2021
+R1534,Dilated ResNet-22,Dilated ResNet (Wolfram),DRN-22,semantic segmentation,Cityscapes,none,comparison,health & wellbeing,2021
+R1534,Dilated ResNet-38,Dilated ResNet (Wolfram),DRN-38,semantic segmentation,Cityscapes,none,comparison,health & wellbeing,2021
+R1534,Multi-scale Context Aggregation Net,Multi-scale Context Agg.,,semantic segmentation,Cityscapes,none,comparison,health & wellbeing,2021
+R1536,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,walkability & active travel,2022
+R1536,U-Net,U-Net,,semantic segmentation,,none,mentioned,walkability & active travel,2022
+R1544,FCN (fully convolutional network),FCN,,semantic segmentation,,unclear,main,health & wellbeing,2021
+R1550,FCN,FCN,,semantic segmentation,ADE20K,none,main,walkability & active travel,2021
+R1555,DeepLab-v3,DeepLabv3,,semantic segmentation,Cityscapes,unclear,main,housing & economy,2022
+R1555,RefineNet,ENet,,semantic segmentation,,none,mentioned,housing & economy,2022
+R1555,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,housing & economy,2022
+R1555,ResNet-38,ResNet-38,,semantic segmentation,,none,mentioned,housing & economy,2022
+R1556,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2022
+R1563,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2020
+R1565,FCN,FCN,,semantic segmentation,,none,main,walkability & active travel,2022
+R1570,YOLOv3,YOLO,Darknet-53,object detection,,unclear,main,heritage & tourism,2021
+R1573,Mapillary API semantic segmentation,Mapillary API semantic segmentation,,semantic segmentation,,none,main,walkability & active travel,2022
+R1578,PSPNet,PSPNet,ResNet,semantic segmentation,Cityscapes,none,main,"environmental quality (air, noise, light)",2020
+R1578,FCN,FCN,,semantic segmentation,,none,mentioned,"environmental quality (air, noise, light)",2020
+R1578,SegNet,SegNet,,semantic segmentation,,none,mentioned,"environmental quality (air, noise, light)",2020
+R1582,PSPNet,PSPNet,,semantic segmentation,,none,main,equity & environmental justice,2022
+R1584,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2020
+R1584,U-Net,U-Net,,semantic segmentation,,none,mentioned,walkability & active travel,2020
+R1584,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2020
+R1590,DeepLabV3+,DeepLabv3+,,semantic segmentation,,none,main,urban form & morphology,2021
+R1590,U-Net,U-Net,,semantic segmentation,,none,comparison,urban form & morphology,2021
+R1590,SegNet,SegNet,,semantic segmentation,,none,mentioned,urban form & morphology,2021
+R1594,FCN,FCN,,semantic segmentation,,none,main,thermal environment & climate,2022
+R1595,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,"crime, disorder & social",2022
+R1618,PSPNet,PSPNet,,semantic segmentation,,none,main,walkability & active travel,2022
+R1618,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,walkability & active travel,2022
+R1620,SegNet,SegNet,,semantic segmentation,,from-scratch,main,perception & aesthetics,2021
+R1620,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2021
+R1620,DeepLab-LargeFOV,DeepLab (unspecified),,semantic segmentation,,none,mentioned,perception & aesthetics,2021
+R1620,DeconvNet,DeconvNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2021
+R1629,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,perception & aesthetics,2022
+R1635,HRNet (High-Resolution Networks),HRNet(+OCR),,semantic segmentation,,none,main,walkability & active travel,2022
+R1639,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2021
+R1645,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,health & wellbeing,2021
+R1647,DeepLabv3+,DeepLabv3+,ResNet (stated generically),semantic segmentation,Cityscapes,none,main,perception & aesthetics,2022
+R1650,HRNetV2,HRNet(+OCR),,semantic segmentation,,none,main,perception & aesthetics,2020
+R1664,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,greenery & vegetation,2022
+R1664,FCN,FCN,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1666,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2022
+R1674,HPSCIL GPU-CUDA-enabled Semantic Segmentation App (FCN),FCN,,semantic segmentation,,none,main,other,2021
+R1678,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2021
+R1681,Dilated ResNet-105 (DRN),Dilated ResNet (Wolfram),Dilated ResNet-105,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2021
+R1688,PSPNet,PSPNet,,semantic segmentation,,none,main,perception & aesthetics,2021
+R1688,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,perception & aesthetics,2021
+R1692,Multipath-based semantic segmentation program (ref. 54; likely RefineNet),ENet,,semantic segmentation,,none,main,transport & road safety,2022
+R1707,DeepLab (TensorFlow DeepLab Model Zoo) Xception-71,DeepLabv3+,Xception-71,semantic segmentation,Cityscapes,none,main,health & wellbeing,2021
+R1709,PSPNet,PSPNet,,semantic segmentation,,none,main,perception & aesthetics,2021
+R1712,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,walkability & active travel,2022
+R1716,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,perception & aesthetics,2019
+R1718,ResNet50 semantic segmentation model,ResNet50 semantic segmentation model,ResNet-50,semantic segmentation,ADE20K,none,main,perception & aesthetics,2022
+R1718,ResNet50 benchmark model,ResNet50 benchmark model,ResNet-50,semantic segmentation,ImageNet,fine-tune,comparison,perception & aesthetics,2022
+R1718,DeepLab V3+ downscale,DeepLabv3+,ResNet-50,semantic segmentation,ImageNet,fine-tune,main,perception & aesthetics,2022
+R1728,DeepLab v3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,thermal environment & climate,2021
+R1729,DeepLabv3+ (MATLAB pretrained network),DeepLabv3+,ResNet-18,semantic segmentation,CamVid; ImageNet,unclear,main,greenery & vegetation,2020
+R1730,DeepLabv3,DeepLabv3,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2022
+R1735,DeepLab-v3,DeepLabv3,,semantic segmentation,Cityscapes,none,main,housing & economy,2022
+R1738,SegNet,SegNet,,semantic segmentation,,none,main,greenery & vegetation,2022
+R1738,Bayesian SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1739,DeepLab v3+ (MATLAB Deep Learning Toolbox),DeepLabv3+,ResNet-18,semantic segmentation,,from-scratch,main,thermal environment & climate,2022
+R1754,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,health & wellbeing,2022
+R1757,PSPNet,PSPNet,ResNet,semantic segmentation,ADE20K,unclear,main,perception & aesthetics,2022
+R1758,FCN-8s,FCN,,semantic segmentation,Cityscapes,from-scratch,main,walkability & active travel,2021
+R1774,PSPNet,PSPNet,ResNet-101,semantic segmentation,ADE20K,none,main,health & wellbeing,2022
+R1774,PSPNet,PSPNet,ResNet-101,semantic segmentation,Cityscapes; PASCAL VOC,none,mentioned,health & wellbeing,2022
+R1782,PSPNet,PSPNet,,semantic segmentation,,none,main,housing & economy,2022
+R1785,DeepLabv3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,unclear,main,transport & road safety,2022
+R1785,SegNet,SegNet,,semantic segmentation,,none,mentioned,transport & road safety,2022
+R1785,FCN,FCN,,semantic segmentation,,none,mentioned,transport & road safety,2022
+R1788,DeepLab v3+,DeepLabv3+,,semantic segmentation,CamVid,from-scratch,main,"environmental quality (air, noise, light)",2022
+R1794,Panoptic-FPN,Panoptic-FPN,,panoptic segmentation,COCO,from-scratch,main,perception & aesthetics,2021
+R1806,SegNet,SegNet,VGG16,semantic segmentation,CamVid,unclear,main,thermal environment & climate,2022
+R1808,DeepLab,DeepLab (unspecified),,semantic segmentation,Cityscapes,none,main,land use & urban function,2020
+R1817,HRNetV2+OCR,HRNet(+OCR),HRNet,semantic segmentation,Cityscapes,from-scratch,main,greenery & vegetation,2022
+R1817,U-Net,U-Net,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1817,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1817,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1817,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1823,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,"crime, disorder & social",2021
+R1823,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1823,FCN,FCN,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1825,PSPNet,PSPNet,,semantic segmentation,,none,main,walkability & active travel,2022
+R1825,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,walkability & active travel,2022
+R1825,SegNet,SegNet,,semantic segmentation,,none,mentioned,walkability & active travel,2022
+R1832,FCN (fully convolutional network),FCN,,semantic segmentation,,none,main,walkability & active travel,2022
+R1835,DeepLab,DeepLab (unspecified),,semantic segmentation,Cityscapes,none,main,other,2022
+R1835,SegNet,SegNet,,semantic segmentation,,none,comparison,other,2022
+R1835,PSPNet,PSPNet,,semantic segmentation,,none,comparison,other,2022
+R1836,DeepLabv3,DeepLabv3,ResNet (Deep Residual Network),semantic segmentation,Cityscapes,none,main,housing & economy,2022
+R1840,FCN-8s,FCN,,semantic segmentation,,none,main,equity & environmental justice,2022
+R1841,unnamed,unnamed,,semantic segmentation,,none,main,transport & road safety,2020
+R1841,unnamed,unnamed,,object detection,,none,main,transport & road safety,2020
+R1842,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,housing & economy,2022
+R1849,FCN-8s,FCN,,semantic segmentation,,unclear,main,health & wellbeing,2020
+R1849,SegNet (Bayesian SegNet),SegNet,,semantic segmentation,,none,mentioned,health & wellbeing,2020
+R1850,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,unclear,main,greenery & vegetation,2022
+R1850,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1853,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2022
+R1853,FCN-8s,FCN,,semantic segmentation,,none,mentioned,"crime, disorder & social",2022
+R1853,SegNet,SegNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2022
+R1853,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2022
+R1861,DeepLabv3,DeepLabv3,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2021
+R1861,Faster R-CNN (Luminoth v0.2.4),Faster R-CNN,,object detection,COCO,none,main,walkability & active travel,2021
+R1861,PSPNet,PSPNet,,semantic segmentation,,none,comparison,walkability & active travel,2021
+R1861,YOLOv3,YOLO,,object detection,COCO,none,comparison,walkability & active travel,2021
+R1866,DeepLabv3,DeepLabv3,ResNet-101,semantic segmentation,Cityscapes; ImageNet,unclear,main,health & wellbeing,2021
+R1866,PSPNet,PSPNet,,semantic segmentation,,unclear,comparison,health & wellbeing,2021
+R1866,ICNet,ICNet,,semantic segmentation,,unclear,comparison,health & wellbeing,2021
+R1866,Fast R-CNN,Fast R-CNN,,object detection,,unclear,comparison,health & wellbeing,2021
+R1866,FCN,FCN,,semantic segmentation,,unclear,comparison,health & wellbeing,2021
+R1872,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,greenery & vegetation,2021
+R1874,PSPNet,PSPNet,ResNet,semantic segmentation,Cityscapes,unclear,main,thermal environment & climate,2022
+R1885,SegNet,SegNet,,semantic segmentation,,none,main,housing & economy,2022
+R1886,SegNet (improved),SegNet,ResNet-50,semantic segmentation,ADE20K,from-scratch,main,perception & aesthetics,2022
+R1886,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2022
+R1887,DeepLabv3+,DeepLabv3+,Xception,semantic segmentation,Cityscapes,fine-tune,main,greenery & vegetation,2022
+R1887,PSPNet,PSPNet,,semantic segmentation,,unclear,comparison,greenery & vegetation,2022
+R1887,DeepLabv3,DeepLabv3,,semantic segmentation,,unclear,comparison,greenery & vegetation,2022
+R1887,Fast R-CNN,Fast R-CNN,,object detection,,unclear,comparison,greenery & vegetation,2022
+R1887,FCN,FCN,,semantic segmentation,,none,mentioned,greenery & vegetation,2022
+R1892,DeepLabv3+,DeepLabv3+,ResNet-18,semantic segmentation,CamVid,none,main,health & wellbeing,2021
+R1893,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,"crime, disorder & social",2021
+R1901,SegNet,SegNet,,semantic segmentation,,none,main,health & wellbeing,2020
+R1913,SeamSeg (Seamless Scene Segmentation),SeamSeg,,panoptic segmentation,Mapillary Vistas,none,main,infrastructure & assets,2022
+R1914,PSPNet,PSPNet,,semantic segmentation,,unclear,main,greenery & vegetation,2022
+R1920,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,transport & road safety,2021
+R1921,Faster R-CNN,Faster R-CNN,,object detection,,none,main,"crime, disorder & social",2022
+R1921,PSPNet,PSPNet,,semantic segmentation,,unclear,main,"crime, disorder & social",2022
+R1935,PSPNet,PSPNet,,semantic segmentation,Cityscapes,unclear,main,perception & aesthetics,2021
+R1935,U-Net,U-Net,,semantic segmentation,,none,mentioned,perception & aesthetics,2021
+R1935,DeepLabv3,DeepLabv3,,semantic segmentation,,none,mentioned,perception & aesthetics,2021
+R1937,"FCN (FCN+RF perception model, Yao et al. 2019 software)",FCN,,semantic segmentation,ADE20K,unclear,comparison,perception & aesthetics,2021
+R1941,PSPNet,PSPNet,,semantic segmentation,"Cityscapes (inferred from 19 classes, not stated)",none,main,"crime, disorder & social",2021
+R1941,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1941,SegNet,SegNet,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1941,DPN,DPN,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1941,LRR,LRR,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1941,Piecewise,Piecewise,,semantic segmentation,,none,mentioned,"crime, disorder & social",2021
+R1952,Detectron2,Detectron2 (unspecified),,semantic segmentation,,none,main,transport & road safety,2022
+R1952,Mask R-CNN (maskrcnn-benchmark),Mask R-CNN,,instance segmentation,,none,mentioned,transport & road safety,2022
+R1952,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,transport & road safety,2022
+R1958,FCN,FCN,,semantic segmentation,ADE20K,unclear,main,land use & urban function,2022
+R1959,SegNet,SegNet,ResNet50,semantic segmentation,Cityscapes,fine-tune,main,health & wellbeing,2022
+R1959,FCN,FCN,,semantic segmentation,,none,mentioned,health & wellbeing,2022
+R1975,pymeanshift (mean-shift segmentation) + Excess Green Index + Otsu thresholding (Li et al. GVI method),pymeanshift (mean-shift segmentation) + Excess Green Index + Otsu thresholding (Li et al. GVI method),,other,,none,main,health & wellbeing,2021
+R1977,DeepLab V3,DeepLabv3,,semantic segmentation,Cityscapes,unclear,main,greenery & vegetation,2020
+R1977,SegNet,SegNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2020
+R1977,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,greenery & vegetation,2020
+R1983,PSPNet,PSPNet,,semantic segmentation,,none,main,health & wellbeing,2020
+R2016,FCN-8s,FCN,,semantic segmentation,ADE20K,unclear,main,health & wellbeing,2019
+R2021,PSPNet,PSPNet,,semantic segmentation,ADE20K,unclear,main,housing & economy,2019
+R2021,SegNet,SegNet,,semantic segmentation,,none,mentioned,housing & economy,2019
+R2021,ACF (aggregated channel features) detector,ACF (aggregated channel features) detector,,object detection,,none,mentioned,housing & economy,2019
+R2022,SegNet,SegNet,,semantic segmentation,CamVid,from-scratch,main,housing & economy,2018
+R2081,PSPNet,PSPNet,,semantic segmentation,ADE20K,unclear,main,urban form & morphology,2018
+R2111,Faster R-CNN,Faster R-CNN,VGG-16,object detection,PASCAL VOC 2007; ImageNet,none,main,housing & economy,2018
+R2147,SegNet,SegNet,,semantic segmentation,,unclear,comparison,greenery & vegetation,2018
+R2155,DeepLabv3+,DeepLabv3+,,semantic segmentation,ADE20K,none,main,transport & road safety,2018
+R2155,Faster R-CNN,Faster R-CNN,,object detection,,none,mentioned,transport & road safety,2018
+R2155,SegNet,SegNet,,semantic segmentation,,none,mentioned,transport & road safety,2018
+R2155,YOLO,YOLO,,object detection,,none,mentioned,transport & road safety,2018
+R2175,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,perception & aesthetics,2018
+R2224,PSPNet,PSPNet,,semantic segmentation,Cityscapes,none,main,walkability & active travel,2018
+R2224,FCN,FCN,,semantic segmentation,,none,mentioned,walkability & active travel,2018
+R2256,FCN-8s,FCN,,semantic segmentation,ADE20K,from-scratch,main,health & wellbeing,2019
+R2264,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2019
+R2274,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,thermal environment & climate,2018
+R2274,SegNet,SegNet,,semantic segmentation,,none,mentioned,thermal environment & climate,2018
+R2288,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,greenery & vegetation,2018
+R2290,SSDMobileNetV3,ENet,MobileNetV3,object detection,,none,main,"crime, disorder & social",2022
+R2293,Mask2Former,Mask2Former,,panoptic segmentation,ADE20K,none,main,greenery & vegetation,2026
+R2302,unnamed,unnamed,,object detection,,unclear,main,walkability & active travel,2018
+R2302,unnamed,unnamed,,semantic segmentation,,unclear,main,walkability & active travel,2018
+R2307,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R2307,Vision Transformer,Vision Transformer,,semantic segmentation,,none,mentioned,walkability & active travel,2024
+R2316,Mask2Former,Mask2Former,,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2024
+R2316,ResNet50,ResNet50,ResNet-50,semantic segmentation,ADE20K,none,comparison,"crime, disorder & social",2024
+R2316,SETR,SETR,,semantic segmentation,ADE20K,none,comparison,"crime, disorder & social",2024
+R2319,"unnamed (transformer-based ADE20K scene-parsing model; cites efficient and masked-attention segmentation designs [41,42])",unnamed,,semantic segmentation,ADE20K,none,main,"crime, disorder & social",2026
+R2320,PSPNet,PSPNet,,semantic segmentation,,none,main,perception & aesthetics,2022
+R2320,Mask R-CNN,Mask R-CNN,,instance segmentation,,none,main,perception & aesthetics,2022
+R2321,Mask2Former,Mask2Former,ResNet-50,semantic segmentation,Mapillary Vistas,none,main,greenery & vegetation,2026
+R2323,PSPNet (psp_resnet101_ade),PSPNet,ResNet-101,semantic segmentation,ADE20K,none,main,walkability & active travel,2024
+R2323,Mask R-CNN,Mask R-CNN,ResNet-50,instance segmentation,COCO,none,main,walkability & active travel,2024
+R2327,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,main,walkability & active travel,2025
+R2334,FCN,FCN,,semantic segmentation,ADE20K,none,main,land use & urban function,2025
+R2334,SegNet,SegNet,,semantic segmentation,,none,mentioned,land use & urban function,2025
+R2334,DeepLabv3+,DeepLabv3+,,semantic segmentation,,none,mentioned,land use & urban function,2025
+R2338,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,walkability & active travel,2026
+R2342,Dilated ResNet-105,Dilated ResNet (Wolfram),ResNet-105 (dilated),semantic segmentation,Cityscapes,none,main,land use & urban function,2024
+R2342,Ademxapp Model A1,Ademxapp (Wolfram),,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2024
+R2342,Multi-scale Context Aggregation Net,Multi-scale Context Agg.,,semantic segmentation,Cityscapes,none,comparison,land use & urban function,2024
+R2362,BiSeNet (Bilateral Segmentation Network),ENet,,semantic segmentation,Cityscapes,none,main,greenery & vegetation,2023
+R2362,Treepedia (colour segmentation),Treepedia,,other,,none,comparison,greenery & vegetation,2023
+R2367,SegNet,SegNet,,semantic segmentation,Japanese urban image datasets (NILIM program),none,main,greenery & vegetation,2026
+R2385,SegFormer,SegFormer,,semantic segmentation,,none,main,equity & environmental justice,2025
+R2387,PSPNet,PSPNet,ResNet-v2-101,semantic segmentation,Cityscapes,from-scratch,main,perception & aesthetics,2024
+R2387,SegNet,SegNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R2387,FCN,FCN,,semantic segmentation,,none,mentioned,perception & aesthetics,2024
+R2396,unnamed,unnamed,,semantic segmentation,,none,main,heritage & tourism,2026
+R2402,DeepLabv3+,DeepLabv3+,,semantic segmentation,Cityscapes,none,main,urban form & morphology,2022
+R2402,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,urban form & morphology,2022
+R2402,SegNet,SegNet,,semantic segmentation,,none,mentioned,urban form & morphology,2022
+R2420,U-Net,U-Net,,semantic segmentation,CamVid,from-scratch,main,transport & road safety,2020
+R2478,SegNet,SegNet,VGG16 (13 conv layers),semantic segmentation,CamVid,none,main,land use & urban function,2020
+R2502,YOLOv5,YOLO,,object detection,,unclear,main,transport & road safety,2024
+R2502,road-segmentation-adas-0001 (OpenVINO),road-segmentation-adas-0001 (OpenVINO),,semantic segmentation,,none,main,transport & road safety,2024
+R2502,YOLOv3 (Intel Person-Vehicle-Bike-Detection-Crossroad-YOLOv3-1020),YOLO,,object detection,,none,mentioned,transport & road safety,2024
+R2502,YOLOv6s,YOLO,,object detection,,none,mentioned,transport & road safety,2024
+R2502,PLARD,PLARD,,semantic segmentation,,none,mentioned,transport & road safety,2024
+R2502,PLB-RD,PLB-RD,,semantic segmentation,,none,mentioned,transport & road safety,2024
+R2502,RoadFormer,RoadFormer,,semantic segmentation,,none,mentioned,transport & road safety,2024
+R2502,USNet,USNet,,semantic segmentation,,none,mentioned,transport & road safety,2024
+R2529,Inplace-ABN (DeepLabv3+),DeepLabv3+,WideResNet38,semantic segmentation,Mapillary Vistas,none,main,perception & aesthetics,2019
+R2669,SegFormer,SegFormer,Mix Transformer (MiT),semantic segmentation,,unclear,main,perception & aesthetics,2025
+R2669,PSPNet,PSPNet,,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R2669,DeepLab,DeepLab (unspecified),,semantic segmentation,,none,mentioned,perception & aesthetics,2025
+R3292,OneFormer,OneFormer,DiNAT-L,panoptic segmentation,Mapillary Vistas v2.0,none,main,transport & road safety,2026
+R3304,Segmenter,Segmenter,,semantic segmentation,,none,main,transport & road safety,2026
+R3310,Mask2Former,Mask2Former,Swin-Large,semantic segmentation,Mapillary Vistas,none,main,thermal environment & climate,2025
+R3311,InternImage + UperNet,InternImage+UperNet,InternImage-XL,semantic segmentation,Cityscapes,none,main,perception & aesthetics,2025
+R3317,OneFormer,OneFormer,,panoptic segmentation,Mapillary Vistas,none,main,transport & road safety,2025
+R3363,PSPNet,PSPNet,,semantic segmentation,ADE20K,none,main,transport & road safety,2018
