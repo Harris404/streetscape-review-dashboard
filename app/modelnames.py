@@ -34,6 +34,10 @@ def unify(name: str, raw: str = '') -> str:
     """Common family name; YOLO split by version using the name or the raw description."""
     n = str(name or '').strip()
     text = f'{n} {raw or ""}'.lower()
+    if 'pp-yolo' in text:
+        return 'PP-YOLOE'
+    if 'yolo-world' in text:
+        return 'YOLO-World'
     if 'yolo' in text and 'yolox' not in text and 'yolo-nas' not in text:
         m = re.search(r'yolo\s*-?v?\s*(\d{1,2})', text)
         if m:
@@ -75,7 +79,8 @@ def kind_of(family: str, model_kind) -> str:
 
 
 def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame, papers: pd.DataFrame,
-                flat: pd.DataFrame, comp_rows: list[dict], norm, model_kind, enet_ok: set | None = None):
+                flat: pd.DataFrame, comp_rows: list[dict], norm, model_kind, enet_ok: set | None = None,
+                raw_models: dict | None = None, official_models: dict | None = None):
     """Return (models, pairs, records) with unified family names, standardised variants and split roles.
     enet_ok: papers that really use ENet. The snapshot's old name rule mapped any name containing 'enet'
     (MobileNet, BiSeNet, SpineNet, RefineNet ...) to ENet; those rows are dropped."""
@@ -91,11 +96,21 @@ def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame
         fam = getattr(r, 'family', '') or ''
         fam = unify(norm(r.base_model), r.base_model) if fam in NOT_NAMED or not isinstance(fam, str) else unify(fam, r.base_model)
         base[r.id] = (fam, r.base_model if isinstance(r.base_model, str) else '')
-    rename = {}
+    rename = {}; aux = []
     for i, row in models.iterrows():
         raw = ' '.join(str(row.get(k, '') or '') for k in ('variant', 'raw'))
-        rename[i] = unify(row['model'], raw)
+        fam = unify(row['model'], raw)
+        if fam == 'YOLO（版本未注明）' and raw_models:
+            # recover the version from the paper's raw model names; YOLO used only as an image classifier is auxiliary
+            ys = [r for r in raw_models.get(row['id'], []) if 'yolo' in r.lower()]
+            det = [r for r in ys if 'classif' not in r.lower()]
+            if ys and not det:
+                aux.append(i)
+            elif det:
+                fam = unify(det[0], det[0]); models.at[i, 'raw'] = det[0]
+        rename[i] = fam
     models['family_new'] = pd.Series(rename)
+    models.loc[aux, 'role'] = 'auxiliary'
     # method papers: base model from the wave-2 extraction is "main", everything else the authors ran is "comparison"
     new_rows = []
     for pid in meth:
@@ -117,6 +132,19 @@ def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame
                                  role='main', dataset_roles=[]))
     if new_rows:
         models = pd.concat([models, pd.DataFrame(new_rows)], ignore_index=True)
+    # papers without any named main model: take the official list's main model names (recovered by full-text checks)
+    if official_models:
+        named = set(models.loc[(models.role == 'main') & (models.kind.fillna(QUALIFIED) == QUALIFIED), 'id'])
+        add = []
+        for pid in app - named:
+            for nm in official_models.get(pid, []):
+                fam = unify(nm, nm)
+                if fam and fam not in NOT_NAMED:
+                    add.append(dict(id=pid, model=fam, family_new=fam, raw=nm, variant=nm, tasks=[], datasets=[], scope='正式清单补录',
+                                    source='papers_two_waves.csv', source_row=0, kind=kind_of(fam, model_kind), evidence_status='全文核查补录',
+                                    role='main', dataset_roles=[]))
+        if add:
+            models = pd.concat([models, pd.DataFrame(add)], ignore_index=True)
     # application papers: add comparison models from the app-group full-text extraction
     have = set(zip(models.id, models.family_new)); extra = []
     for r in comp_rows:
@@ -142,3 +170,26 @@ def standardise(models: pd.DataFrame, pairs: pd.DataFrame, records: pd.DataFrame
             df['model'] = [old2new.get((i, m), unify(m)) if m else m for i, m in zip(df.id, df.model)]
             df['model_role'] = [roles.get((i, m), r) if m and r != 'paper' else r for i, m, r in zip(df.id, df.model, df.model_role)]
     return models, pairs, records
+
+
+DATASET_ALIAS = {'COCO Panoptic': 'COCO', 'COCO-Stuff': 'COCO', 'OpenImages': 'Open Images'}
+# research themes for the 19 untrained algorithm / comparison papers now counted as 应用类 (coded from title and full-text task, 2026-10-30)
+THEME_FIX = {
+    'R0311': '城市形态', 'R0665': '热环境与气候', 'R1852': '基础设施与资产', 'R2423': '住房与经济', 'R0139': '步行性与主动出行',
+    'R0690': '基础设施与资产', 'R2161': '绿化与植被', 'R2373': '绿化与植被', 'R3010': '城市形态', 'R3285': '城市形态', 'R1439': '城市形态',
+    'R0108': '现成模型评测与工具', 'R0480': '现成模型评测与工具', 'R2028': '现成模型评测与工具', 'R2744': '现成模型评测与工具',
+    'R1318': '现成模型评测与工具', 'R1336': '现成模型评测与工具', 'R1601': '现成模型评测与工具', 'R2083': '现成模型评测与工具',
+}
+
+
+def fix_paper_fields(papers: pd.DataFrame) -> pd.DataFrame:
+    papers = papers.copy()
+    papers['datasets'] = papers.datasets.apply(lambda ds: sorted({DATASET_ALIAS.get(d, d) for d in ds}))
+    papers['theme'] = [THEME_FIX.get(i, t) if g == '应用类' else t for i, t, g in zip(papers.id, papers.theme, papers.group)]
+    return papers
+
+
+def fix_dataset_names(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    if len(df) and col in df:
+        df = df.copy(); df[col] = df[col].map(lambda d: DATASET_ALIAS.get(d, d))
+    return df

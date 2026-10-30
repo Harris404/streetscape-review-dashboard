@@ -148,6 +148,8 @@ def _retheme(row):
 
 
 papers['theme'] = papers.apply(_retheme, axis=1)
+from modelnames import fix_paper_fields, fix_dataset_names
+papers = fix_paper_fields(papers)
 all_pairs = pd.DataFrame(catalog['pairs']).drop_duplicates(['id', 'model', 'dataset', 'role', 'model_role'])
 
 
@@ -183,10 +185,15 @@ def split_roles(models, pairs, records):
     _, comp = comparison_sources(file_version(WAVE2 / 'wave2_flat.csv', PROJECT / 'app_group/app_group_models_long.csv'))
     enet_ok = {i for i, r in (official or {}).items() if 'ENet' in [m.strip() for m in r['main_models'].split(';')]}
     enet_ok |= set(flat.loc[flat.family == 'ENet', 'id']) | {r['rec_id'] for r in comp if r['model'] == 'ENet'}
-    return standardise(models, pairs, records, papers, flat, comp, _model_norm(), model_kind, enet_ok)
+    import json as _json
+    rawp = PROJECT / 'analysis/two_waves/raw_models.json'
+    raw_models = _json.loads(rawp.read_text(encoding='utf-8')) if rawp.exists() else None
+    off_models = {i: [m.strip() for m in r['main_models'].split(';') if m.strip()] for i, r in (official or {}).items()}
+    return standardise(models, pairs, records, papers, flat, comp, _model_norm(), model_kind, enet_ok, raw_models, off_models)
 
 
 all_models, all_pairs, _records = split_roles(all_models, all_pairs, pd.DataFrame(catalog['dataset_records']))
+all_pairs = fix_dataset_names(all_pairs, 'dataset'); _records = fix_dataset_names(_records, 'name')
 catalog = dict(catalog, dataset_records=_records.to_dict('records'))
 dataset_df = pd.DataFrame(catalog['datasets'])
 coverage_df = pd.DataFrame(catalog['coverage'])
