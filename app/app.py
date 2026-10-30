@@ -194,6 +194,13 @@ def split_roles(models, pairs, records):
 
 all_models, all_pairs, _records = split_roles(all_models, all_pairs, pd.DataFrame(catalog['dataset_records']))
 all_pairs = fix_dataset_names(all_pairs, 'dataset'); _records = fix_dataset_names(_records, 'name')
+# per-paper model fields (sidebar filter, overview metric, evidence table) follow the standardised names
+_main = all_models[(all_models.role == 'main') & (all_models.kind == QUALIFIED)]
+_fam = _main.groupby('id').model.apply(lambda x: sorted(set(x))).to_dict()
+_var = all_models[all_models.role.isin(['main', 'comparison'])].groupby('id').variant.apply(lambda x: sorted(set(map(str, x)))).to_dict()
+papers['qualified_models'] = papers.id.map(lambda i: _fam.get(i, []))
+papers['models'] = papers['qualified_models']
+papers['model_variants'] = papers.id.map(lambda i: _var.get(i, []))
 catalog = dict(catalog, dataset_records=_records.to_dict('records'))
 dataset_df = pd.DataFrame(catalog['datasets'])
 coverage_df = pd.DataFrame(catalog['coverage'])
