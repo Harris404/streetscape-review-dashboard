@@ -81,6 +81,10 @@ def read_wave2(version):
     spec = importlib.util.spec_from_file_location('gains_curated', WAVE2 / 'gains_curated.py')
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     h2h = pd.read_csv(WAVE2 / 'wave2_h2h.csv', encoding='utf-8-sig').fillna('')
+    from modelnames import unify
+    flat['family'] = [unify(f, b) for f, b in zip(flat.family.fillna(''), flat.base_model.fillna(''))]
+    h2h['families'] = h2h.families.apply(lambda fs: '; '.join(sorted({unify(f) for f in fs.split('; ') if f})))
+    h2h['winner'] = h2h.winner.apply(lambda w: unify(w) if w else '')
     return flat, pd.DataFrame(mod.G, columns=mod.COLS), h2h
 
 
@@ -174,38 +178,12 @@ def comparison_sources(version):
 
 
 def split_roles(models, pairs, records):
-    norm = _model_norm()
-    base, comp = comparison_sources(file_version(WAVE2 / 'wave2_flat.csv', PROJECT / 'app_group/app_group_models_long.csv'))
-    models = models.copy(); pairs = pairs.copy(); records = records.copy()
-    meth = set(papers[papers.group == '算法与方法类'].id)
-    moved = set()
-    # 算法与方法类: the paper's base model stays "main"; other models the authors ran become "comparison"
-    for pid, grp in models[models.id.isin(meth) & (models.role == 'main')].groupby('id'):
-        b = base.get(pid)
-        if not b:
-            continue
-        hit = grp.model.apply(lambda m: m == b or norm(m) == b)
-        if hit.any() and (~hit).any():
-            models.loc[grp.index[~hit], 'role'] = 'comparison'
-            moved |= {(pid, m) for m in grp.model[~hit]}
-    if moved:
-        key = list(zip(pairs.id, pairs.model)); pairs.loc[[k in moved for k in key], 'model_role'] = 'comparison'
-        key = list(zip(records.id, records.model)); records.loc[[k in moved for k in key], 'model_role'] = 'comparison'
-    # 应用类: comparison models recorded in the app-group full-text extraction
-    app = set(papers[papers.group == '应用类'].id)
-    have = set(zip(models.id, models.model))
-    extra = []
-    for r in comp:
-        if r['rec_id'] in app and (r['rec_id'], r['model']) not in have and r['model'] != 'unnamed':
-            have.add((r['rec_id'], r['model']))
-            task = {'semantic segmentation': '语义分割', 'object detection': '目标检测', 'instance segmentation': '实例分割',
-                    'panoptic segmentation': '全景分割'}.get(r['task'], '其他任务')
-            extra.append(dict(id=r['rec_id'], model=r['model'], raw=r['model_raw'], tasks=[task], datasets=[], scope='模型级明确对应',
-                              source='app_group_models_long.csv', source_row=0, kind=model_kind(r['model']), evidence_status='应用组全文提取',
-                              variant=r['model_raw'], role='comparison', dataset_roles=[]))
-    if extra:
-        models = pd.concat([models, pd.DataFrame(extra)], ignore_index=True)
-    return models, pairs, records
+    from modelnames import standardise
+    flat = pd.read_csv(WAVE2 / 'wave2_flat.csv', encoding='utf-8-sig')
+    _, comp = comparison_sources(file_version(WAVE2 / 'wave2_flat.csv', PROJECT / 'app_group/app_group_models_long.csv'))
+    enet_ok = {i for i, r in (official or {}).items() if 'ENet' in [m.strip() for m in r['main_models'].split(';')]}
+    enet_ok |= set(flat.loc[flat.family == 'ENet', 'id']) | {r['rec_id'] for r in comp if r['model'] == 'ENet'}
+    return standardise(models, pairs, records, papers, flat, comp, _model_norm(), model_kind, enet_ok)
 
 
 all_models, all_pairs, _records = split_roles(all_models, all_pairs, pd.DataFrame(catalog['dataset_records']))
@@ -585,7 +563,7 @@ def models_page():
         st.subheader('模型使用频次')
         c1, c2 = st.columns(2)
         top_n = c1.slider('展示前 N 个模型', 5, 30, 15, key='model_top')
-        name_scope = c2.radio('名称粒度', ['模型家族', '具体模型描述'], horizontal=True, key='name_scope')
+        name_scope = c2.radio('名称粒度', ['模型家族', '模型 + 骨干／规模'], horizontal=True, key='name_scope')
         model_col = 'model' if name_scope == '模型家族' else 'variant'
         mc = named_rows.groupby(model_col).id.nunique().sort_values(ascending=False)
         event = bar(mc.head(top_n), 'models_bar', color=color, selectable=True, height=520)
@@ -934,7 +912,7 @@ else:
 st.markdown('<div class="foot">STREETSCAPE REVIEW · 按论文 ID 去重 · 支持筛选、图表选择、证据回查与 CSV 导出</div>', unsafe_allow_html=True)
 with st.expander('数据来源与统计口径'):
     st.write('分类以项目正式清单为准：应用类 = 作者未训练模型、直接使用现成或零样本模型；算法与方法类 = 涉及训练、微调或自建标注。')
-    st.write('模型家族与具体模型描述分开；主用、比较、辅助模块分开。主题是综述编码，视觉任务可多选。')
+    st.write('模型名称已统一：“模型家族”把同一模型的不同写法合并（YOLO 按版本区分）；“模型 + 骨干／规模”只保留骨干网络或 YOLO 规模，去掉大小写与训练配置差异。算法与方法类的主用模型取自第二波逐篇全文提取。')
     st.write('“训练与迁移”页来自第二波全文专项提取（analysis/wave2）；适配前后对比为人工逐条核对。')
     st.write(catalog['review_meta']['scope'])
     st.caption('正式ID和分类已逐篇对齐两波统计_v3.xlsx与正式纳入966篇_索引.csv。PRISMA全文排除383篇，硬盘excluded目录193份PDF，两者分别记录。')

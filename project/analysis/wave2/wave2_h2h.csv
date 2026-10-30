@@ -43,7 +43,7 @@ R0740,semantic segmentation,DeepLabv3+; SegFormer; Swin (other head),,Trans-AsfN
 R0747,object detection,Faster R-CNN; Swin (other head); YOLOv8,,Grounding DINO + BLIP zero-shot pipeline (best 4-class mAP); YOLOv8 best for single-class building detection
 R0761,semantic segmentation,DeepLabv3; PSPNet; 通用 CNN / 自建网络,,PSAT-Net
 R0777,semantic segmentation,DeepLabv3+; HRNet/OCR,,HRDLNet (although PIDNet 80.6% and BANet 82.5% mIoU score higher in Table 6)
-R0802,semantic segmentation,DeepLabv3+; ENet; 通用 CNN / 自建网络,ENet,"LiteMSNet-ResNet50 highest mIoU; LiteMSNet-MobileNetV3 best accuracy/efficiency trade-off (4.82M params, 66.1 FPS)"
+R0802,semantic segmentation,DeepLabv3+; 通用 CNN / 自建网络,通用 CNN / 自建网络,"LiteMSNet-ResNet50 highest mIoU; LiteMSNet-MobileNetV3 best accuracy/efficiency trade-off (4.82M params, 66.1 FPS)"
 R0803,object detection,Faster R-CNN; YOLOv5,YOLOv5,Detectron2 (two-stage Faster R-CNN) outperforms YOLOv5
 R0806,object detection,Faster R-CNN; SSD; YOLOv5,YOLOv5,YOLOv5
 R0864,object detection,Faster R-CNN; YOLOv10,YOLOv10,Contrast augmentation gave the most consistent gain (shearing second); combining all augmentations rarely beat the best single one; YOLOv10-PVT + shearing gave the highest AP50
@@ -52,7 +52,7 @@ R0941,semantic segmentation,DeepLabv3+; U-Net; YOLOv7,,"MBF-UNet (beats U-Net, U
 R0962,object detection,RT-DETR; YOLO (version n/s); YOLO11,RT-DETR,"HPSM-YOLO (vs Faster R-CNN, Cascade R-CNN, YOLOv5s-v10s, YOLO11s, YOLO12s, RT-DETR)"
 R0975,semantic segmentation,SegFormer; classical ML / 非深度,classical ML / 非深度,"SegFormer+CRF; competitive with ViT-B (RTFP) and ALKNet with fewer parameters (13M), best on vegetation and building"
 R0998,object detection,YOLO (version n/s); YOLO11; YOLOv8,YOLOv8,RCPs-YOLO (higher precision/F1/mAP50 than YOLOv8s and YOLOv11s with 3.6M params)
-R1040,semantic segmentation,DeepLabv3+; ENet; U-Net,DeepLabv3+,MS-DeepLabV3+ (proposed)
+R1040,semantic segmentation,DeepLabv3+; U-Net,DeepLabv3+,MS-DeepLabV3+ (proposed)
 R1061,object detection,Cascade R-CNN; Mask R-CNN,Cascade R-CNN,"Training on clean crowdsourced labels gives clearly the best detection (Mask R-CNN 10.2 / Cascade R-CNN 9.8 mAP@[.5:.95]); noisy auto-labels much worse except large rigid polyline classes (waterway, bicycle path, railway track)"
 R1073,semantic segmentation,DeepLabv3+; SegNet,DeepLabv3+,Hybrid ensemble (avg IoU 0.773) over DeepLabv3+ and SegNet
 R1107,object detection,DETR family; 通用 CNN / 自建网络,DETR family,DINO outperforms Deformable-DETR in all metrics
@@ -92,7 +92,7 @@ R1663,object detection,SSD; YOLOv3,YOLOv3,SSD nearly eliminates false positives;
 R1669,object detection,Cascade R-CNN; 通用 CNN / 自建网络,,DetectoRS best on test at 1200px (F1 95.2%); ResNeSt best at 800px
 R1676,object detection,NanoDet; YOLO (version n/s),NanoDet,NanoDet + GGLI best on all 8 datasets
 R1696,object detection,SSD; YOLOv3,YOLOv3,YOLOv3 at 640x640
-R1718,semantic segmentation,DeepLabv3+; ENet,DeepLabv3+,DeepLab V3+ downscale model (more than double the benchmark accuracy)
+R1718,semantic segmentation,DeepLabv3+; 通用 CNN / 自建网络,DeepLabv3+,DeepLab V3+ downscale model (more than double the benchmark accuracy)
 R1721,semantic segmentation,PSPNet; U-Net,PSPNet,"Improved PSPNet (ours, MobileNetV1); also shortest training time (298 min)"
 R1775,panoptic segmentation,DANet; 通用 CNN / 自建网络,通用 CNN / 自建网络,ResNet101+PSNet
 R1790,object detection,Faster R-CNN; RetinaNet,Faster R-CNN,"Faster R-CNN with VGG16 backbone pre-trained on Places365 (86.07% supervised, 86.53% with semi-supervised pipeline)"
@@ -157,5 +157,4 @@ R3308,object detection,YOLO11; YOLOv8,YOLO11,"YOLO11 (94.0 mAP50, 91.9 recall) u
 R3331,semantic segmentation,FCN; SegFormer,FCN,FCN with ResNet-50 backbone (IoU 0.66)
 R3334,object detection,Faster R-CNN; YOLOv5,YOLOv5,YOLOv5l best on 4-class (mAP 44.0); Faster R-CNN best on 10-class (mAP 25.0) and used for heatmaps
 R3340,semantic segmentation,DeepLabv3; 通用 CNN / 自建网络,DeepLabv3,"Facade R-CNN (beats FCN, PSPNet, DeepLabV3/V3+, DeepFacade, PALKN on RueMonge2014 and Oxford; slightly below PALKN mIoU on ECP)"
-R3350,semantic segmentation,DeepLabv3+; ENet,,SpineNet-S143+ (SpineNet-Seg) outperforms DeepLabv3/v3+ at all scales
 R3351,object detection,Cascade R-CNN; 通用 CNN / 自建网络,,"ResNeSt best at 800px (AP50 92,0%, F1 94,8%); DetectoRS best at 1200px (AP50 92,6%) and on hard samples"

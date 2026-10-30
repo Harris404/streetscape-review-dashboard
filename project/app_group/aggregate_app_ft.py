@@ -14,7 +14,7 @@ RULES = [("mask2former", "Mask2Former"), ("maskformer", "MaskFormer"), ("mp-form
     ("xception-71", "DeepLabv3+"), ("xception71", "DeepLabv3+"), ("ladeco", "DeepLabv3 (LaDeco)"), ("resnest", "DeepLabv3 (ResNeSt)"), ("deeplabv3", "DeepLabv3"), ("deeplab v3", "DeepLabv3"),
     ("deeplab-v3", "DeepLabv3"), ("deeplab", "DeepLab (unspecified)"), ("inplace-abn", "DeepLabv3+"), ("in-place abn", "DeepLabv3"), ("pspnet", "PSPNet"), ("ppm", "PSPNet (MIT CSAIL)"),
     ("mit csail", "PSPNet (MIT CSAIL)"), ("csail", "PSPNet (MIT CSAIL)"), ("hrnet", "HRNet(+OCR)"), ("ocrnet", "HRNet(+OCR)"), ("hierarchical multi-scale", "HMSA (NVIDIA)"),
-    ("segnet", "SegNet"), ("fcn", "FCN"), ("fully conv", "FCN"), ("u-net", "U-Net"), ("unet", "U-Net"), ("enet", "ENet"), ("bisenet", "BiSeNet"), ("pp-liteseg", "PP-LiteSeg"),
+    ("segnet", "SegNet"), ("fcn", "FCN"), ("fully conv", "FCN"), ("u-net", "U-Net"), ("unet", "U-Net"), (r"\be-?net\b", "ENet"), ("bisenet", "BiSeNet"), ("pp-liteseg", "PP-LiteSeg"),
     ("efficientvit", "EfficientViT"), ("dilated resnet", "Dilated ResNet (Wolfram)"), ("ademxapp", "Ademxapp (Wolfram)"), ("multi-scale context", "Multi-scale Context Agg."),
     ("panoptic fpn", "Panoptic FPN"), ("seamseg", "SeamSeg"), ("seamless", "SeamSeg"), ("mask r-cnn", "Mask R-CNN"), ("mask rcnn", "Mask R-CNN"), ("faster r-cnn", "Faster R-CNN"),
     ("fast r-cnn", "Fast R-CNN"), ("yolo", "YOLO"), ("ssd", "SSD"), ("grounding dino", "Grounding DINO"), ("detectron", "Detectron2 (unspecified)"), ("treepedia", "Treepedia"),
