@@ -12,8 +12,9 @@ import streamlit as st
 
 from data import TYPE_NAMES, fingerprint, load_catalog
 from enrichment import QUALIFIED, model_kind, named_record
+from i18n import tr, tr_df, tr_list
 
-st.set_page_config(page_title='街景研究 · 文献分析', page_icon='🏙️', layout='wide', initial_sidebar_state='auto')
+st.set_page_config(page_title='Streetscape Review · Literature Explorer', page_icon='🏙️', layout='wide', initial_sidebar_state='auto')
 # validated categorical palette (dataviz reference, light mode): slot order is the CVD-safety mechanism
 BLUE, ORANGE, AQUA, YELLOW, MAGENTA, GREEN, VIOLET, RED = '#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#6250d6', '#e34948'
 COLORS = [BLUE, ORANGE, AQUA, YELLOW, MAGENTA, GREEN, VIOLET, RED]
@@ -24,6 +25,9 @@ GROUPS = ['应用类', '算法与方法类']
 GROUP_COLOR = {'应用类': BLUE, '算法与方法类': ORANGE}
 TYPE_COLOR = {'迁移与适配': AQUA, '算法开发': VIOLET, '数据集研究': YELLOW, '模型比较': MAGENTA}
 TASK_COLOR = {'检测': VIOLET, '分割': AQUA, '其他': YELLOW}
+# the same colours keyed by the displayed (English) names
+GROUP_COLOR_EN, TYPE_COLOR_EN, TASK_COLOR_EN = ({tr(k): v for k, v in m.items()} for m in (GROUP_COLOR, TYPE_COLOR, TASK_COLOR))
+PAGE_EN = {'研究概览': 'Overview', '模型与数据来源': 'Models & data sources', '训练与迁移': 'Training & transfer'}
 import os
 _BUNDLED = Path(__file__).resolve().parent.parent / 'project'
 PROJECT = Path(os.environ.get('STREETSCAPE_PROJECT') or (_BUNDLED if _BUNDLED.exists() else '/Users/paris404/Desktop/streetscape_review'))
@@ -241,9 +245,9 @@ def goto(view, page='研究概览'):
 
 VIEWS = ['研究全景'] + GROUPS
 with st.sidebar:
-    st.markdown('<div class="brand">街景研究<small>RESEARCH EXPLORER</small></div>', unsafe_allow_html=True)
-    view = st.radio('视图', VIEWS, key='view', on_change=reset_filters,
-                    format_func=lambda v: {'研究全景': '研究全景与数据集（总览）', '应用类': f'应用类 · {(papers.group == "应用类").sum()} 篇', '算法与方法类': f'算法与方法类 · {(papers.group == "算法与方法类").sum()} 篇'}[v])
+    st.markdown('<div class="brand">Streetscape<small>RESEARCH EXPLORER</small></div>', unsafe_allow_html=True)
+    view = st.radio('View', VIEWS, key='view', on_change=reset_filters,
+                    format_func=lambda v: {'研究全景': 'Landscape & datasets (overview)', '应用类': f'Application studies · {(papers.group == "应用类").sum()}', '算法与方法类': f'Algorithm & method studies · {(papers.group == "算法与方法类").sum()}'}[v])
     group = view if view in GROUPS else None
     selected = papers.iloc[0:0]
     page = view
@@ -252,32 +256,32 @@ with st.sidebar:
         if st.session_state.get('page') not in PAGES:
             st.session_state.page = PAGES[0]
         st.divider()
-        st.markdown(f'**{group} · 分析页面**')
-        page = st.radio('分析页面', PAGES, label_visibility='collapsed', key='page')
+        st.markdown(f'**{tr(group)} studies · pages**')
+        page = st.radio('Page', PAGES, label_visibility='collapsed', key='page', format_func=PAGE_EN.get)
         st.divider()
         scope = papers[papers.group == group].copy()
         N_SCOPE = len(scope)
-        st.markdown(f'**{group}筛选**')
-        years = st.slider('发表年份', int(scope.year.min()), int(scope.year.max()),
+        st.markdown(f'**Filter {tr(group).lower()} studies**')
+        years = st.slider('Publication year', int(scope.year.min()), int(scope.year.max()),
                           (int(scope.year.min()), int(scope.year.max())), key='years')
-        chosen_tasks = st.multiselect('视觉任务', sorted({t for ts in scope.tasks for t in ts}), key='tasks', placeholder='全部任务')
+        chosen_tasks = st.multiselect('Vision task', sorted({t for ts in scope.tasks for t in ts}, key=tr), key='tasks', placeholder='All tasks', format_func=tr)
         chosen_types = []
         if group == '算法与方法类':
-            chosen_types = st.multiselect('子类', [t for t in ['迁移与适配', '算法开发', '数据集研究', '模型比较'] if t in set(scope.type_name)],
-                                          key='types', placeholder='全部子类')
-        chosen_themes = st.multiselect('研究主题' if group == '应用类' else '技术主题', sorted(scope.theme.unique()), key='themes', placeholder='全部主题')
-        with st.expander('模型与数据筛选'):
-            chosen_models = st.multiselect('使用模型', sorted({m for ms in scope.qualified_models for m in ms}), key='models', placeholder='全部模型')
-            chosen_data = st.multiselect('训练数据来源', sorted({d for ds in scope.datasets for d in ds}), key='datasets', placeholder='全部数据集')
-        search = st.text_input('搜索论文／ID／对象', placeholder='例如 tree、R0143', key='search')
-        st.button('清空筛选', on_click=reset_filters, width='stretch', key='reset_filters')
+            chosen_types = st.multiselect('Sub-type', [t for t in ['迁移与适配', '算法开发', '数据集研究', '模型比较'] if t in set(scope.type_name)],
+                                          key='types', placeholder='All sub-types', format_func=tr)
+        chosen_themes = st.multiselect('Research theme' if group == '应用类' else 'Technical theme', sorted(scope.theme.unique(), key=tr), key='themes', placeholder='All themes', format_func=tr)
+        with st.expander('Model & data filters'):
+            chosen_models = st.multiselect('Model used', sorted({m for ms in scope.qualified_models for m in ms}, key=lambda m: str(tr(m)).lower()), key='models', placeholder='All models', format_func=tr)
+            chosen_data = st.multiselect('Training data source', sorted({d for ds in scope.datasets for d in ds}, key=tr), key='datasets', placeholder='All datasets', format_func=tr)
+        search = st.text_input('Search title / ID / objects', placeholder='e.g. tree, R0143', key='search')
+        st.button('Clear filters', on_click=reset_filters, width='stretch', key='reset_filters')
         selected = apply_filters(scope, years, chosen_tasks, chosen_themes, chosen_types, chosen_models, chosen_data, search)
-        st.caption(f'当前范围：{len(selected):,} / {N_SCOPE:,} 篇')
+        st.caption(f'In scope: {len(selected):,} / {N_SCOPE:,} papers')
     else:
-        st.caption(f'全部正式纳入 {N_ALL:,} 篇（两类共用页面）。选择“应用类”或“算法与方法类”进入各自的分析页面与筛选。')
+        st.caption(f'All {N_ALL:,} included papers (shared page for both classes). Choose "Application" or "Algorithm & method" for their own pages and filters.')
     st.divider()
-    st.caption('分类口径 · 项目正式清单（papers_two_waves.csv）' if official else '分类口径 · 应用内快照')
-    if st.button('重新读取数据', width='stretch'):
+    st.caption('Classification · official project list (papers_two_waves.csv)' if official else 'Classification · in-app snapshot')
+    if st.button('Reload data', width='stretch'):
         read_data.clear(); read_official.clear(); read_wave2.clear(); read_dataset_table.clear(); read_curves.clear()
         st.rerun()
 
@@ -286,7 +290,7 @@ ids = set(selected.id)
 
 def hero(kicker, title, subtitle, badge=None):
     st.markdown(f'<div class="eyebrow">{html.escape(kicker)}</div>', unsafe_allow_html=True)
-    b = f'<span class="badge" style="background:{GROUP_COLOR[badge]}">{badge}</span>' if badge else ''
+    b = f'<span class="badge" style="background:{GROUP_COLOR[badge]}">{tr(badge)}</span>' if badge else ''
     st.markdown(f'<h1 style="margin:0 0 8px 0">{html.escape(title)}{b}</h1>', unsafe_allow_html=True)
     st.markdown(f'<div class="subhead">{html.escape(subtitle)}</div>', unsafe_allow_html=True)
 
@@ -315,18 +319,19 @@ def chart(fig, key, select=False, height=360):
 
 
 def bar(counts, key, color=TEAL, horizontal=True, selectable=False, height=380):
-    data = counts.rename_axis('类别').reset_index(name='论文数')
+    data = counts.rename_axis('key').reset_index(name='Papers')
     if data.empty:
-        st.info('当前筛选下没有可统计记录。'); return None
+        st.info('No records under the current filters.'); return None
+    data['Category'] = data.key.map(tr)  # custom_data keeps the internal key so a click maps back to the data
     if horizontal:
-        data = data.sort_values('论文数')
-        fig = px.bar(data, y='类别', x='论文数', orientation='h', text='论文数', custom_data=['类别'])
-        fig.update_layout(yaxis_title=None, xaxis_title='论文数（按 ID 去重）')
+        data = data.sort_values('Papers')
+        fig = px.bar(data, y='Category', x='Papers', orientation='h', text='Papers', custom_data=['key', 'Category'])
+        fig.update_layout(yaxis_title=None, xaxis_title='Papers (unique IDs)')
     else:
-        fig = px.bar(data, x='类别', y='论文数', text='论文数', custom_data=['类别'])
-        fig.update_layout(xaxis_title=None, yaxis_title='论文数（按 ID 去重）')
+        fig = px.bar(data, x='Category', y='Papers', text='Papers', custom_data=['key', 'Category'])
+        fig.update_layout(xaxis_title=None, yaxis_title='Papers (unique IDs)')
     fig.update_traces(marker_color=color, textposition='outside', cliponaxis=False,
-                      hovertemplate='%{customdata[0]}<br>%{x} 篇<extra></extra>' if horizontal else None)
+                      hovertemplate='%{customdata[1]}<br>%{x} papers<extra></extra>' if horizontal else None)
     return chart(fig, key, selectable, height)
 
 
@@ -345,7 +350,7 @@ def counts_for(frame, column):
 
 def matrix(frame, row, col, key, height=430, percent=False, row_order=None, col_order=None, color=TEAL):
     if frame.empty:
-        st.info('当前筛选下没有可建立对应关系的记录。'); return
+        st.info('No linked records under the current filters.'); return
     table = frame.drop_duplicates(['id', row, col]).groupby([row, col]).id.nunique().unstack(fill_value=0)
     if row_order is None:
         row_order = table.sum(axis=1).sort_values(ascending=False).index.tolist()
@@ -355,124 +360,127 @@ def matrix(frame, row, col, key, height=430, percent=False, row_order=None, col_
     z = table.astype(float)
     if percent:
         z = z.div(z.sum(axis=0).replace(0, 1), axis=1) * 100
-    fig = go.Figure(go.Heatmap(z=z.values, x=[str(c) for c in table.columns], y=table.index.tolist(),
+    fig = go.Figure(go.Heatmap(z=z.values, x=[str(tr(c)) for c in table.columns], y=[tr(i) for i in table.index],
         customdata=table.values, colorscale=SEQ,
-        colorbar=dict(title='%' if percent else '篇'), text=z.round(1).values if percent else table.values,
+        colorbar=dict(title='%' if percent else 'Papers'), text=z.round(1).values if percent else table.values,
         texttemplate='%{text:.1f}%' if percent else '%{text}',
-        hovertemplate='%{y} × %{x}<br>%{customdata} 篇<extra></extra>'))
+        hovertemplate='%{y} × %{x}<br>%{customdata} papers<extra></extra>'))
     fig.update_layout(xaxis_title=None, yaxis_title=None, yaxis_autorange='reversed')
     chart(fig, key, height=height)
 
 
-def paper_evidence(frame, key, label='查看论文与证据', expanded=False):
-    with st.expander(f'{label} · {len(frame):,} 篇', expanded=expanded):
+def paper_evidence(frame, key, label='Papers and evidence', expanded=False):
+    with st.expander(f'{label} · {len(frame):,} papers', expanded=expanded):
         if frame.empty:
-            st.info('没有符合条件的论文。'); return
+            st.info('No matching papers.'); return
         view = frame[['id', 'year', 'title', 'type_name', 'tasks', 'theme', 'model_variants', 'datasets']].copy()
+        view['title'] = view.title.map(tr)
+        for c in ('type_name', 'theme'):
+            view[c] = view[c].map(tr)
         for c in ('tasks', 'model_variants', 'datasets'):
-            view[c] = view[c].apply(lambda x: '；'.join(x))
-        view.columns = ['论文 ID', '年份', '标题', '类型', '视觉任务', '主题', '模型', '训练数据来源']
-        view = view.sort_values(['年份', '论文 ID'], ascending=[False, True])
+            view[c] = view[c].apply(lambda x: '; '.join(map(str, tr_list(list(x)))))
+        view.columns = ['Paper ID', 'Year', 'Title', 'Type', 'Vision task', 'Theme', 'Models', 'Training data source']
+        view = view.sort_values(['Year', 'Paper ID'], ascending=[False, True])
         event = st.dataframe(view, hide_index=True, width='stretch', height=320,
                             on_select='rerun', selection_mode='single-row', key=f'{key}_table',
-                            column_config={'标题': st.column_config.TextColumn(width='large')})
-        st.download_button('下载当前论文清单 · CSV', view.to_csv(index=False).encode('utf-8-sig'),
+                            column_config={'Title': st.column_config.TextColumn(width='large')})
+        st.download_button('Download this paper list · CSV', view.to_csv(index=False).encode('utf-8-sig'),
                            file_name=f'{key}_papers.csv', mime='text/csv', key=f'{key}_download')
         selected_rows = event.selection.rows
         if selected_rows:
-            rid = view.iloc[selected_rows[0]]['论文 ID']
+            rid = view.iloc[selected_rows[0]]['Paper ID']
         else:
-            rid = st.selectbox('选择论文查看证据', view['论文 ID'].tolist(),
-                               format_func=lambda v: v + ' · ' + frame.set_index('id').loc[v, 'title'][:75], key=f'{key}_paper')
+            rid = st.selectbox('Choose a paper to see its evidence', view['Paper ID'].tolist(),
+                               format_func=lambda v: v + ' · ' + tr(frame.set_index('id').loc[v, 'title'])[:75], key=f'{key}_paper')
         r = frame.set_index('id').loc[rid]
-        st.markdown(f'<div class="evidence"><div class="id">{html.escape(rid)} · {html.escape(r["type_name"])}</div>'
-                    f'<h4>{html.escape(r["title"])}</h4>{html.escape(r["evidence"] or "当前来源没有证据摘录。")}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="evidence"><div class="id">{html.escape(rid)} · {html.escape(tr(r["type_name"]))}</div>'
+                    f'<h4>{html.escape(tr(r["title"]))}</h4>{html.escape(tr(r["evidence"]) or "No evidence excerpt from the current source.")}</div>', unsafe_allow_html=True)
         if r.get('reclassified'):
-            st.caption('该论文原为算法／比较研究，未训练模型，直接使用现成或零样本模型，按“分类 = 是否训练”归入应用类。')
+            st.caption('Originally an algorithm / comparison study, but no model was trained (ready-made or zero-shot models only), so it is counted as an application study (class = whether a model was trained).')
         a, b = st.columns(2)
         with a:
-            st.caption('识别对象：' + (r['classes'] or '未单独提取'))
-            st.caption('应用指标：' + (r['indicators'] or '未单独提取'))
+            st.caption('Objects recognised: ' + (tr(r['classes']) or 'not extracted separately'))
+            st.caption('Indicators: ' + (tr(r['indicators']) or 'not extracted separately'))
         with b:
-            st.caption('影像来源：' + (r['imagery'] or '未说明'))
-            st.caption('框架／模型渠道：' + (r['framework'] or '未说明'))
+            st.caption('Imagery source: ' + (tr(r['imagery']) or 'not stated'))
+            st.caption('Framework / model channel: ' + (tr(r['framework']) or 'not stated'))
         if r['doi']:
-            st.link_button('打开论文 DOI', 'https://doi.org/' + r['doi'].removeprefix('https://doi.org/'))
-        st.write('**模型记录状态**：' + r['model_status'])
+            st.link_button('Open paper DOI', 'https://doi.org/' + r['doi'].removeprefix('https://doi.org/'))
+        st.write('**Model record status**: ' + tr(r['model_status']))
         if r['theme_detail']:
-            st.write('**主题细分**：' + r['theme_detail'])
+            st.write('**Theme detail**: ' + tr(r['theme_detail']))
         if r['comparison_models']:
-            st.write('**比较基线（单列）**：' + '；'.join(r['comparison_models']))
-        st.write('**训练数据状态**：' + r['dataset_status'])
+            st.write('**Comparison baselines (listed separately)**: ' + '; '.join(map(str, tr_list(list(r['comparison_models'])))))
+        st.write('**Training data status**: ' + tr(r['dataset_status']))
         if r['dataset_records']:
             dr = pd.DataFrame(r['dataset_records']).replace({'role': {'pretrain': '预训练', 'train': '训练／微调', 'unspecified': '训练来源（角色未细分）', 'released': '新发布数据集'}})
-            st.dataframe(dr.rename(columns={'name': '数据集', 'role': '数据用途', 'model': '对应模型', 'model_role': '模型角色'}), hide_index=True, width='stretch')
+            st.dataframe(tr_df(dr).rename(columns={'name': 'Dataset', 'role': 'Data role', 'model': 'Model', 'model_role': 'Model role'}), hide_index=True, width='stretch')
         if r['enrichment_notes'] or r['enrichment_sources']:
-            st.markdown('**补充与复核**')
+            st.markdown('**Additions and checks**')
             for note in r['enrichment_notes']:
-                st.write('• ' + note)
-            st.dataframe(pd.DataFrame(r['enrichment_sources']).rename(columns={
-                'field': '字段', 'source': '证据来源', 'locator': '位置', 'evidence': '证据／摘要'}),
+                st.write('• ' + tr(note))
+            st.dataframe(tr_df(pd.DataFrame(r['enrichment_sources'])).rename(columns={
+                'field': 'Field', 'source': 'Evidence source', 'locator': 'Location', 'evidence': 'Evidence / excerpt'}),
                 hide_index=True, width='stretch')
 
 
 # ---------------------------------------------------------------- pages
 def landscape():
-    hero('01 / RESEARCH LANDSCAPE', '研究全景', '按作者是否训练模型分为两大类：直接使用现成模型的应用类，以及涉及训练或自建标注的算法与方法类。')
+    hero('01 / RESEARCH LANDSCAPE', 'Research landscape', 'Papers are split by whether the authors trained a model: application studies use ready-made models directly; algorithm & method studies train, fine-tune or build their own annotations.')
     app = papers[papers.group == '应用类']; meth = papers[papers.group == '算法与方法类']
-    metrics([('正式纳入', f'{N_ALL:,}', '项目正式清单，按论文 ID 去重。'),
-             ('应用类', f'{len(app):,}', '直接使用现成或零样本模型，含未训练模型的算法／比较研究。'),
-             ('算法与方法类', f'{len(meth):,}', '涉及模型训练、微调或自建标注。')])
+    metrics([('Included', f'{N_ALL:,}', 'Official project list, unique paper IDs.'),
+             ('Application', f'{len(app):,}', 'Ready-made or zero-shot models used directly, incl. algorithm/comparison studies that trained no model.'),
+             ('Algorithm & method', f'{len(meth):,}', 'Model training, fine-tuning or self-built annotation.')])
     prisma = catalog['prisma']
-    st.caption(f'PRISMA：评估全文 {prisma["assessed"]} 篇，全文排除 {prisma["excluded"]} 篇，纳入 {prisma["included"]} 篇。纳入索引中的 {catalog["scope_sync"]["verified_files"]} 份PDF均已核实存在。')
+    st.caption(f'PRISMA: {prisma["assessed"]:,} full texts assessed, {prisma["excluded"]} excluded at full text, {prisma["included"]} included. All {catalog["scope_sync"]["verified_files"]} PDFs in the inclusion index were verified to exist.')
     st.write('')
     a, b = st.columns(2, gap='large')
     with a:
-        st.markdown(f'<div class="def"><span class="tag" style="color:{TEAL}">应用类 · {len(app)} 篇</span><br>'
-                    '作者<b>不训练模型</b>，直接用现成的预训练或零样本模型（DeepLabv3+、PSPNet、SegFormer、SAM 等）识别街景要素，'
-                    f'结果用于城市研究，或比较现成模型的效果。其中 {int(app.reclassified.sum())} 篇原为算法／比较研究。'
-                    '<br>回答：<b>哪些模型拿来就能用？</b></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="def"><span class="tag" style="color:{TEAL}">APPLICATION · {len(app)} PAPERS</span><br>'
+                    'The authors <b>do not train a model</b>. They use ready-made pretrained or zero-shot models (DeepLabv3+, PSPNet, SegFormer, SAM, etc.) to extract street-scene elements '
+                    f'for urban research, or compare off-the-shelf models. {int(app.reclassified.sum())} of these were originally algorithm/comparison studies.'
+                    '<br>Answers: <b>which models can be used directly?</b></div>', unsafe_allow_html=True)
     with b:
-        sub = '、'.join(f'{k} {v}' for k, v in meth.type_name.value_counts().items())
-        st.markdown(f'<div class="def"><span class="tag" style="color:{NAVY}">算法与方法类 · {len(meth)} 篇</span><br>'
-                    f'作者<b>训练、微调或改进模型</b>，或自建街景标注数据集。子类：{sub}。'
-                    '<br>回答：<b>哪些模型适合迁移、要标多少 label？</b></div>', unsafe_allow_html=True)
+        sub = ', '.join(f'{tr(k).lower()} {v}' for k, v in meth.type_name.value_counts().items())
+        st.markdown(f'<div class="def"><span class="tag" style="color:{NAVY}">ALGORITHM & METHOD · {len(meth)} PAPERS</span><br>'
+                    f'The authors <b>train, fine-tune or modify models</b>, or build their own annotated street-view datasets. Sub-types: {sub}.'
+                    '<br>Answers: <b>which models transfer well, and how many labels are needed?</b></div>', unsafe_allow_html=True)
     st.write('')
     left, right = st.columns([1, 1.4], gap='large')
     with left:
-        st.subheader('两大类占比')
-        fig = go.Figure(go.Pie(labels=GROUPS, values=[len(app), len(meth)], hole=.68, marker=dict(colors=[BLUE, ORANGE], line=dict(color=SURFACE, width=2)),
+        st.subheader('Share of the two classes')
+        fig = go.Figure(go.Pie(labels=[tr(g) for g in GROUPS], values=[len(app), len(meth)], hole=.68, marker=dict(colors=[BLUE, ORANGE], line=dict(color=SURFACE, width=2)),
                                textinfo='label+percent', textposition='outside', sort=False))
-        fig.update_layout(showlegend=False, annotations=[dict(text=f'<b>{N_ALL}</b><br>篇', x=.5, y=.5, showarrow=False, font_size=22)])
+        fig.update_layout(showlegend=False, annotations=[dict(text=f'<b>{N_ALL}</b><br>papers', x=.5, y=.5, showarrow=False, font_size=22)])
         chart(fig, 'classification_pie', height=380)
     with right:
-        st.subheader('算法与方法类的构成')
+        st.subheader('Algorithm & method sub-types')
         bar(meth.type_name.value_counts(), 'method_types', color=ORANGE, height=380)
-    st.subheader('两类研究的年度分布')
-    trend = papers.groupby(['year', 'group']).id.nunique().reset_index(name='论文数')
-    fig = px.bar(trend, x='year', y='论文数', color='group', barmode='stack', color_discrete_map=GROUP_COLOR,
-                 labels={'year': '发表年份', 'group': '研究类型'}, category_orders={'group': GROUPS})
+    st.subheader('Papers per year, by class')
+    trend = papers.groupby(['year', 'group']).id.nunique().reset_index(name='Papers')
+    trend['group'] = trend.group.map(tr)
+    fig = px.bar(trend, x='year', y='Papers', color='group', barmode='stack', color_discrete_map=GROUP_COLOR_EN,
+                 labels={'year': 'Publication year', 'group': 'Class'}, category_orders={'group': [tr(g) for g in GROUPS]})
     fig.update_xaxes(dtick=1)
     chart(fig, 'all_years', height=340)
     cutoff = int(catalog['review_meta']['updated_at'][:4])
     future = int((papers.year > cutoff).sum())
-    st.caption(f'按发表年份计数；{cutoff} 年为检索截面，不能与完整年度直接比较增速。'
-               + (f' 另有 {future} 篇标为晚于检索年份，保留源清单年份。' if future else ''))
-    st.caption('下方为两类共用的“数据集与对象覆盖”；各类的详细分析请在左侧选择“应用类”或“算法与方法类”。')
+    st.caption(f'Counted by publication year; {cutoff} is the search cut-off year, so its growth cannot be compared directly with complete years.'
+               + (f' Another {future} papers carry a year later than the search year; the source-list year is kept.' if future else ''))
+    st.caption('Below: "Datasets & object coverage", shared by both classes. For each class\'s detailed analysis, choose "Application" or "Algorithm & method" on the left.')
     if MISSING:
-        st.caption(f'注意：正式清单中有 {len(MISSING)} 篇不在应用数据快照里，未显示：' + '、'.join(MISSING[:20]))
-
+        st.caption(f'Note: {len(MISSING)} papers in the official list are not in the app snapshot and are not shown: ' + ', '.join(MISSING[:20]))
 
 
 TYPE_DEF = [
-    ('迁移与适配', '拿现成模型，在作者自己标注的街景数据上训练或微调，模型结构基本不改。',
-     '例：用 YOLOv8 在自标的 1,000 张街景上训练，检测路面坑洞、电线杆。'),
-    ('算法开发', '提出新模型或改进已有模型（改网络结构、损失函数、训练策略等），再与其他方法比较。',
-     '例：在 DeepLabv3+ 上加注意力模块，提高街景分割精度。'),
-    ('数据集研究', '主要贡献是发布新的街景检测／分割标注数据集，多数附带基线模型的成绩。',
-     '例：标注街边设施、建筑立面或街头摊贩的公开数据集。'),
-    ('模型比较', '作者自己训练多个现有模型，在同一份街景数据上比较谁更好。',
-     '例：YOLOv5、Faster R-CNN、SSD 在同一份标注上对比精度和速度。'),
+    ('迁移与适配', 'Take a ready-made model and train or fine-tune it on street-view data the authors annotated themselves; the architecture is largely unchanged.',
+     'e.g. train YOLOv8 on 1,000 self-annotated street-view images to detect potholes and utility poles.'),
+    ('算法开发', 'Propose a new model or improve an existing one (architecture, loss, training strategy, etc.), then compare it with other methods.',
+     'e.g. add an attention module to DeepLabv3+ to improve street-view segmentation accuracy.'),
+    ('数据集研究', 'The main contribution is a new annotated street-view detection/segmentation dataset, usually with baseline model results.',
+     'e.g. public datasets of street furniture, building facades or street vendors.'),
+    ('模型比较', 'The authors train several existing models themselves and compare them on the same street-view data.',
+     'e.g. YOLOv5, Faster R-CNN and SSD compared on accuracy and speed on the same annotations.'),
 ]
 
 
@@ -481,108 +489,112 @@ def method_intro():
     cols = st.columns(4, gap='medium')
     for col, (name, what, eg) in zip(cols, TYPE_DEF):
         n = int((allm.type_name == name).sum())
-        col.markdown(f'<div class="def"><span class="tag" style="color:{TYPE_COLOR[name]}">{name} · {n} 篇</span><br>'
+        col.markdown(f'<div class="def"><span class="tag" style="color:{TYPE_COLOR[name]}">{tr(name).upper()} · {n} PAPERS</span><br>'
                      f'{what}<br><span style="color:#8a8984;font-size:13px">{eg}</span></div>', unsafe_allow_html=True)
     st.write('')
     a, b = st.columns([3, 1], gap='medium')
-    a.markdown('<div class="def"><span class="tag" style="color:#eb6834">“训练与迁移”页是什么</span><br>'
-               '专门回答导师第二波的两个问题：<b>① 没有现成模型时，哪个基础模型迁移到街景上效果好；'
-               '② 要自己标多少张图、多大的数据集效果才够。</b>数据来自对这 491 篇逐篇读全文的专项提取：'
-               '作者用了什么基础模型、从什么权重开始训练、自标了多少张、训练前后成绩提升多少。</div>', unsafe_allow_html=True)
-    b.button('打开训练与迁移 →', type='primary', on_click=lambda: st.session_state.update(page='训练与迁移'), key='open_training', width='stretch')
+    a.markdown('<div class="def"><span class="tag" style="color:#eb6834">WHAT THE "TRAINING & TRANSFER" PAGE IS</span><br>'
+               'It answers the two wave-2 questions: <b>(1) when no ready-made model fits, which base model transfers well to street view; '
+               '(2) how many images need to be labelled, and how large a dataset is enough.</b> The data come from a dedicated full-text extraction of all 491 papers: '
+               'which base model was used, which weights training started from, how many images were self-annotated, and how much scores improved after training.</div>', unsafe_allow_html=True)
+    b.button('Open Training & transfer →', type='primary', on_click=lambda: st.session_state.update(page='训练与迁移'), key='open_training', width='stretch')
     st.write('')
 
 
 def overview():
     color = GROUP_COLOR[group]
     if group == '应用类':
-        hero('03 / APPLICATION STUDIES', '应用研究关注什么？', '从发表时间、视觉任务与研究主题出发，观察现成模型在城市研究中的用途。', group)
+        hero('03 / APPLICATION STUDIES', 'What do application studies focus on?', 'Publication years, vision tasks and research themes show how ready-made models are used in urban research.', group)
     else:
-        hero('03 / METHOD STUDIES', '算法与方法研究在做什么？', '这一类论文的共同点：作者自己训练、微调或改进了模型，或者自己标注了街景数据。按论文的主要贡献分为 4 个子类。', group)
+        hero('03 / METHOD STUDIES', 'What do algorithm & method studies do?', 'What these papers share: the authors trained, fine-tuned or modified a model, or annotated street-view data themselves. They are split into 4 sub-types by main contribution.', group)
         method_intro()
     if selected.empty:
-        st.info('当前条件没有匹配论文，请放宽左侧筛选。'); return
+        st.info('No papers match the current filters; widen the filters on the left.'); return
     known = selected.qualified_models.apply(bool).sum()
     if group == '应用类':
-        metrics([('当前范围', f'{len(selected):,}', f'应用类共 {N_SCOPE} 篇。'),
-                 ('主用模型明确', f'{known:,}', '有完整模型或模型家族描述的论文。'),
-                 ('主题已编码', f'{(selected.theme != "主题未编码").sum():,}', '沿用逐篇核查编码，包括研究问题、结局与技术主题。'),
-                 ('有训练来源记录', f'{selected.datasets.apply(bool).sum():,}', '模型的预训练／训练数据集已记录。')])
+        metrics([('In scope', f'{len(selected):,}', f'{N_SCOPE} application papers in total.'),
+                 ('Main model named', f'{known:,}', 'Papers with a complete model or model-family description.'),
+                 ('Theme coded', f'{(selected.theme != "主题未编码").sum():,}', 'Paper-by-paper coding of research question, outcome and technical theme.'),
+                 ('Training source recorded', f'{selected.datasets.apply(bool).sum():,}', "The model's pretraining/training dataset is recorded.")])
     else:
         tc = selected.type_name.value_counts()
-        metrics([('当前范围', f'{len(selected):,}', f'算法与方法类共 {N_SCOPE} 篇。'),
-                 ('迁移与适配', f'{tc.get("迁移与适配", 0):,}', '用现有模型在自标街景数据上训练或微调。'),
-                 ('算法开发', f'{tc.get("算法开发", 0):,}', '提出新模型或改进模型。'),
-                 ('数据集 + 比较', f'{tc.get("数据集研究", 0) + tc.get("模型比较", 0):,}', '发布街景数据集，或训练多个模型后比较。')])
+        metrics([('In scope', f'{len(selected):,}', f'{N_SCOPE} algorithm & method papers in total.'),
+                 ('Transfer & adaptation', f'{tc.get("迁移与适配", 0):,}', 'An existing model trained or fine-tuned on self-annotated street-view data.'),
+                 ('Algorithm development', f'{tc.get("算法开发", 0):,}', 'A new or improved model.'),
+                 ('Dataset + comparison', f'{tc.get("数据集研究", 0) + tc.get("模型比较", 0):,}', 'A street-view dataset release, or several models trained and compared.')])
     st.write('')
     left, right = st.columns([1.25, 1], gap='large')
     with left:
-        st.subheader('年度趋势')
+        st.subheader('Papers per year')
         if group == '应用类':
             annual = selected.groupby('year').id.nunique().reindex(range(years[0], years[1] + 1), fill_value=0)
-            fig = px.bar(x=annual.index, y=annual.values, labels={'x': '发表年份', 'y': '论文数'}, text=annual.values)
+            fig = px.bar(x=annual.index, y=annual.values, labels={'x': 'Publication year', 'y': 'Papers'}, text=annual.values)
             fig.update_traces(marker_color=color, textposition='outside')
         else:
-            annual = selected.groupby(['year', 'type_name']).id.nunique().reset_index(name='论文数')
-            fig = px.bar(annual, x='year', y='论文数', color='type_name', barmode='stack',
-                         labels={'year': '发表年份', 'type_name': '子类'}, color_discrete_map=TYPE_COLOR)
+            annual = selected.groupby(['year', 'type_name']).id.nunique().reset_index(name='Papers')
+            annual['type_name'] = annual.type_name.map(tr)
+            fig = px.bar(annual, x='year', y='Papers', color='type_name', barmode='stack',
+                         labels={'year': 'Publication year', 'type_name': 'Sub-type'}, color_discrete_map=TYPE_COLOR_EN)
         fig.update_xaxes(dtick=1)
         chart(fig, 'scope_years', height=380)
     with right:
-        st.subheader('视觉任务构成')
+        st.subheader('Vision tasks')
         event = bar(counts_for(selected, 'tasks'), 'task_counts', color=color, selectable=True, height=380)
-    st.caption('任务可多选，同一篇可同时做检测和分割，各任务篇数相加可能超过论文总数。点击柱子可查看对应论文。')
+    st.caption('A paper can have several tasks (e.g. both detection and segmentation), so task counts can add up to more than the number of papers. Click a bar to list its papers.')
     task_selection = chosen_point(event)
     if task_selection:
-        paper_evidence(selected[selected.tasks.apply(lambda ts: task_selection in ts)], 'task_drill', f'图中选择：{task_selection}', True)
+        paper_evidence(selected[selected.tasks.apply(lambda ts: task_selection in ts)], 'task_drill', f'Selected in chart: {tr(task_selection)}', True)
     if group == '算法与方法类':
-        st.subheader('子类 × 视觉任务')
+        st.subheader('Sub-type × vision task')
         st_rows = selected[['id', 'type_name', 'tasks']].explode('tasks')
         matrix(st_rows, 'type_name', 'tasks', 'type_task', height=300, color=NAVY,
                row_order=[t for t in ['迁移与适配', '算法开发', '数据集研究', '模型比较'] if t in set(st_rows.type_name)])
-    st.subheader('研究主题与变化' if group == '应用类' else '技术主题与变化')
+    st.subheader('Research themes over time' if group == '应用类' else 'Technical themes over time')
     left, right = st.columns([1, 1.55], gap='large')
     with left:
         event_theme = bar(selected.theme.value_counts(), 'theme_counts', color=color, selectable=True, height=500)
     with right:
-        mode = st.radio('年度主题图', ['论文数', '年内占比'], horizontal=True, key='theme_mode')
+        mode = st.radio('Theme-by-year chart', ['论文数', '年内占比'], horizontal=True, key='theme_mode',
+                        format_func={'论文数': 'Papers', '年内占比': 'Share within year'}.get)
         matrix(selected[['id', 'year', 'theme']], 'theme', 'year', 'theme_years', height=455, color=color,
                percent=mode == '年内占比', col_order=list(range(years[0], years[1] + 1)))
     theme_selection = chosen_point(event_theme)
     if theme_selection:
-        paper_evidence(selected[selected.theme == theme_selection], 'theme_drill', f'图中选择：{theme_selection}', True)
+        paper_evidence(selected[selected.theme == theme_selection], 'theme_drill', f'Selected in chart: {tr(theme_selection)}', True)
     paper_evidence(selected, 'overview')
 
 
 def models_page():
     color = GROUP_COLOR[group]
-    hero('04 / MODELS & DATA', '模型从哪里来，用于什么任务？',
-         '模型家族、具体架构、训练来源与使用角色分开记录。' + ('应用类看“现成模型 + 预训练数据集”。' if group == '应用类' else '算法与方法类看“基础模型 + 初始化／训练数据”。'), group)
+    hero('04 / MODELS & DATA', 'Where do the models come from, and what are they used for?',
+         'Model family, specific architecture, training source and usage role are recorded separately. ' + ('Application studies: "ready-made model + pretraining dataset".' if group == '应用类' else 'Algorithm & method studies: "base model + initialisation/training data".'), group)
     if selected.empty:
-        st.info('当前条件没有匹配论文。'); return
-    role_choice = st.radio('模型使用角色', ['主用分割／检测模型', '主用＋实际运行的比较分支'], horizontal=True, key='model_role_scope')
+        st.info('No papers match the current filters.'); return
+    role_choice = st.radio('Model role', ['主用分割／检测模型', '主用＋实际运行的比较分支'], horizontal=True, key='model_role_scope',
+                           format_func={'主用分割／检测模型': 'Main detection/segmentation model', '主用＋实际运行的比较分支': 'Main + comparison models actually run'}.get)
     roles = ['main'] if role_choice.startswith('主用分割') else ['main', 'comparison']
     use_rows = all_models[all_models.id.isin(ids) & all_models.role.isin(roles)].copy()
     named_rows = use_rows[use_rows.kind == QUALIFIED]
     use_pairs = all_pairs[all_pairs.id.isin(ids) & all_pairs.model_role.isin(roles)].copy()
-    st.caption('主用＝论文用来产出结果的模型（算法与方法类即作者训练/改进的基础模型）；比较分支＝作者自己也跑过、用来对比的其他模型（只在文献综述里提到的不算）。')
+    st.caption('Main = the model the paper uses to produce its results (for algorithm & method studies, the base model the authors trained/modified); comparison = other models the authors also ran for comparison (models only mentioned in the literature review do not count).')
     known_keys = set(zip(named_rows.id, named_rows.model))
     relevant = use_pairs.loc[[(rid, m) in known_keys for rid, m in zip(use_pairs.id, use_pairs.model)]].copy()
-    metrics([('当前论文', len(selected), '当前筛选范围。'),
-             ('模型／家族明确', named_rows.id.nunique(), '按论文 ID 去重。'),
-             ('有训练来源记录', selected.datasets.apply(bool).sum(), '包括公开训练集、自建训练集。'),
-             ('模型—数据明确配对', relevant.id.nunique(), '同一模型与数据集有据对应，不做笛卡尔配对。')])
+    metrics([('Papers', len(selected), 'Current filter scope.'),
+             ('Model/family named', named_rows.id.nunique(), 'Unique paper IDs.'),
+             ('Training source recorded', selected.datasets.apply(bool).sum(), 'Public training sets and self-built training sets.'),
+             ('Model–dataset pairs', relevant.id.nunique(), 'A model and dataset are linked only with evidence; no Cartesian pairing.')])
     left, right = st.columns([1.3, 1], gap='large')
     with left:
-        st.subheader('模型使用频次')
+        st.subheader('Most used models')
         c1, c2 = st.columns(2)
-        top_n = c1.slider('展示前 N 个模型', 5, 30, 15, key='model_top')
-        name_scope = c2.radio('名称粒度', ['模型家族', '模型 + 骨干／规模'], horizontal=True, key='name_scope')
+        top_n = c1.slider('Show top N models', 5, 30, 15, key='model_top')
+        name_scope = c2.radio('Name level', ['模型家族', '模型 + 骨干／规模'], horizontal=True, key='name_scope',
+                              format_func={'模型家族': 'Model family', '模型 + 骨干／规模': 'Model + backbone/size'}.get)
         model_col = 'model' if name_scope == '模型家族' else 'variant'
         mc = named_rows.groupby(model_col).id.nunique().sort_values(ascending=False)
         event = bar(mc.head(top_n), 'models_bar', color=color, selectable=True, height=520)
     with right:
-        st.subheader('预训练数据集频次' if group == '应用类' else '训练／预训练数据来源频次')
+        st.subheader('Pretraining datasets' if group == '应用类' else 'Training / pretraining data sources')
         training_records = pd.DataFrame(catalog['dataset_records'])
         allowed_roles = ['main', 'paper'] if roles == ['main'] else ['main', 'comparison', 'paper']
         training_records = training_records[training_records.id.isin(ids) & training_records.model_role.isin(allowed_roles)]
@@ -591,36 +603,36 @@ def models_page():
         bar(dc.head(12), 'dataset_freq', color=INK2, height=600)
     picked = chosen_point(event)
     if picked:
-        paper_evidence(selected[selected.id.isin(named_rows[named_rows[model_col] == picked].id)], 'model_drill', f'图中选择：{picked}', True)
+        paper_evidence(selected[selected.id.isin(named_rows[named_rows[model_col] == picked].id)], 'model_drill', f'Selected in chart: {tr(picked)}', True)
     left, right = st.columns(2, gap='large')
     with left:
-        st.subheader('模型 × 数据来源')
+        st.subheader('Model × data source')
         top_models = relevant.groupby('model').id.nunique().sort_values(ascending=False).head(top_n).index.tolist()
         top_data = relevant.groupby('dataset').id.nunique().sort_values(ascending=False).head(8).index.tolist()
         matrix(relevant[relevant.model.isin(top_models) & relevant.dataset.isin(top_data)], 'model', 'dataset', 'model_data_heatmap',
                height=max(380, len(top_models) * 28 + 120), row_order=top_models, col_order=top_data, color=color)
     with right:
-        st.subheader('模型 × 视觉任务')
+        st.subheader('Model × vision task')
         mt = named_rows[['id', 'model', 'tasks']].explode('tasks').dropna(subset=['tasks'])
         best = mt.groupby('model').id.nunique().sort_values(ascending=False).head(top_n).index.tolist()
         matrix(mt[mt.model.isin(best)], 'model', 'tasks', 'model_task_heatmap', height=max(380, len(best) * 28 + 120), row_order=best, color=color)
-    st.caption('每格为去重论文数。基准表现、验证集、街景影像平台和辅助模型的数据集，不作为该模型的训练来源。')
-    st.subheader('训练数据来源 × ' + ('研究主题' if group == '应用类' else '技术主题'))
+    st.caption('Each cell = unique papers. Benchmark results, validation sets, street-view imagery platforms and datasets of auxiliary models are not counted as the model\'s training source.')
+    st.subheader('Training data source × ' + ('research theme' if group == '应用类' else 'technical theme'))
     ds_papers = selected[['id', 'datasets', 'theme']].explode('datasets').dropna(subset=['datasets'])
     top_ds = ds_papers.groupby('datasets').id.nunique().sort_values(ascending=False).head(10).index.tolist()
     matrix(ds_papers[ds_papers.datasets.isin(top_ds)], 'theme', 'datasets', 'dataset_themes', height=520, col_order=top_ds)
-    st.caption('论文使用的训练／预训练数据集 × 主题，按 ID 去重，随左侧筛选变化。数据集本身的规格与类别见“研究全景与数据集”页下半部分。')
+    st.caption('Training/pretraining datasets used by the papers × theme, unique IDs, follows the filters on the left. Dataset specifications and classes are in the lower half of the "Landscape & datasets" page.')
     paper_evidence(selected, 'models')
 
 
 def dataset_page():
     st.divider()
-    hero('02 / DATASETS & OBJECTS', '数据集与对象覆盖', '两类研究共用：常用公开城市数据集支持什么任务、规模与采集背景如何、能识别哪些城市对象，以及按目标要素反查可用的类别体系。')
-    tabs = st.tabs(['① 支持的任务', '② 数据集比较', '③ 对象与类别', '④ 按要素查找'])
+    hero('02 / DATASETS & OBJECTS', 'Datasets & object coverage', 'Shared by both classes: which tasks the common public urban datasets support, their size and collection context, which urban objects they can recognise, and which label schemes cover a target element.')
+    tabs = st.tabs(['① Supported tasks', '② Dataset comparison', '③ Objects & classes', '④ Find by element'])
     names = dataset_df.name.tolist()
     with tabs[0]:
-        st.subheader('数据集本身支持什么视觉任务？')
-        def native_tasks(d):  # from the 标注类型 column of 数据集表_v2.xlsx; '框' (boxes) = object detection
+        st.subheader('Which vision tasks does each dataset support?')
+        def native_tasks(d):  # from the 标注类型 (annotation type) column of 数据集表_v2.xlsx; '框' (boxes) = object detection
             if d['name'] == 'SA-1B':
                 return ['无类别掩码分割']
             import re
@@ -628,96 +640,98 @@ def dataset_page():
             out = ['目标检测'] if re.search(r'检测|2D|(?<!3D )框', a) else []  # 2D boxes = detection; 3D-only boxes are not counted
             out += [label for w, label in [('语义', '语义分割'), ('实例', '实例分割'), ('全景', '全景分割')] if w in a]
             return out
-        native = [{'数据集': d['name'], '视觉任务': t} for d in catalog['datasets'] for t in native_tasks(d)]
-        table = pd.DataFrame(native).assign(value=1).pivot_table(index='数据集', columns='视觉任务', values='value', aggfunc='max', fill_value=0)
+        native = [{'Dataset': d['name'], 'Vision task': tr(t)} for d in catalog['datasets'] for t in native_tasks(d)]
+        table = pd.DataFrame(native).assign(value=1).pivot_table(index='Dataset', columns='Vision task', values='value', aggfunc='max', fill_value=0)
         fig = go.Figure(go.Heatmap(z=table.values, x=table.columns, y=table.index,
                          colorscale=[[0, '#f3f6fa'], [1, '#3987e5']], showscale=False,
                          text=table.replace({0: '—', 1: '●'}).values, texttemplate='%{text}',
                          hovertemplate='%{y} · %{x}<br>%{text}<extra></extra>'))
         chart(fig, 'native_tasks', height=440)
-        st.caption('依据数据集表_v2.xlsx“1 数据集总表”的“标注类型”列整理：写了“框”或“检测”记为目标检测，写了语义／实例／全景记为对应分割。只描述表中收录的子集（如 IDD 只收了场景解析子集）。SA-1B 的掩码没有语义类别。')
+        st.caption('Derived from the "annotation type" column of the project dataset table: boxes or detection → object detection; semantic / instance / panoptic → the matching segmentation. Describes only the subset in the table (e.g. only the IDD scene-parsing subset). SA-1B masks have no semantic classes.')
     with tabs[1]:
-        compare = st.multiselect('选择数据集进行比较', names, default=names, key='compare_ds')
+        compare = st.multiselect('Datasets to compare', names, default=names, key='compare_ds')
         use_app = counts_for(papers[papers.group == '应用类'], 'datasets')
         use_meth = counts_for(papers[papers.group == '算法与方法类'], 'datasets')
         rows = []
         for d in catalog['datasets']:
             if d['name'] in compare:
-                rows.append({'数据集': d['name'], '应用类论文数': int(use_app.get(d['name'], 0)), '算法与方法类论文数': int(use_meth.get(d['name'], 0)),
-                             '支持的任务': '；'.join(native_tasks(d)), '标注类型（原表）': d['annotation'], '场景': d['scene'], '类别数／体系': d['classes'],
-                             '规模与划分': d['size'], '采集背景': d['geography'], '与街景的贴合度': d['fit']})
+                rows.append({'Dataset': d['name'], 'Application papers': int(use_app.get(d['name'], 0)), 'Algorithm & method papers': int(use_meth.get(d['name'], 0)),
+                             'Supported tasks': '; '.join(tr_list(native_tasks(d))), 'Annotation (source table)': tr(d['annotation']), 'Scene': tr(d['scene']),
+                             'Classes / scheme': tr(d['classes']), 'Size & splits': tr(d['size']), 'Collection context': tr(d['geography']), 'Fit to street view': tr(d['fit'])})
         view = pd.DataFrame(rows)
         st.dataframe(view, hide_index=True, width='stretch', height=360)
-        st.caption('论文数 = 该类论文中把此数据集作为训练／预训练来源的篇数（按 ID 去重）。')
-        st.download_button('下载数据集比较 · CSV', view.to_csv(index=False).encode('utf-8-sig'), 'dataset_comparison.csv', 'text/csv')
+        st.caption('Paper counts = papers of that class using the dataset as a training/pretraining source (unique IDs).')
+        st.download_button('Download dataset comparison · CSV', view.to_csv(index=False).encode('utf-8-sig'), 'dataset_comparison.csv', 'text/csv')
         if compare:
-            detail = st.selectbox('展开数据集详情', compare, key='dataset_detail')
+            detail = st.selectbox('Dataset details', compare, key='dataset_detail')
             d = next(d for d in catalog['datasets'] if d['name'] == detail)
-            st.markdown(f'**{d["full_name"]}** · {d["year"]}')
-            for label, field in [('出处', 'reference'), ('影像类型', 'imagery'), ('分辨率', 'resolution'), ('许可记录', 'license')]:
-                st.write(f'**{label}**：{d[field]}')
-            st.caption(f'来源：数据集表_v2.xlsx · 1 数据集总表 · 第 {d["source_row"]} 行。')
+            st.markdown(f'**{tr(d["full_name"])}** · {d["year"]}')
+            for label, field in [('Reference', 'reference'), ('Imagery', 'imagery'), ('Resolution', 'resolution'), ('Licence', 'license')]:
+                st.write(f'**{label}**: {tr(d[field])}')
+            st.caption(f'Source: project dataset master table, sheet 1 (dataset overview), row {d["source_row"]}.')
     with tabs[2]:
-        st.subheader('城市对象覆盖矩阵')
+        st.subheader('Urban-object coverage matrix')
+        el_en = dict(zip(coverage_df.element, coverage_df.english))
         variants = coverage_df.variant.drop_duplicates().tolist()
-        chosen_variants = st.multiselect('比较类别体系／版本', variants,
+        chosen_variants = st.multiselect('Label schemes / versions to compare', variants,
              default=variants, key='coverage_variants')
         elements = coverage_df.element.drop_duplicates().tolist()
-        chosen_elements = st.multiselect('只看部分对象（留空显示全部）', elements, key='coverage_elements')
+        chosen_elements = st.multiselect('Only some objects (empty = all)', elements, key='coverage_elements', format_func=el_en.get)
         cov = coverage_df[coverage_df.variant.isin(chosen_variants)]
         if chosen_elements:
             cov = cov[cov.element.isin(chosen_elements)]
         if not cov.empty:
             c = cov.pivot(index='element', columns='variant', values='coverage').reindex(index=[e for e in elements if e in set(cov.element)], columns=chosen_variants)
-            labels = cov.pivot(index='element', columns='variant', values='labels').reindex(index=c.index, columns=c.columns)
-            fig = go.Figure(go.Heatmap(z=c.values, x=c.columns, y=c.index, zmin=0, zmax=2,
+            labels = cov.pivot(index='element', columns='variant', values='labels').reindex(index=c.index, columns=c.columns).map(tr)
+            fig = go.Figure(go.Heatmap(z=c.values, x=c.columns, y=[el_en[e] for e in c.index], zmin=0, zmax=2,
                      customdata=labels.values, showscale=False,
                      colorscale=[[0, '#f0efec'], [.249, '#f0efec'], [.25, '#b7d3f6'], [.749, '#b7d3f6'], [.75, '#3987e5'], [1, '#3987e5']],
                      text=c.replace({0: '—', 1: '≈', 2: '✓'}).values, texttemplate='%{text}',
                      hovertemplate='%{y}<br>%{x}<br>%{customdata}<extra></extra>'))
             fig.update_layout(yaxis_autorange='reversed')
             chart(fig, 'coverage', height=max(400, len(c) * 26 + 130))
-            st.download_button('下载当前覆盖矩阵 · CSV', labels.to_csv().encode('utf-8-sig'), 'object_coverage.csv', 'text/csv')
-        st.caption('✓ 有独立类别　≈ 仅被更宽类别包含　— 没有对应类别。类别覆盖不代表模型的实际识别精度。')
-        st.subheader('完整类别清单')
-        ds = st.selectbox('查看哪个数据集的对象标签？', names, key='classlist_ds')
+            st.download_button('Download this coverage matrix · CSV', labels.rename(index=el_en).to_csv().encode('utf-8-sig'), 'object_coverage.csv', 'text/csv')
+        st.caption('✓ own class　≈ only inside a broader class　— no matching class. Class coverage says nothing about a model\'s actual recognition accuracy.')
+        st.subheader('Full class lists')
+        ds = st.selectbox('Which dataset\'s object labels?', names, key='classlist_ds')
         for r in catalog['classlists']:
             if r['dataset'] == ds:
-                with st.expander(f'{r["variant"]} · {r["subset"]} · {r["count"]} 类', expanded=True):
-                    st.write(r['labels'])
+                with st.expander(f'{r["variant"]} · {tr(r["subset"])} · {r["count"]} classes', expanded=True):
+                    st.write(tr(r['labels']))
     with tabs[3]:
-        st.subheader('从目标对象反查类别体系')
-        wanted = st.multiselect('希望识别哪些城市要素？', coverage_df.element.drop_duplicates().tolist(),
-                               default=coverage_df.element.drop_duplicates().tolist(), key='wanted_objects')
-        strict = st.toggle('只保留每个目标都有独立类别的体系', value=False, key='strict_coverage')
+        st.subheader('Find label schemes for target objects')
+        el_en = dict(zip(coverage_df.element, coverage_df.english))
+        wanted = st.multiselect('Which urban elements do you want to recognise?', coverage_df.element.drop_duplicates().tolist(),
+                               default=coverage_df.element.drop_duplicates().tolist(), key='wanted_objects', format_func=el_en.get)
+        strict = st.toggle('Keep only schemes with an own class for every target', value=False, key='strict_coverage')
         if wanted:
             cov = coverage_df[coverage_df.element.isin(wanted)]
             summary = cov.groupby('variant').coverage.agg(['min', 'sum'])
             valid = summary.index[summary['min'] == 2] if strict else summary.sort_values('sum', ascending=False).index
             result = cov[cov.variant.isin(valid)].pivot(index='variant', columns='element', values='labels').reindex(columns=wanted)
             if result.empty:
-                st.info('没有同时满足这些独立类别要求的体系。可关闭严格条件查看更宽类别。')
+                st.info('No scheme has an own class for all of these. Turn off the strict option to see broader classes.')
             else:
-                st.dataframe(result, width='stretch')
-            st.caption('只按现有类别表匹配；可用权重、目标地区表现和标注成本需另行核实。')
+                st.dataframe(result.map(tr).rename(columns=el_en), width='stretch')
+            st.caption('Matched on the class tables only; available weights, performance in the target region and annotation cost need checking separately.')
 
 
-BINS = [(1, 100, '≤100'), (101, 300, '101–300'), (301, 1000, '301–1千'), (1001, 3000, '1千–3千'), (3001, 10000, '3千–1万'), (10001, 10**9, '>1万')]
+BINS = [(1, 100, '≤100'), (101, 300, '101–300'), (301, 1000, '301–1k'), (1001, 3000, '1k–3k'), (3001, 10000, '3k–10k'), (10001, 10**9, '>10k')]
 
 
 def training_page():
-    hero('05 / TRAINING & TRANSFER', '训练与迁移：要标多少、哪个模型好迁移？',
-         '对应导师第二波的两个问题：① 要标多少 label、多大的数据集效果才够；② 没有现成模型时，哪个基础模型迁移过来效果好。数据来自算法与方法类逐篇全文专项提取。', group)
-    st.markdown('<div class="def">“迁移”指把在大数据集（COCO、Cityscapes、ImageNet 等）上训练过的模型，拿到街景任务上继续训练或微调。'
-                '本页按证据强弱排列：先看<b>同一篇论文里的直接对比</b>（最可靠），再看<b>实际标注规模与起点权重</b>（描述现状），'
-                '最后看<b>哪些模型常用、常胜出</b>（参考）。</div>', unsafe_allow_html=True)
+    hero('05 / TRAINING & TRANSFER', 'Training & transfer: how many labels, and which models transfer well?',
+         'The two wave-2 questions: (1) how many labels / how large a dataset is enough; (2) when no ready-made model fits, which base model transfers well. Data from a dedicated full-text extraction of the algorithm & method studies.', group)
+    st.markdown('<div class="def">"Transfer" means taking a model trained on a large dataset (COCO, Cityscapes, ImageNet, etc.) and continuing to train or fine-tune it for a street-view task. '
+                'This page is ordered by strength of evidence: first <b>direct comparisons within the same paper</b> (most reliable), then <b>actual labelling scale and starting weights</b> (describes current practice), '
+                'and finally <b>which models are common and often win</b> (indicative only).</div>', unsafe_allow_html=True)
     st.write('')
     flat_all, gains_all, h2h_all = read_wave2(file_version(WAVE2 / 'wave2_flat.csv', WAVE2 / 'gains_curated.py', WAVE2 / 'wave2_h2h.csv'))
     curves_all, ntypes = read_curves(file_version(WAVE2 / 'learning_curves.json', WAVE2 / 'note_types.csv'))
     flat = flat_all[flat_all.id.isin(ids)].copy()
     gains = gains_all[gains_all.id.isin(ids)].copy()
     if flat.empty:
-        st.info('当前筛选下没有专项提取记录。'); return
+        st.info('No extraction records under the current filters.'); return
     own = flat[flat.data_source.isin(['own-annotated', 'both'])].copy()
     for c_ in ('own_images', 'own_train', 'own_val', 'own_test'):
         own[c_] = pd.to_numeric(own[c_], errors='coerce')
@@ -732,55 +746,60 @@ def training_page():
     curves = [c for c in curves_all if c['id'] in ids]
 
     # ---- conclusion cards
-    st.markdown('### 本页结论')
+    st.markdown('### Key findings on this page')
     c = st.columns(4, gap='medium')
     card = lambda col, tag, body: col.markdown(f'<div class="def"><span class="tag" style="color:{ORANGE}">{tag}</span><br>{body}</div>', unsafe_allow_html=True)
     if len(ga):
-        card(c[0], '少量本地标注就有用', f'{len(ga)} 对同篇对比：用目标城市自己的图微调，中位标注 <b>{ga["标注图像"].median():,.0f} 张</b>，中位提升 <b>{ga["提升"].median():.1f} 个百分点</b>（{ga["提升"].min():.0f}–{ga["提升"].max():.0f}）。')
+        card(c[0], 'A LITTLE LOCAL LABELLING HELPS', f'{len(ga)} within-paper pairs: fine-tuning on images from the target city used a median of <b>{ga["标注图像"].median():,.0f} images</b> and gained a median of <b>{ga["提升"].median():.1f} percentage points</b> ({ga["提升"].min():.0f}–{ga["提升"].max():.0f}).')
     curve_ids = sorted({x['id'] for x in curves if x['type'] == 'curve'})
     flat_pl = [x for x in curves if x['type'] == 'curve' and any(k in (x.get('plateau_note') or '') for k in ('不再', '无提升', '无明显提升'))]
     flat_pl.sort(key=lambda x: (0 if '张' in x['plateau_note'] else 1, x['id']))
     rising = [x for x in curves if x['type'] == 'curve' and any(k in (x.get('plateau_note') or '') for k in ('仍在上升', '未见平台'))]
-    body = f'{len(curve_ids)} 篇论文在同一篇里用不同标注量训练。'
+    body = f'{len(curve_ids)} papers trained with different label amounts within the same paper. '
     if flat_pl:
-        body += '出现平台期：' + '；'.join(f'{x["id"]} {x["plateau_note"]}' for x in flat_pl[:3]) + '。'
+        body += 'Plateaus: ' + '; '.join(f'{x["id"]} {tr(x["plateau_note"])}' for x in flat_pl[:3]) + '. '
     if rising:
-        body += '也有到全量仍在上升的：' + '、'.join(x['id'] for x in rising[:3]) + '。'
-    card(c[1], '收益递减（篇内证据）', body)
+        body += 'Still rising at the full set: ' + ', '.join(x['id'] for x in rising[:3]) + '.'
+    card(c[1], 'DIMINISHING RETURNS (WITHIN-PAPER)', body)
     if len(counted):
         q = counted.own_images.quantile([.25, .5, .75])
         med = counted.groupby('task_group').own_images.median()
-        card(c[2], '实际标注规模', f'自标图像中位 <b>{q[.5]:,.0f} 张</b>（一半在 {q[.25]:,.0f}–{q[.75]:,.0f}）；检测 {med.get("检测", float("nan")):,.0f}、分割 {med.get("分割", float("nan")):,.0f}。这是“实际标了多少”，不是“至少要多少”；另有 {n_eval_only} 篇自标图像只用于测试，未计入。')
+        card(c[2], 'ACTUAL LABELLING SCALE', f'Median self-annotated images <b>{q[.5]:,.0f}</b> (middle half {q[.25]:,.0f}–{q[.75]:,.0f}); detection {med.get("检测", float("nan")):,.0f}, segmentation {med.get("分割", float("nan")):,.0f}. This is "how many were labelled", not "the minimum needed"; another {n_eval_only} papers used their own labels for testing only and are not counted.')
     ns = (flat.init == 'not stated').mean() * 100
-    card(c[3], '从什么权重起步', f'检测多从 <b>COCO</b> 起步，分割多从 <b>ImageNet 骨干 / Cityscapes</b> 起步；<b>{ns:.0f}%</b> 的论文没写初始化权重。')
+    card(c[3], 'STARTING WEIGHTS', f'Detection mostly starts from <b>COCO</b>, segmentation from <b>ImageNet backbones / Cityscapes</b>; <b>{ns:.0f}%</b> of papers do not state the initial weights.')
     st.write('')
 
     # ---- 1. before / after
-    st.markdown('### ① 同一模型、同一测试集：用本地标注微调前后提升多少？')
+    st.markdown('### ① Same model, same test set: how much does fine-tuning on local labels help?')
     if gains.empty:
-        st.info('当前筛选下没有适配前后对比。')
+        st.info('No before/after comparisons under the current filters.')
     else:
         left, right = st.columns([1, 1.25], gap='large')
         with left:
             if ga.empty:
-                st.info('没有可作图的数值记录。')
+                st.info('No numeric records to plot.')
             else:
-                fig = px.scatter(ga, x='标注图像', y='提升', text='id', log_x=True, hover_data=['模型', '指标', '适配前', '适配后', '测试集'],
-                                 labels={'标注图像': '用于微调的目标城市标注图像数（对数轴）', '提升': '提升（百分点）'})
+                gd = ga.rename(columns={'模型': 'Model', '指标': 'Metric', '适配前': 'Before', '适配后': 'After', '测试集': 'Test set'})
+                for c_ in ('Model', 'Metric', 'Before', 'After', 'Test set'):
+                    gd[c_] = gd[c_].map(lambda v: tr(str(v)))
+                fig = px.scatter(gd, x='标注图像', y='提升', text='id', log_x=True, hover_data=['Model', 'Metric', 'Before', 'After', 'Test set'],
+                                 labels={'标注图像': 'Target-city images used for fine-tuning (log axis)', '提升': 'Gain (percentage points)'})
                 fig.update_traces(marker=dict(size=11, color=ORANGE, line=dict(color=SURFACE, width=2)), textposition='top center', textfont=dict(size=10, color=INK2))
-                fig.add_hline(y=ga['提升'].median(), line_dash='dot', line_color=MUTED, annotation_text=f'中位提升 {ga["提升"].median():.1f}', annotation_font_color=INK2)
+                fig.add_hline(y=ga['提升'].median(), line_dash='dot', line_color=MUTED, annotation_text=f'median gain {ga["提升"].median():.1f}', annotation_font_color=INK2)
                 chart(fig, 'gain_scatter', height=430)
-                st.caption('每个点是一篇论文：同一模型在同一测试集上，加入目标城市自标图像微调前后的差值。几十到几百张就能带来明显提升。')
+                st.caption('Each point is one paper: the difference for the same model on the same test set before and after fine-tuning with self-annotated target-city images. Tens to hundreds of images already give a clear gain.')
         with right:
             show = gains[['id', '类型', '模型', '指标', '适配前', '适配后', '提升(点)', '适配用标注图像']].copy()
             show['类型'] = show['类型'].map({'A': '本地自标微调', 'B': '无目标标签', 'C': '预训练/策略/清洗'})
-            st.dataframe(show.astype(str), hide_index=True, width='stretch', height=430)
-            st.caption('A＝用目标城市自标图像微调；B＝不用目标标签（无监督适应、合成数据等）；C＝换预训练来源、训练策略或清洗数据。均为人工逐条核对。')
+            show = tr_df(show.astype(str))
+            show.columns = ['Paper ID', 'Type', 'Model', 'Metric', 'Before', 'After', 'Gain (pts)', 'Labelled images used']
+            st.dataframe(show, hide_index=True, width='stretch', height=430)
+            st.caption('A = fine-tuned with self-annotated target-city images; B = no target labels (unsupervised adaptation, synthetic data, etc.); C = different pretraining source, training strategy or data cleaning. All checked manually, one by one.')
 
     # ---- 2. learning curves
-    st.markdown('### ② 篇内学习曲线：标得越多，提升会不会停？')
+    st.markdown('### ② Within-paper learning curves: does the gain stop as more labels are added?')
     if not curves:
-        st.info('学习曲线数据尚未生成或当前筛选下没有。')
+        st.info('Learning-curve data not generated or none under the current filters.')
     else:
         rows = []
         multi = pd.Series([(x['id'], x['type'], x.get('x_unit', '')) for x in curves]).value_counts()
@@ -791,126 +810,131 @@ def training_page():
             scale = 100 if (str(x.get('metric_scale', '')).strip() == '0-1' or (ys and max(ys) <= 1)) else 1
             for pt in x['points']:
                 try:
-                    rows.append(dict(id=x['id'], 曲线=series, 类型=x['type'], 模型=x.get('model', ''), 指标=x.get('metric', ''), 单位=x.get('x_unit', ''),
-                                     x=float(pt['x']), y=float(pt['y']) * scale, 标签=pt.get('label', ''), 平台=x.get('plateau_note', '')))
+                    rows.append(dict(id=x['id'], Curve=series, kind=x['type'], Model=x.get('model', ''), Metric=x.get('metric', ''), unit=x.get('x_unit', ''),
+                                     x=float(pt['x']), y=float(pt['y']) * scale, Label=tr(pt.get('label', '')), Plateau=tr(x.get('plateau_note', ''))))
                 except (TypeError, ValueError, KeyError):
                     pass
         lc = pd.DataFrame(rows)
-        kind = st.radio('曲线类型', ['学习曲线（同篇不同标注量）', '加入本地数据前后'], horizontal=True, key='curve_kind')
-        sub_all = lc[lc['类型'] == ('curve' if kind.startswith('学习') else 'local_add')]
-        UNIT = {'images': '图像张数', 'percent': '训练数据比例 %', 'instances': '标注实例数', 'patches': '图块数', 'other': '其他（按配置顺序）'}
+        kind = st.radio('Curve type', ['学习曲线（同篇不同标注量）', '加入本地数据前后'], horizontal=True, key='curve_kind',
+                        format_func={'学习曲线（同篇不同标注量）': 'Learning curve (different label amounts, same paper)', '加入本地数据前后': 'Before / after adding local data'}.get)
+        sub_all = lc[lc['kind'] == ('curve' if kind.startswith('学习') else 'local_add')]
+        UNIT = {'images': 'images', 'percent': 'share of training data %', 'instances': 'annotated instances', 'patches': 'patches', 'other': 'other (configuration order)'}
 
         def curve_chart(sub, unit, key):
-            sub = sub[sub['单位'] == unit].sort_values(['曲线', 'x'])
+            sub = sub[sub['unit'] == unit].sort_values(['Curve', 'x'])
             if sub.empty:
-                st.info('该类型下没有记录。'); return
+                st.info('No records of this type.'); return
             logx = unit in ('images', 'instances', 'patches')
             sub = sub.assign(x=sub.x.where(~(logx & sub.x.eq(0)), 1))  # 0 (no local data) is drawn at 1 on the log axis
-            fig = px.line(sub, x='x', y='y', color='曲线', markers=True, log_x=logx,
-                          hover_data=['模型', '指标', '标签', '平台'], color_discrete_sequence=COLORS,
-                          labels={'x': {'images': '标注图像数', 'other': '配置顺序'}.get(unit, UNIT[unit]), 'y': '成绩（统一为 0–100）', '曲线': '论文'})
+            fig = px.line(sub, x='x', y='y', color='Curve', markers=True, log_x=logx,
+                          hover_data=['Model', 'Metric', 'Label', 'Plateau'], color_discrete_sequence=COLORS,
+                          labels={'x': {'images': 'Annotated images', 'other': 'Configuration order'}.get(unit, UNIT[unit].capitalize()), 'y': 'Score (rescaled to 0–100)', 'Curve': 'Paper'})
             fig.update_traces(line=dict(width=2), marker=dict(size=8))
             chart(fig, key, height=460)
 
-        st.markdown(f'**横轴：标注图像张数** · {sub_all[sub_all["单位"] == "images"]["曲线"].nunique()} 条曲线')
+        st.markdown(f'**x-axis: annotated images** · {sub_all[sub_all["unit"] == "images"]["Curve"].nunique()} curves')
         curve_chart(sub_all, 'images', 'curves')
-        st.caption('每条线是一篇论文（同一篇的不同城市／数据集分开画），指标各不相同，只看每条线自己的走势（是否变平），不要在线与线之间比高低。0–1 的指标已乘以 100；横轴为对数轴，“0 张（未加本地数据）”画在 1 的位置。')
-        others = [u for u in ['instances', 'percent', 'patches', 'other'] if (sub_all['单位'] == u).any()]
+        st.caption('Each line is one paper (different cities/datasets in the same paper are drawn separately). Metrics differ, so read only each line\'s own trend (does it flatten?) and do not compare heights across lines. Metrics on a 0–1 scale are multiplied by 100; the x-axis is logarithmic and "0 images (no local data)" is drawn at 1.')
+        others = [u for u in ['instances', 'percent', 'patches', 'other'] if (sub_all['unit'] == u).any()]
         if others:
-            with st.expander('其他横轴单位的曲线（标注实例数、训练数据比例等，' + '、'.join(f'{UNIT[u]} {sub_all[sub_all["单位"] == u]["曲线"].nunique()} 条' for u in others) + '）'):
-                u = st.radio('横轴单位', others, horizontal=True, key='curve_unit', format_func=lambda x: UNIT[x])
+            with st.expander('Curves with other x-axis units (' + ', '.join(f'{UNIT[u]}: {sub_all[sub_all["unit"] == u]["Curve"].nunique()}' for u in others) + ')'):
+                u = st.radio('x-axis unit', others, horizontal=True, key='curve_unit', format_func=lambda x: UNIT[x])
                 curve_chart(sub_all, u, 'curves_other')
-                st.caption('这些论文没有按图像张数报告：实例数是标注的物体个数，比例是训练集的百分比，图块是从大图切出的小块，“其他”只是配置先后顺序。只看趋势，不能和上图的张数直接对应。')
-    with st.expander('各论文关于“标注量与效果”的记录（按类型）', expanded=False):
+                st.caption('These papers did not report image counts: instances = number of annotated objects, share = percentage of the training set, patches = tiles cut from large images, "other" = configuration order only. Read the trend only; it does not map onto the image counts above.')
+    with st.expander('What each paper reports on "label amount vs performance" (by type)', expanded=False):
         notes = flat[flat.label_efficiency_note.fillna('').str.len() > 30][['id', 'base_model', 'own_images', 'label_efficiency_note']].copy()
         if ntypes is not None:
             notes = notes.merge(ntypes, on='id', how='left')
             notes['type'] = notes['type'].map({'curve': '学习曲线', 'local_add': '加入本地数据', 'imbalance': '类别不平衡', 'qualitative': '定性说法'}).fillna('未分类')
             order = {'学习曲线': 0, '加入本地数据': 1, '类别不平衡': 2, '定性说法': 3, '未分类': 4}
             notes = notes.sort_values('type', key=lambda s: s.map(order))
-            pick = st.multiselect('显示类型', list(order), default=['学习曲线', '加入本地数据'], key='note_types')
+            pick = st.multiselect('Types shown', list(order), default=['学习曲线', '加入本地数据'], key='note_types', format_func=tr)
             notes = notes[notes['type'].isin(pick)]
-            view = notes[['id', 'type', 'summary_zh', 'base_model', 'own_images', 'label_efficiency_note']]
-            view.columns = ['论文 ID', '类型', '要点', '基础模型', '自标图像', '原文摘要（英文）']
+            view = tr_df(notes[['id', 'type', 'summary_zh', 'base_model', 'own_images', 'label_efficiency_note']])
+            view.columns = ['Paper ID', 'Type', 'Key point', 'Base model', 'Self-annotated images', 'Original note']
         else:
-            view = notes.rename(columns={'id': '论文 ID', 'base_model': '基础模型', 'own_images': '自标图像', 'label_efficiency_note': '原文摘要（英文）'})
+            view = notes.rename(columns={'id': 'Paper ID', 'base_model': 'Base model', 'own_images': 'Self-annotated images', 'label_efficiency_note': 'Original note'})
         st.dataframe(view.astype(str), hide_index=True, width='stretch', height=420,
-                     column_config={'原文摘要（英文）': st.column_config.TextColumn(width='large')})
-        st.caption('“学习曲线”和“加入本地数据”两类有成对数字，可以当证据；“类别不平衡”提示要按类别保证样本；“定性说法”只作背景。')
+                     column_config={'Original note': st.column_config.TextColumn(width='large')})
+        st.caption('"Learning curve" and "adding local data" give paired numbers and count as evidence; "class imbalance" signals that samples must be balanced per class; "qualitative statement" is background only.')
 
     # ---- 3. labelling scale and starting weights
-    st.markdown('### ③ 实际标注规模与起点权重（描述现状）')
+    st.markdown('### ③ Actual labelling scale and starting weights (current practice)')
     left, right = st.columns(2, gap='large')
     with left:
-        st.subheader('作者自标了多少张街景图像？')
-        counted['区间'] = counted.own_images.apply(lambda n: next(b[2] for b in BINS if b[0] <= n <= b[1]))
-        dist = counted.groupby(['区间', 'task_group']).id.nunique().reset_index(name='论文数')
-        fig = px.bar(dist, x='区间', y='论文数', color='task_group', barmode='stack',
-                     category_orders={'区间': [b[2] for b in BINS], 'task_group': ['检测', '分割', '其他']},
-                     color_discrete_map=TASK_COLOR, labels={'task_group': '任务'})
+        st.subheader('How many street-view images did the authors annotate?')
+        counted['bin'] = counted.own_images.apply(lambda n: next(b[2] for b in BINS if b[0] <= n <= b[1]))
+        dist = counted.groupby(['bin', 'task_group']).id.nunique().reset_index(name='Papers')
+        dist['task_group'] = dist.task_group.map(tr)
+        fig = px.bar(dist, x='bin', y='Papers', color='task_group', barmode='stack',
+                     category_orders={'bin': [b[2] for b in BINS], 'task_group': [tr(t) for t in ['检测', '分割', '其他']]},
+                     color_discrete_map=TASK_COLOR_EN, labels={'task_group': 'Task', 'bin': 'Self-annotated images'})
         chart(fig, 'own_dist', height=380)
         stats = counted.groupby('task_group').own_images.describe()[['count', '25%', '50%', '75%']].round(0)
-        stats.columns = ['篇数', 'P25', '中位数', 'P75']; stats.index.name = '任务'
+        stats.columns = ['Papers', 'P25', 'Median', 'P75']; stats.index = [tr(i) for i in stats.index]; stats.index.name = 'Task'
         st.dataframe(stats, width='stretch')
-        st.caption(f'只统计用于训练的自标图像；另有 {n_eval_only} 篇论文的自标图像只用于测试（零样本评测或只标了测试集），未计入。')
+        st.caption(f'Only self-annotated images used for training are counted; another {n_eval_only} papers used their own images for testing only (zero-shot evaluation or only a test set labelled) and are not counted.')
     with right:
-        st.subheader('基础模型从什么权重开始训练？')
+        st.subheader('Which weights did the base model start from?')
         fi = flat[['id', 'family', 'init']]
         top_f = fi.groupby('family').id.nunique().sort_values(ascending=False).head(12).index.tolist()
         top_i = fi.groupby('init').id.nunique().sort_values(ascending=False).head(7).index.tolist()
         matrix(fi[fi.family.isin(top_f) & fi.init.isin(top_i)], 'family', 'init', 'family_init', height=520,
                row_order=top_f, col_order=top_i, color=NAVY)
-        st.caption('“not stated”表示论文没写从什么权重开始训练。')
+        st.caption('"not stated" means the paper does not say which weights training started from.')
 
     # ---- 4. which model families
-    st.markdown('### ④ 哪些基础模型常用、常胜出（参考）')
+    st.markdown('### ④ Which base models are common and often win (indicative)')
     h2h = h2h_all[h2h_all.id.isin(ids)]
     rows = []
     for fam in sorted({f for fs in h2h.families for f in fs.split('; ') if f}):
-        rows.append({'模型族': fam, '参与对比': int(h2h.families.apply(lambda fs: fam in fs.split('; ')).sum()), '被评最佳': int((h2h.winner == fam).sum())})
+        rows.append({'family': fam, 'Compared': int(h2h.families.apply(lambda fs: fam in fs.split('; ')).sum()), 'Rated best': int((h2h.winner == fam).sum())})
     hh = pd.DataFrame(rows)
-    min_n = st.slider('至少参与几次对比', 2, 15, 5, key='h2h_min')
-    hh = hh[hh['参与对比'] >= min_n].copy() if not hh.empty else hh
+    min_n = st.slider('Minimum number of comparisons', 2, 15, 5, key='h2h_min')
+    hh = hh[hh['Compared'] >= min_n].copy() if not hh.empty else hh
     if hh.empty:
-        st.info('当前筛选下没有足够的同篇对比。')
+        st.info('Not enough within-paper comparisons under the current filters.')
     else:
-        hh['胜率'] = (hh['被评最佳'] / hh['参与对比'] * 100).round(0)
-        hh = hh.sort_values(['胜率', '参与对比'])
+        hh['family'] = hh.family.map(tr)
+        hh['Win rate'] = (hh['Rated best'] / hh['Compared'] * 100).round(0)
+        hh = hh.sort_values(['Win rate', 'Compared'])
         fig = go.Figure()
-        fig.add_bar(y=hh['模型族'], x=hh['参与对比'], orientation='h', name='参与对比', marker_color='#cde2fb', hovertemplate='%{y}<br>参与 %{x} 次<extra></extra>')
-        fig.add_bar(y=hh['模型族'], x=hh['被评最佳'], orientation='h', name='被评最佳', marker_color=ORANGE,
-                    text=[f'{w}/{a} · {r:.0f}%' for w, a, r in zip(hh['被评最佳'], hh['参与对比'], hh['胜率'])],
-                    textposition='outside', textfont=dict(color=INK2), hovertemplate='%{y}<br>被评最佳 %{x} 次<extra></extra>')
-        fig.update_layout(barmode='overlay', xaxis_title='论文数', yaxis_title=None)
+        fig.add_bar(y=hh['family'], x=hh['Compared'], orientation='h', name='Compared', marker_color='#cde2fb', hovertemplate='%{y}<br>compared %{x} times<extra></extra>')
+        fig.add_bar(y=hh['family'], x=hh['Rated best'], orientation='h', name='Rated best', marker_color=ORANGE,
+                    text=[f'{w}/{a} · {r:.0f}%' for w, a, r in zip(hh['Rated best'], hh['Compared'], hh['Win rate'])],
+                    textposition='outside', textfont=dict(color=INK2), hovertemplate='%{y}<br>rated best %{x} times<extra></extra>')
+        fig.update_layout(barmode='overlay', xaxis_title='Papers', yaxis_title=None)
         chart(fig, 'h2h_bar', height=max(380, len(hh) * 32 + 110))
-    st.caption('同一篇里比较了 ≥2 个模型族时，各族记“参与”一次，作者评为最佳的记“胜出”一次。作者改进版计入基础族、作者倾向报告自己方法最好，所以胜率只作参考。')
-    with st.expander('各模型族的最好成绩中位数（跨论文，证据弱）'):
+    st.caption('When a paper compares ≥2 model families, each family counts as "compared" once and the one the authors rate best counts as a "win". Improved variants count towards their base family and authors tend to report their own method as best, so win rates are indicative only.')
+    with st.expander('Median best score per model family (across papers, weak evidence)'):
         perf = flat.copy()
         for col in ('best_mAP50', 'best_mIoU'):
             perf[col] = pd.to_numeric(perf[col], errors='coerce')
-        det = perf[perf.task_group == '检测'].groupby('family').agg(有mAP50篇数=('best_mAP50', 'count'), mAP50中位数=('best_mAP50', 'median'))
-        seg = perf[perf.task_group == '分割'].groupby('family').agg(有mIoU篇数=('best_mIoU', 'count'), mIoU中位数=('best_mIoU', 'median'))
-        fam = det.join(seg, how='outer').fillna({'有mAP50篇数': 0, '有mIoU篇数': 0})
-        fam = fam[(fam['有mAP50篇数'] + fam['有mIoU篇数']) > 0]
-        fam = fam.assign(合计=fam['有mAP50篇数'] + fam['有mIoU篇数']).sort_values('合计', ascending=False).head(15).round(1)
-        fam.index.name = '模型族'
-        st.dataframe(fam[['有mAP50篇数', 'mAP50中位数', '有mIoU篇数', 'mIoU中位数']], width='stretch',
-                     column_config={'mAP50中位数': st.column_config.ProgressColumn(min_value=0, max_value=100, format='%.1f'),
-                                    'mIoU中位数': st.column_config.ProgressColumn(min_value=0, max_value=100, format='%.1f')})
-        st.caption('每篇取同一指标的最高值，再取中位数。各篇类别、测试集、难度不同，不能据此判断模型强弱。')
-    with st.expander('跨论文：标注量 vs 成绩（为什么不能这样比）'):
-        metric = st.radio('指标', ['检测 mAP50', '分割 mIoU'], horizontal=True, key='amount_metric')
-        col, tg = ('best_mAP50', '检测') if metric.startswith('检测') else ('best_mIoU', '分割')
+        det = perf[perf.task_group == '检测'].groupby('family').agg(n_mAP50=('best_mAP50', 'count'), mAP50_median=('best_mAP50', 'median'))
+        seg = perf[perf.task_group == '分割'].groupby('family').agg(n_mIoU=('best_mIoU', 'count'), mIoU_median=('best_mIoU', 'median'))
+        fam = det.join(seg, how='outer').fillna({'n_mAP50': 0, 'n_mIoU': 0})
+        fam = fam[(fam['n_mAP50'] + fam['n_mIoU']) > 0]
+        fam = fam.assign(total=fam['n_mAP50'] + fam['n_mIoU']).sort_values('total', ascending=False).head(15).round(1)
+        fam.index = [tr(i) for i in fam.index]; fam.index.name = 'Model family'
+        fam = fam[['n_mAP50', 'mAP50_median', 'n_mIoU', 'mIoU_median']]
+        fam.columns = ['Papers with mAP50', 'Median mAP50', 'Papers with mIoU', 'Median mIoU']
+        st.dataframe(fam, width='stretch',
+                     column_config={'Median mAP50': st.column_config.ProgressColumn(min_value=0, max_value=100, format='%.1f'),
+                                    'Median mIoU': st.column_config.ProgressColumn(min_value=0, max_value=100, format='%.1f')})
+        st.caption('Each paper\'s highest value for the metric, then the median. Classes, test sets and difficulty differ between papers, so this cannot rank models.')
+    with st.expander('Across papers: label amount vs score (and why this comparison fails)'):
+        metric = st.radio('Metric', ['Detection mAP50', 'Segmentation mIoU'], horizontal=True, key='amount_metric')
+        col, tg = ('best_mAP50', '检测') if metric.startswith('Detection') else ('best_mIoU', '分割')
         sc = counted[(counted.task_group == tg)].copy()
         sc[col] = pd.to_numeric(sc[col], errors='coerce'); sc = sc.dropna(subset=[col])
         if not sc.empty:
             topf = sc.family.value_counts().head(6).index
-            sc['模型族'] = sc.family.where(sc.family.isin(topf), '其他')
-            fig = px.scatter(sc, x='own_images', y=col, color='模型族', log_x=True, hover_data=['id', 'base_model', 'n_classes'],
-                             labels={'own_images': '作者自标图像数（对数轴）', col: metric.split()[1] + ' (%)'})
+            sc['Model family'] = sc.family.where(sc.family.isin(topf), '其他').map(tr)
+            fig = px.scatter(sc, x='own_images', y=col, color='Model family', log_x=True, hover_data=['id', 'base_model', 'n_classes'],
+                             labels={'own_images': 'Self-annotated images (log axis)', col: metric.split()[1] + ' (%)'})
             fig.update_traces(marker=dict(size=9, opacity=.85, line=dict(color=SURFACE, width=1.5)))
             chart(fig, 'amount_effect', height=420)
-        st.caption('点散成一片、看不出“标得越多分越高”，因为各篇类别数、测试集、难度都不同。所以“要标多少”的证据要看 ① 和 ②。')
+        st.caption('The points form a cloud with no "more labels → higher score" pattern, because classes, test sets and difficulty all differ between papers. Evidence on "how many labels" must come from ① and ②.')
     paper_evidence(selected, 'training')
 
 
@@ -919,8 +943,8 @@ if page == '研究全景':
     dataset_page()
     st.divider()
     c1, c2, _ = st.columns([1, 1, 2])
-    c1.button('进入应用类 →', type='primary', on_click=goto('应用类'), key='enter_app', width='stretch')
-    c2.button('进入算法与方法类 →', on_click=goto('算法与方法类'), key='enter_method', width='stretch')
+    c1.button('Go to application studies →', type='primary', on_click=goto('应用类'), key='enter_app', width='stretch')
+    c2.button('Go to algorithm & method studies →', on_click=goto('算法与方法类'), key='enter_method', width='stretch')
 elif page == '研究概览':
     overview()
 elif page == '模型与数据来源':
@@ -928,12 +952,12 @@ elif page == '模型与数据来源':
 else:
     training_page()
 
-st.markdown('<div class="foot">STREETSCAPE REVIEW · 按论文 ID 去重 · 支持筛选、图表选择、证据回查与 CSV 导出</div>', unsafe_allow_html=True)
-with st.expander('数据来源与统计口径'):
-    st.write('分类以项目正式清单为准：应用类 = 作者未训练模型、直接使用现成或零样本模型；算法与方法类 = 涉及训练、微调或自建标注。')
-    st.write('模型名称已统一：“模型家族”把同一模型的不同写法合并（YOLO 按版本区分）；“模型 + 骨干／规模”只保留骨干网络或 YOLO 规模，去掉大小写与训练配置差异。算法与方法类的主用模型取自第二波逐篇全文提取。')
-    st.write('“训练与迁移”页来自第二波全文专项提取（analysis/wave2）；适配前后对比为人工逐条核对。')
-    st.write(catalog['review_meta']['scope'])
-    st.caption('正式ID和分类已逐篇对齐两波统计_v3.xlsx与正式纳入966篇_索引.csv。PRISMA全文排除383篇，硬盘excluded目录193份PDF，两者分别记录。')
-    st.caption('研究数量遵从正式清单；未确认的训练来源保留为空，不推测模型与数据集配对。此前补齐的5篇及其证据已包含在当前清单中。')
-    st.caption('应用内证据快照更新：' + catalog['review_meta']['updated_at'])
+st.markdown('<div class="foot">STREETSCAPE REVIEW · unique paper IDs · filters, chart selection, evidence look-up and CSV export</div>', unsafe_allow_html=True)
+with st.expander('Data sources and counting rules'):
+    st.write('Classes follow the official project list: application = the authors did not train a model and used ready-made or zero-shot models directly; algorithm & method = model training, fine-tuning or self-built annotation.')
+    st.write('Model names are standardised: "model family" merges different spellings of the same model (YOLO is split by version); "model + backbone/size" keeps only the backbone or YOLO size and drops case and training-setting differences. The main model of algorithm & method studies comes from the wave-2 full-text extraction.')
+    st.write('The "Training & transfer" page comes from the wave-2 full-text extraction (analysis/wave2); before/after comparisons were checked manually one by one.')
+    n_app, n_meth = int((papers.group == '应用类').sum()), int((papers.group == '算法与方法类').sum())
+    st.write(f'{N_ALL} papers formally included: {n_app} application, {n_meth} algorithm & method. PRISMA: {catalog["prisma"]["assessed"]:,} full texts assessed, {catalog["prisma"]["excluded"]} excluded at full text. All full-text paths were checked against the drive index.')
+    st.caption('Study counts follow the official list; unconfirmed training sources are left empty and model–dataset pairs are never guessed.')
+    st.caption('In-app evidence snapshot updated: ' + catalog['review_meta']['updated_at'])

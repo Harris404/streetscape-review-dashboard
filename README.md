@@ -1,11 +1,12 @@
-# 街景影像目标检测与分割：文献综述可视化
+# Object detection and segmentation on street-view imagery: literature review explorer
 
-Streamlit 应用，展示系统综述的研究全景、公开数据集与对象覆盖、应用类与算法与方法类的模型使用情况，以及训练与迁移专项分析（正式纳入 966 篇）。
+Streamlit app for the systematic review: research landscape, public datasets and object coverage, model use in application and algorithm & method studies, and the training & transfer analysis (966 included papers).
 
-- 入口：`app/app.py`
-- 数据：`app/data/`（论文证据快照）与 `project/`（正式清单、第二波专项提取、数据集表）
+- Entry point: `app/app.py`
+- Data: `app/data/` (paper evidence snapshot, English display text in `en.json`) and `project/` (official list, wave-2 extraction, dataset table)
+- Display language: English. Internal data keep the original coding; `app/i18n.py` translates everything shown on screen.
 
-本地运行：
+Run locally:
 ```
 pip install -r requirements.txt
 streamlit run app/app.py
