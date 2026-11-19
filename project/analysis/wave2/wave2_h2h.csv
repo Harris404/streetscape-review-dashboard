@@ -155,3 +155,4 @@ R3331,semantic segmentation,FCN; SegFormer,FCN,FCN with ResNet-50 backbone (IoU 
 R3334,object detection,Faster R-CNN; YOLOv5,YOLOv5,YOLOv5l best on 4-class (mAP 44.0); Faster R-CNN best on 10-class (mAP 25.0) and used for heatmaps
 R3340,semantic segmentation,DeepLabv3; 通用 CNN / 自建网络,DeepLabv3,"Facade R-CNN (beats FCN, PSPNet, DeepLabV3/V3+, DeepFacade, PALKN on RueMonge2014 and Oxford; slightly below PALKN mIoU on ECP)"
 R3351,object detection,Cascade R-CNN; 通用 CNN / 自建网络,,"ResNeSt best at 800px (AP50 92,0%, F1 94,8%); DetectoRS best at 1200px (AP50 92,6%) and on hard samples"
+R0856,semantic segmentation,DeepLabv3+; FCN; PSPNet,DeepLabv3+,"Newly trained Deeplabv3+ (overall accuracy 0.880, outperforming FCN and PSPNet)"

@@ -72,7 +72,7 @@ def read_data(version):
 
 @st.cache_data(show_spinner=False)
 def read_official(version):
-    """Official list of the project (966): wave 1 = 应用类, wave 2 = 算法与方法类."""
+    """Official list of the project (1,112 since 2026-11-19): wave 1 = 应用类, wave 2 = 算法与方法类."""
     if not OFFICIAL.exists():
         return None
     with OFFICIAL.open(encoding='utf-8-sig', newline='') as f:
@@ -425,6 +425,15 @@ def paper_evidence(frame, key, label='Papers and evidence', expanded=False):
 
 
 # ---------------------------------------------------------------- pages
+def _pdf_note():
+    ss = catalog['scope_sync']
+    miss = ss.get('missing_files')
+    if miss:
+        return (f'{ss["verified_files"]:,} of the {N_ALL:,} included papers have a PDF in the drive index; the other {miss} '
+                '(mostly open-access publisher pages) were assessed on the publisher website.')
+    return f'All {ss["verified_files"]:,} PDFs in the inclusion index were verified to exist.'
+
+
 def landscape():
     hero('01 / RESEARCH LANDSCAPE', 'Research landscape', 'Papers are split by whether the authors trained a model: application studies use ready-made models directly; algorithm & method studies train, fine-tune or build their own annotations.')
     app = papers[papers.group == '应用类']; meth = papers[papers.group == '算法与方法类']
@@ -432,7 +441,7 @@ def landscape():
              ('Application', f'{len(app):,}', 'Ready-made or zero-shot models used directly, incl. algorithm/comparison studies that trained no model.'),
              ('Algorithm & method', f'{len(meth):,}', 'Model training, fine-tuning or self-built annotation.')])
     prisma = catalog['prisma']
-    st.caption(f'PRISMA: {prisma["assessed"]:,} full texts assessed, {prisma["excluded"]} excluded at full text, {prisma["included"]} included. All {catalog["scope_sync"]["verified_files"]} PDFs in the inclusion index were verified to exist.')
+    st.caption(f'PRISMA: {prisma["assessed"]:,} full texts assessed, {prisma["excluded"]} excluded at full text, {prisma["included"]:,} included. ' + _pdf_note())
     st.write('')
     a, b = st.columns(2, gap='large')
     with a:
@@ -495,7 +504,7 @@ def method_intro():
     a, b = st.columns([3, 1], gap='medium')
     a.markdown('<div class="def"><span class="tag" style="color:#eb6834">WHAT THE "TRAINING & TRANSFER" PAGE IS</span><br>'
                'It answers the two wave-2 questions: <b>(1) when no ready-made model fits, which base model transfers well to street view; '
-               '(2) how many images need to be labelled, and how large a dataset is enough.</b> The data come from a dedicated full-text extraction of all 491 papers: '
+               '(2) how many images need to be labelled, and how large a dataset is enough.</b> The data come from a dedicated full-text extraction of all ' + f'{len(allm)}' + ' papers: '
                'which base model was used, which weights training started from, how many images were self-annotated, and how much scores improved after training.</div>', unsafe_allow_html=True)
     b.button('Open Training & transfer →', type='primary', on_click=lambda: st.session_state.update(page='训练与迁移'), key='open_training', width='stretch')
     st.write('')
@@ -958,6 +967,6 @@ with st.expander('Data sources and counting rules'):
     st.write('Model names are standardised: "model family" merges different spellings of the same model (YOLO is split by version); "model + backbone/size" keeps only the backbone or YOLO size and drops case and training-setting differences. The main model of algorithm & method studies comes from the wave-2 full-text extraction.')
     st.write('The "Training & transfer" page comes from the wave-2 full-text extraction (analysis/wave2); before/after comparisons were checked manually one by one.')
     n_app, n_meth = int((papers.group == '应用类').sum()), int((papers.group == '算法与方法类').sum())
-    st.write(f'{N_ALL} papers formally included: {n_app} application, {n_meth} algorithm & method. PRISMA: {catalog["prisma"]["assessed"]:,} full texts assessed, {catalog["prisma"]["excluded"]} excluded at full text. All full-text paths were checked against the drive index.')
+    st.write(f'{N_ALL:,} papers formally included: {n_app} application, {n_meth} algorithm & method. PRISMA: {catalog["prisma"]["assessed"]:,} full texts assessed, {catalog["prisma"]["excluded"]} excluded at full text. ' + _pdf_note())
     st.caption('Study counts follow the official list; unconfirmed training sources are left empty and model–dataset pairs are never guessed.')
     st.caption('In-app evidence snapshot updated: ' + catalog['review_meta']['updated_at'])

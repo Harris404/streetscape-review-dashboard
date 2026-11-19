@@ -1,6 +1,6 @@
 # Object detection and segmentation on street-view imagery: literature review explorer
 
-Streamlit app for the systematic review: research landscape, public datasets and object coverage, model use in application and algorithm & method studies, and the training & transfer analysis (966 included papers).
+Streamlit app for the systematic review: research landscape, public datasets and object coverage, model use in application and algorithm & method studies, and the training & transfer analysis (1,112 included papers; snapshot updated 2026-11-19).
 
 - Entry point: `app/app.py`
 - Data: `app/data/` (paper evidence snapshot, English display text in `en.json`) and `project/` (official list, wave-2 extraction, dataset table)

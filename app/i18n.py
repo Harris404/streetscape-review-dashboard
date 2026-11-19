@@ -49,6 +49,14 @@ EN = {
     '发表版未明确训练集名称': 'Published version does not name the training set',
     '方法类主题使用技术主题，不混入应用类15类研究结局。': 'Method studies use technical themes, not the 15 application research outcomes.',
     '沿用既有技术主题编码；已按966篇源清单归入第一波应用类。': 'Existing technical theme kept; placed in wave 1 (application) per the 966-paper list.',
+    # papers added on 2026-11-19 (pending-292 full-text assessment)
+    '待定292全文评估（2026-11-19）': 'Pending-292 full-text assessment (2026-11-19)', '待定292全文评估': 'Pending-292 full-text assessment',
+    '待定292全文评估编码': 'Coded in the pending-292 full-text assessment', '全文评估': 'Full-text assessment', '模型未具名': 'Model not named',
+    '出版商网页阅读': 'Read on the publisher web page', '已获取（未入硬盘）': 'Obtained (not on the drive)', '出版商网页（UQ 机构访问）': 'Publisher web page (UQ institutional access)',
+    '全文文本': 'Full-text file', '2026-11-19 待定292条全文评估纳入；研究分类与两波归属遵从最新版源清单。': 'Included in the 2026-11-19 full-text assessment of the 292 pending records; class and wave follow the latest source list.',
+    '待定292全文评估：PDF 双审': 'Pending-292 assessment: PDF, two reviewers', '待定292全文评估：PDF 单审': 'Pending-292 assessment: PDF, one reviewer',
+    '待定292全文评估：出版商网页单审': 'Pending-292 assessment: publisher web page, one reviewer', '待定292全文评估：用户裁定': 'Pending-292 assessment: user ruling',
+    '待定292全文评估：复核改判': 'Pending-292 assessment: changed on re-check',
     # dataset names
     '作者自建／自标数据': "Authors' own / self-annotated data", 'Bing门图像': 'Bing door images', 'Boston街景数据集': 'Boston street-view dataset',
     'Google Street View图像': 'Google Street View images', 'Mapillary街景图像': 'Mapillary street-view images',
