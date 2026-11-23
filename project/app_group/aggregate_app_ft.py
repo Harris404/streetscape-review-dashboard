@@ -1,4 +1,5 @@
 """Aggregate step-2 full-text extraction of the application group (509 papers): validate, normalise model names, write app_group_fulltext_extraction.csv and app_group_models_long.csv."""
+import os as _os; _os.chdir(_os.path.dirname(_os.path.abspath(__file__)))  # all paths below are relative to this folder
 import json, glob, csv, collections, re
 C = {}
 for f in sorted(glob.glob("ft_out/*.jsonl")):
